@@ -1,0 +1,8 @@
+if ((mysql_num_rows($participante_repetido) > 0)  || (mysql_num_rows($inscricao_repetida) > 0)){
+     echo "<script>alert('ATLETA  ou INSCRICÃO JÁ CADASTRADI !!!');</script>";
+     echo "<meta http-equiv='refresh' content='0, url=./inscricao.php'>";
+  } elseif {
+  
+  
+  }
+  

@@ -55,7 +55,7 @@ require_once "config.php";
           <ul class="dropdown-menu" role="menu">
 		        <li><a href="classifica.php">Pódio</a></li>
             <li class="dropdown-submenu">
-               <a tabindex="-1" href="#">Ranking</a>
+               <a tabindex="-1" href="#">Ranking<span class="caret"></span></a>
                       <ul class="dropdown-menu">
                         <li><a href="ranking_abasup.php">ABASUP</a></li>
                         <li><a href="ranking_absup.php">ABSUP</a></li>

@@ -86,7 +86,7 @@
                         </div>
                       </div>
                       <div class="control-group <?php echo !empty($mobileError)?'error':'';?>">
-                        <label class="control-label">Mobile Number</label>
+                        <label class="control-label">Estado</label>
                         <div class="controls">
                             <input name="estado" type="text"  placeholder="Estado" value="<?php echo !empty($estado)?$estado:'';?>">
                             <?php if (!empty($mobileError)): ?>

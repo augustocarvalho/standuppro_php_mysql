@@ -27,7 +27,7 @@
                       <tbody>
                       <?php
                         $count=1;
-                        $sql = mysql_query("select * from participante ORDER by id_participante");
+                        $sql = mysql_query("select * from participante ORDER by id_participante limit 500");
                         while ($row = mysql_fetch_assoc($sql)){
                                 echo '<tr>';
                                 echo '<td>'. $count . '</td>';

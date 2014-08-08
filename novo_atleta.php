@@ -34,12 +34,11 @@
             $sql_result = mysql_query("select id_participante from participante where id_participante=$cpf");
               if (mysql_num_rows($sql_result) == 0) {
                 mysql_query("INSERT INTO participante (id_participante,nome_participante,estado,email) values('$cpf','$name','$estado','$email')");
-                echo "<script>alert('Cadastro efetuado com sucesso.');</script>";
-                echo "<meta http-equiv='refresh' content='0, url=./inscricao.php'>";
+				header("Location: reg_chegada.php?id=$id");
               }
               else {
                echo "<script>alert('CPF JÁ CADASTRADO!!!');</script>";
-               echo "<meta http-equiv='refresh' content='0, url=./inscricao.php'>";
+               echo "<meta http-equiv='refresh' content='0, url=./listar_atleta.php'>";
               }  
 
         }

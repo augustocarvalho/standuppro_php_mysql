@@ -14,8 +14,11 @@
         $cpf = $_POST['cpf'];
         $email = $_POST['email'];
         $estado = $_POST['estado'];
-
+        $dt_nascimento = $_POST['dt_nascimento'];
+        $sexo = $_POST['sexo'];
+        $cod_cbsup = $_POST['cod_cbsup'];
          
+
         // validate input
         $valid = true;
         if (empty($name)) {
@@ -31,9 +34,9 @@
         
         // insert data
         if ($valid) {
-            $sql_result = mysql_query("select id_participante from participante where id_participante=$cpf");
+            $sql_result = mysql_query("select * from atleta where cpf=$cpf");
               if (mysql_num_rows($sql_result) == 0) {
-                mysql_query("INSERT INTO participante (id_participante,nome_participante,estado,email) values('$cpf','$name','$estado','$email')");
+                mysql_query("INSERT INTO atleta (cpf,nome,estado,data_nascimento,sexo,email, cod_cbsup) values('$cpf','$name','$estado','$dt_nascimento','$sexo','$email','$cod_cbsup')");
                 echo "<script>alert('Cadastro efetuado com sucesso.');</script>";
                 echo "<meta http-equiv='refresh' content='0, url=./novo_atleta.php'>";
               }
@@ -76,6 +79,28 @@
                             <?php endif; ?>
                         </div>
                       </div>
+                      <div class="control-group <?php echo !empty($dtError)?'error':'';?>">
+                        <label class="control-label">Data de Nascimento</label>
+                        <div class="controls">
+                            <input name="dt_nascimento" type="date"  placeholder="dt_nascimento" value="<?php echo !empty($dt_nascimento)?$dt_nascimento:'';?>">
+                            <?php if (!empty($dt_nascimentoError)): ?>
+                                <span class="help-inline"><?php echo $dt_nascimentoError;?></span>
+                            <?php endif; ?>
+                        </div>
+                      </div>
+                      <div class="control-group <?php echo !empty($sexoError)?'error':'';?>">
+                        <label class="control-label">Sexo</label>
+                        <div class="controls">
+                            <input name="sexo" type="radio"  placeholder="sexo" value="<?php echo !empty($sexo)?$sexo:'';?>M" checked> Masculino
+                            <input name="sexo" type="radio"  placeholder="sexo" value="<?php echo !empty($sexo)?$sexo:'';?>F"> Feminino
+                            <?php if (!empty($sexoError)): ?>
+                                <span class="help-inline"><?php echo $sexoError;?></span>
+                            <?php endif; ?>
+                        </div>
+                      </div>
+
+
+
                       <div class="control-group <?php echo !empty($emailError)?'error':'';?>">
                         <label class="control-label">Email Address</label>
                         <div class="controls">
@@ -85,6 +110,14 @@
                             <?php endif;?>
                         </div>
                       </div>
+
+                      <div class="control-group">
+                        <label class="control-label">CÓDIGO CBSUP</label>
+                        <div class="controls">
+                            <input name="cod_cbsup" type="text" placeholder="CBSUP" value="<?php echo !empty($cod_cbsup)?$cod_cbsup:'';?>">
+                        </div>
+                      </div>
+
                       <div class="control-group <?php echo !empty($estadoError)?'error':'';?>">
                         <label class="control-label">ESTADO</label>
                         <div class="controls">

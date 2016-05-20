@@ -11,7 +11,7 @@
         $id = $_POST['id'];
          
         // delete data
-        mysql_query("DELETE FROM participante  WHERE id_participante='$id'");
+        mysql_query("DELETE FROM atleta  WHERE cpf='$id'");
         header("Location: listar_atleta.php");
          
     }

@@ -1,8 +1,9 @@
 <?php
   require_once "config.php";
   require_once "menu.php";
-
+ 
     $id = null;
+    $id_etapa=1;
     if ( !empty($_GET['id'])) {
         $id = $_REQUEST['id'];
     }
@@ -13,39 +14,104 @@
      
     if ( !empty($_POST)) {
         // keep track validation errors
-        $cpfError = null;
-        $inscricaoError = null;
-        
+        $nameError = null;
+        $emailError = null;
+        $estadoError = null;
+
         // keep track post values
-        $cpf = $_POST['cpf'];
+        $id_etapa = $_POST['etapa'];
         $id_categoria = $_POST['categoria'];
         $inscricao = $_POST['inscricao'];
-         
+        $sql = mysql_query("SELECT * FROM atleta where cpf=$id");
+        while ($data=mysql_fetch_assoc($sql)){ 
+           sscanf($data['data_nascimento'], '%d-%d-%d', $ano, $mes, $dia);               
+           $idade = 2016 - $ano;   
+         }
         // validate input
-        $valid = true;
-        $row = mysql_query("select * from participante where id_participante=$cpf");
-        if ( (empty($cpf)) or (mysql_num_rows($row)==0) ) {
-            $cpfError = 'CPF Não Cadastrado';
-            $valid = false;
-        }
 
-        if (empty($inscricao)) {
-            $inscricaoError = 'Preencha a Inscrição';
-            $valid = false;
-        }
-     }    
-                
-               
-        // update data
-        if ($valid) {
-          mysql_query("insert into inscricao (id_etapa, id_participante, id_categoria, cod_inscricao) values('$id','$cpf','$id_categoria','$inscricao')");
-          mysql_query("insert into ranking (id_participante, id_categoria, pontos) values('$id_participante','$id_categoria','0')");
-          if  ($id=2) {
-            mysql_query("insert into ranking_brasileiro (id_participante, id_categoria, pontos) values('$id_participante','$id_categoria','0')");
+                  
+        $verifica = mysql_query("select * from inscricao where numero=$inscricao and etapa_idetapa=$id_etapa");
+        if (mysql_num_rows($verifica) > 0) {
+          echo "<script>alert('INSCRIÇÃO JÁ CADASTRADA!!!');</script>";
+          echo "<meta http-equiv='refresh' content='0, url=./inscricao.php?id=$id'>";
+        }      
+        else{
+          $existe=mysql_query("select * from ranking where atleta_cpf='$id' and categoria_idcategoria='$id_categoria'");
+          if (mysql_num_rows($existe)==0) {
+            mysql_query("insert into ranking (atleta_cpf, categoria_idcategoria, pontos) values('$id','$id_categoria','0')");
           }
-          header("Location: inscricao.php?id=$id");
-        } 
+          mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','$id_categoria','$inscricao')");
+          if (($id_categoria==05) and ($idade>39) and ($idade<50) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','06','$inscricao')");
+          } 
+          if (($id_categoria==8) and ($idade>39) and ($idade<50) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','09','$inscricao')");
+          }  
+          if (($id_categoria==11) and ($idade>39) and ($idade<50) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','24','$inscricao')");
+          }  
+          if (($id_categoria==13) and ($idade>39) and ($idade<50) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','15','$inscricao')");
+          } 
+          if (($id_categoria==12) and ($idade>39) and ($idade<50) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','26','$inscricao')");
+          }
+          if (($id_categoria==14) and ($idade>39) and ($idade<50) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','22','$inscricao')");
+          }
+          if (($id_categoria==17) and ($idade>39) and ($idade<50) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','29','$inscricao')");
+          }
+          if (($id_categoria==28) and ($idade>39) and ($idade<50) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','31','$inscricao')");
+          }
+          if (($id_categoria==20) and ($idade>39) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','39','$inscricao')");
+          }  
+          if (($id_categoria==33) and ($idade>39) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','40','$inscricao')");
+          }  
+          if (($id_categoria==05) and ($idade>49) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','07','$inscricao')");
+          }
+          if (($id_categoria==8) and ($idade>49) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','10','$inscricao')");
+          }
+          if (($id_categoria==11) and ($idade>49) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','25','$inscricao')");
+          }
+          if (($id_categoria==13) and ($idade>49) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','16','$inscricao')");
+          }  
+          if (($id_categoria==12) and ($idade>49) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','27','$inscricao')");
+          }
+          if (($id_categoria==14) and ($idade>49) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','23','$inscricao')");
+          }
+          if (($id_categoria==17) and ($idade>49) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','30','$inscricao')");
+          }
+          if (($id_categoria==28) and ($idade>49) ){
+            mysql_query("insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','32','$inscricao')");
+          }
+          header("Location: listar_atleta.php");
+        }
+    }
+        else {
+            $sql = mysql_query("SELECT * FROM atleta where cpf=$id");
+            while ($data=mysql_fetch_assoc($sql)){ 
+                $cpf = $data['cpf'];
+                $nome_participante = $data['nome'];
+                $data_nascimento = $data['data_nascimento'];  
+                sscanf($data_nascimento, '%d-%d-%d', $ano, $mes, $dia);               
+                $idade = 2016 - $ano;         
+            }
+          }
+         
         
+
+ 
 ?>
 
 <html>
@@ -59,25 +125,54 @@
             <br>
         </div>
 
+      
+
         <form class="form-horizontal" action="inscricao.php?id=<?php echo $id?>" method="post">  
+        
           <div class="control-group">
-            <label class="control-label">CPF:</label>
-              <div class="controls">
-                <input name="cpf" type="text"  placeholder="CPF" value="<?php echo !empty($cpf)?$cpf:'';?>">
-                                  <?php if (!empty($cpfError)): ?>
-                                      <span class="help-inline"><?php echo $cpfError;?></span>
-                                  <?php endif; ?>
-              </div>
-          </div>    
+              <label class="control-label">Name</label>
+                 <div class="controls">
+                    <input class="input-xlarge uneditable-input" name="nome_participante" type="text" placeholder="Name" value="<?php echo !empty($nome_participante)?$nome_participante:'';?>">
+                 </div>
+          </div>
+
+          <div class="control-group">
+                        <label class="control-label">Data de Nascimento</label>
+                         <div class="controls">
+          <input class="input-xlarge uneditable-input" name="data_nascimento" type="date"  placeholder="Data de Nascimento" value="<?php echo !empty($data_nascimento)?$data_nascimento:'';?>">
+                        </div>
+                      </div>
+
+        <div class="control-group">
+                        <label class="control-label">Idade em 2016</label>
+                         <div class="controls">
+          <input class="input-xlarge uneditable-input" name="idade" type="text" value="<?php echo !empty($idade)?$idade:'';?>">
+                         </div>
+                      </div>
+
+
+
           <div class="control-group">
                <label class="control-label">Inscrição:</label>
               <div class="controls">
                 <input name="inscricao" type="text"  placeholder="Número Inscrição" value="<?php echo !empty($inscricao)?$inscricao:'';?>">
-                                  <?php if (!empty($inscricaoError)): ?>
-                                      <span class="help-inline"><?php echo $inscricaoError;?></span>
-                                  <?php endif; ?>
               </div>
           </div>
+
+
+          <div class="control-group">
+            <label class="control-label">Etapa:</label>
+              <div class="controls">
+                <select class="span4" name="etapa" >
+                    <option value="05">BAHIA SUP ECO 2016</option>
+              <!-- <option value="04">CIRCUITO NAUTICO SSA-IOS</option>
+                    <option value="03">REGATA MARCILIO DIAS</option>   
+                    <option value="02">MAX FORCE</option>
+                    <option value="01">DESAFIO DOS FORTES</option> -->
+                </select> 
+               </div>   
+          </div>        
+
           <div class="control-group">
             <label class="control-label">Categoria:</label>
               <div class="controls">
@@ -94,16 +189,36 @@
                     <option value="09">FUN RACE FEMININO MASTER</option>
                     <option value="10"> FUN RACE FEMININO GRAN MASTER</option>
                     <option value="11">RACE AMADOR MASCULINO</option>
+                    <option value="24">RACE AMADOR MASCULINO MASTER</option>
+                    <option value="25">RACE AMADOR MASCULINO G-MASTER</option>
                     <option value="12">RACE AMADOR FEMININO</option>
-                    <option value="13"> RACE MASCULINO PROFISSIONAL</option>
-                    <option value="14">RACE FEMININO PROFISSIONAL</option>
-                    <option value="15">RACE MASTER</option>
-                    <option value="16">RACE GRAN MASTER</option>
-                    <option value="17">RACE 14</option>
-                    <option value="18">UNLIMIT</option>
+                    <option value="26">RACE AMADOR FEMININO MASTER</option>
+                    <option value="27">RACE AMADOR FEMININO G-MASTER</option>                    
+                    <option value="13">RACE 12'6 MASCULINO </option>
+                    <option value="14">RACE 12'6 FEMININO </option>
+                    <option value="15">RACE 12'6 MASTER MASC</option>
+                    <option value="22">RACE 12'6 MASTER FEMININO</option>
+                    <option value="16">RACE 12'6 G-MASTER MASC</option>
+                    <option value="23">RACE 12'6 G-MASTER FEMININO</option>
+                    <option value="17">RACE 14 MASC</option>
+                    <option value="29">RACE 14 MASC MASTER</option>
+                    <option value="30">RACE 14 MASC G-MASTER</option>
+                    <option value="28">RACE 14 FEM</option>
+                    <option value="31">RACE 14 FEM MASTER</option>
+                    <option value="31">RACE 14 FEM G-MASTER</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
-                    <option value="20">CANOA HAVAIANA</option>
                     <option value="21">PADDLE BOARD FEMININO</option>
+              <!--  <option value="19">PADDLE BOARD</option>
+                    <option value="30">RACE 14 MASC G_MASTER</option>
+                    <option value="32">RACE 14 FEM G-MASTER</option>
+                    <option value="18">UNLIMIT</option>
+                    <option value="34">CANOA HAVAIANA OC3 MASC</option> 
+                    <option value="40">CANOA HAVAIANA OC1 FEM MASTER</option>
+                    <option value="35">CANOA HAVAIANA OC3 FEM</option> -->
+                    <option value="20">CANOA HAVAIANA OC1 MASC</option>
+                    <option value="39">CANOA HAVAIANA OC1 MASC MASTER</option>
+                    <option value="33">CANOA HAVAIANA OC1 FEM</option>
+                    <option value="36">CANOA HAVAIANA OC6 MISTA</option>
                   </select> 
                </div>   
           </div>        

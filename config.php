@@ -1,11 +1,13 @@
 <?php
 # >> Defina o título do site
-   $titulo="Circuito SUP - 2014";
+   $titulo="Circuito SUP - 2016";
+
+
    
 # >> Dados do mySql
    $user="root"; # usuário do mySql
    $pass=""; # senha do mySql
-   $bd="campeonato"; # nome do banco de dados
+   $bd="circuito"; # nome do banco de dados
    
 # >> Conexão
    $con = @mysql_connect("localhost", $user, $pass) or die ("Banco de Dados Morreu");

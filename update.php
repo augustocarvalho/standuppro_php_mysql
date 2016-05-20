@@ -18,6 +18,7 @@
 
         // keep track post values
         $nome_participante = $_POST['nome_participante'];
+        $data_nascimento = $_POST['data_nascimento'];
         $email = $_POST['email'];
         $estado = $_POST['estado'];
          
@@ -32,13 +33,14 @@
                
         // update data
         if ($valid) {
-    mysql_query("UPDATE participante  set nome_participante='$nome_participante', email='$email', estado='$estado' WHERE id_participante='$id'");
+          mysql_query("UPDATE atleta  set nome='$nome_participante', data_nascimento='$data_nascimento', email='$email', estado='$estado' WHERE cpf='$id'");
           header("Location: listar_atleta.php");
         }
     } else {
-        $sql = mysql_query("SELECT * FROM participante where id_participante=$id");
+        $sql = mysql_query("SELECT * FROM atleta where cpf=$id");
         while ($data=mysql_fetch_assoc($sql)){ 
-          $nome_participante = $data['nome_participante'];
+          $nome_participante = $data['nome'];
+          $data_nascimento = $data['data_nascimento'];  
           $email = $data['email'];
           $estado = $data['estado'];
         }
@@ -76,6 +78,18 @@
                             <?php endif; ?>
                         </div>
                       </div>
+                  
+                      <div class="control-group <?php echo !empty($nameError)?'error':'';?>">
+                        <label class="control-label">Data de Nascimento</label>
+                         <div class="controls">
+          <input name="data_nascimento" type="date"  placeholder="Data de Nascimento" value="<?php echo !empty($data_nascimento)?$data_nascimento:'';?>">
+                            <?php if (!empty($nameError)): ?>
+                                <span class="help-inline"><?php echo $nameError;?></span>
+                            <?php endif; ?>
+                        </div>
+                      </div>
+                  
+
                       <div class="control-group <?php echo !empty($emailError)?'error':'';?>">
                         <label class="control-label">Email Address</label>
                         <div class="controls">
@@ -85,6 +99,7 @@
                             <?php endif;?>
                         </div>
                       </div>
+                      
                       <div class="control-group <?php echo !empty($mobileError)?'error':'';?>">
                         <label class="control-label">Estado</label>
                         <div class="controls">

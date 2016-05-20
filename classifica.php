@@ -1,162 +1,199 @@
 <?php
 require_once "config.php";
+require_once "menu.php";
 ?>
 
-<html>
-<head>
-     <meta http-equiv="Content-Type" content="text/html, charset=utf-8">
-     <title><?=$titulo?></title>
-	 <link rel="stylesheet" type="text/css" href="style.css">
-</head>
+
 
 <html>
 <div id="cadastro">
   <body>
-    <table id="form_selecao">
+     <head>
+        <style>
+        body {
+            background-image: url("stdp_resultados01logo.jpg"), url("stdp_resultados02.jpg");
+            background-repeat: no-repeat, repeat;
+            background-size:100% auto;
+        }
+        </style>
+      </head>    
+    <table id="form_selecao" style="margin-left:100px">
 	<form  method="post" > 
 	<tr>
-	  <td> Etapa: </td>
-           <td> <select name="etapa" id="etapa" class="txt" > 
-		  <option value="02">BAHIA SUP ECO 2014</option>
-		   <option value="01">SALINAS DAS MARGARIDAS</option>
+ 	  <td style="font-weight:bold"> ETAPA: </td>
+      <td> <select name="etapa" id="etapa" class="selectpicker" > 
+       <option value="05">BAHIA SUP ECO 2016</option>  
+       <option value="04">CIRCUITO NAUTICO SSA-IOS</option>     
+       <option data-divider="true"></option>
+       <option> ---- ETAPAS DE 2015 ----- </option>
+       <option data-divider="true"></option>
+       <option value="03">REGATA MARCILIO DIAS</option>     
+		   <option value="02">MAX FORCE</option>
+		   <option value="01">DESAFIO DOS FORTES</option>
       </td>
-	  <td>
-	      <input type="submit" name="action" value="PÓDIO" style="font-weight:bold" class="btn" id="btnCad">
-	      <input type="button" value="INÍCIO" class="btn" style="font-weight:bold" onclick="location. href='./index.php' ">
-	  </td>	  
 	</tr> 
     <tr>
-	  <td> Categoria: </td>
-      <td> <select name="categoria" id="categoria" class="txt" >
-        <option value="00"> GERAL</option>
-		<option value="01"> KIDS MASCULINO</option>
-        <option value="02">KIDS FEMININO</option>
-        <option value="03">JUNIOR MASCULINO</option>
-		<option value="04"> JUNIOR FEMININO</option>
-        <option value="05">FUN RACE MASCULINO</option>
-        <option value="06">FUN RACE MASCULINO MASTER</option>
-		<option value="07"> FUN RACE MASCULINO GRAN MASTER</option>
-        <option value="08">FUN RACE FEMININO</option>
-        <option value="09">FUN RACE FEMININO MASTER</option>
-		<option value="10"> FUN RACE FEMININO GRAN MASTER</option>
-        <option value="11">RACE AMADOR MASCULINO</option>
-        <option value="12">RACE AMADOR FEMININO</option>
-		<option value="13"> RACE MASCULINO PROFISSIONAL</option>
-        <option value="14">RACE FEMININO PROFISSIONAL</option>
-        <option value="15">RACE MASTER</option>
-		<option value="16">RACE GRAN MASTER</option>
-		<option value="17">RACE 14</option>
-		<option value="18">UNLIMIT</option>
-		<option value="19">PADDLE BOARD MASCULINO</option>
-		<option value="20">CANOA HAVAIANA</option>
-		<option value="21">PADDLE BOARD FEMININO</option>
+	  <td style="font-weight:bold"> CATEGORIA: </td>
+      <td> <select name="categoria" id="categoria" class="selectpicker" onchange="form.submit()">
+        			      <option value="">Escolha uma abaixo</option>
+                    <option value="00"> GERAL</option>
+                    <option value="01"> KIDS MASCULINO</option>
+                    <option value="02">KIDS FEMININO</option>
+                    <option value="03">JUNIOR MASCULINO</option>
+                    <option value="04"> JUNIOR FEMININO</option>
+                    <option value="05">FUN RACE MASCULINO</option>
+                    <option value="08">FUN RACE FEMININO</option>
+                    <option value="06">FUN RACE MASCULINO MASTER</option>
+                    <option value="07"> FUN RACE MASCULINO GRAN MASTER</option>
+                    <option value="09">FUN RACE FEMININO MASTER</option>
+                    <option value="10"> FUN RACE FEMININO GRAN MASTER</option>
+                    <option value="11">RACE AMADOR MASCULINO</option>
+                    <option value="24">RACE AMADOR MASCULINO MASTER</option>
+                    <option value="25">RACE AMADOR MASCULINO G-MASTER</option>
+                    <option value="12">RACE AMADOR FEMININO</option>
+                    <option value="26">RACE AMADOR FEMININO MASTER</option>
+                    <option value="27">RACE AMADOR FEMININO G-MASTER</option>                    
+                    <option value="13">RACE 12'6 MASCULINO </option>
+                    <option value="14">RACE 12'6 FEMININO </option>
+                    <option value="15">RACE 12'6 MASTER MASC</option>
+                    <option value="22">RACE 12'6 MASTER FEMININO</option>
+                    <option value="16">RACE 12'6 G-MASTER MASC</option>
+                    <option value="23">RACE 12'6 G-MASTER FEMININO</option>
+                    <option value="17">RACE 14 MASC</option>
+                    <option value="29">RACE 14 MASC MASTER</option>
+                    <option value="30">RACE 14 MASC G_MASTER</option>
+                    <option value="28">RACE 14 FEM</option>
+                    <option value="31">RACE 14 FEM MASTER</option>
+                    <option value="32">RACE 14 FEM G-MASTER</option>
+                    <option value="19">PADDLE BOARD MASCULINO</option>
+                    <option value="21">PADDLE BOARD FEMININO</option>
+              <!--  <option value="19">PADDLE BOARD</option>
+                    <option value="30">RACE 14 MASC G_MASTER</option>
+                    <option value="32">RACE 14 FEM G-MASTER</option>
+                    <option value="18">UNLIMIT</option>
+                    <option value="34">CANOA HAVAIANA OC3 MASC</option> 
+                    <option value="40">CANOA HAVAIANA OC1 FEM MASTER</option>
+                    <option value="35">CANOA HAVAIANA OC3 FEM</option> -->
+                    <option value="20">CANOA HAVAIANA OC1 MASC</option>
+                    <option value="39">CANOA HAVAIANA OC1 MASC MASTER</option>
+                    <option value="33">CANOA HAVAIANA OC1 FEM</option>
+                    <option value="36">CANOA HAVAIANA OC6 MISTA</option>
       </select> </td>
-     <td>
-	   <input type="submit" name="action" value="ABASUP" class="btn" style="font-weight:bold" onclick="location. href='./classifica.php?go=abasup' ">
-	   <input type="submit" name="action" value="ABSUP" class="btn" style="font-weight:bold" onclick="location. href='./classifica.php?go=absup' ">
-	 </td>
-	 </tr>
+     </tr>
+<!--	  <td>
+	      <input type="submit" name="action" value="PÓDIO" style="font-weight:bold" class="btn" id="btnCad">
+	  </td>	  -->
 	  
 	 </form>
 	 </table>
-		 
+		    <br></br>
+        <br></br>
+        <br></br>
 	</body>
 </div>	
 </html>
 
 
 <?php
-if (@$_POST['action'] == 'ABASUP'){
-    $contador = 1;
-    $id_categoria = $_POST['categoria'];
-	$sql = mysql_query("select nome_participante, estado, pontos from ranking r join participante p  where r.id_categoria=$id_categoria and r.id_participante=p.id_participante order by pontos DESC");
-    $sql_categoria = mysql_query("select nome_categoria from categoria  where id_categoria=$id_categoria");
-
-  echo "<table cellpadding=10 border=1 id=form_relatorio>";
-  while ($categoria = mysql_fetch_assoc($sql_categoria)){
-    echo "<tr>";
-	echo "<td>";
-	echo "<B>".$categoria['nome_categoria'].  " -- ABASUP" . "</b>";
-    echo "</td>";
-	echo "</tr>";  
-  }
-	echo "<table cellpadding=10 border=1 id=form_relatorio>";
-	while ($exibe = mysql_fetch_assoc($sql)){
-	    echo "<tr>";
-		echo "<td>";
-		echo $contador++ . "    -          ";
-		echo $exibe['nome_participante'] . "  (" . $exibe['estado'] . ")" . " ------- "   . $exibe['pontos']; 
-		echo "</td>";
-		echo "</tr>";
-	}
-	echo "<br>";
-	echo "<br>";
-	echo "</table>";
-
-}
-?>
-
-<?php
-if (@$_POST['action'] == 'PÓDIO'){
+if (@$_POST['categoria'] !== null) {
 	$id_etapa = $_POST['etapa'];		
 	$id_categoria = $_POST['categoria'];
 	$coluna = 1;
-	
-	$etapa = mysql_query ("select  local  from etapa where id_etapa=$id_etapa");
-	
-	if ($id_categoria > 0) {
-		$sql = mysql_query("select nome_participante, estado, tempo from inscricao i join participante p  where i.id_etapa=$id_etapa and i.id_categoria=$id_categoria and i.id_participante=p.id_participante and tempo is not null order by tempo");
-        $sql_categoria = mysql_query("select nome_categoria from categoria  where id_categoria=$id_categoria");	
-       echo "<table cellpadding=10 border=1 id=form_relatorio>";
-       while ($categoria = mysql_fetch_assoc($sql_categoria)){
-	       	echo "<tr>";
-			echo "<td>";
-			while ($nome_etapa = mysql_fetch_assoc($etapa)){
-			  echo "<B>".$categoria['nome_categoria'] . " ---- " . $nome_etapa['local'] . "</b>";
-			}
-			echo "</td>";
-			echo "</tr>";
-            echo "</table>";			
-		echo "<table cellpadding=10 border=1 id=form_relatorio>";
-		while ($exibe = mysql_fetch_assoc($sql)){
-			echo "<tr>";
-			echo "<td>";
-			echo $coluna++ . "    -          ";
-			echo $exibe['nome_participante'] . "  (" . $exibe['estado'] . ")" . "        -------                 "   . $exibe['tempo']; 
-			echo "</td>";
-			echo "</tr>";
-		}
-		 echo "<br>";
-		 echo "<br>";
-		  echo "</table>";
-		}
-		 
-	} else {
-	  echo "<table cellpadding=10 border=1 id=form_relatorio>";
-		   while ($nome_etapa = mysql_fetch_assoc($etapa)){
-		      echo "<tr>";
-			  echo "<td>";
-			  echo "<B>". " GERAL" . " ---- " . $nome_etapa['local'] . "</b>";
-			  echo "</td>";
-			  echo "</tr>";
-		    }
-		echo "</table>"	;
-		echo "<br>";
-		echo "<br>";
-			
-	  
-	  $sql = mysql_query("select nome_participante, estado, tempo, c.nome_categoria from inscricao i join participante p  join categoria c where i.id_etapa=$id_etapa and i.id_categoria=c.id_categoria and i.id_participante=p.id_participante and tempo is not null order by tempo");
-	  echo "<table cellpadding=10 border=1 id=form_relatorio>";	
-   	  while ($exibe = mysql_fetch_assoc($sql)){
-			echo "<tr>";
-			echo "<td>";
-			echo $coluna++ . "    -          ";
-			echo $exibe['nome_participante'] . "  (" . $exibe['estado'] . ")" . "        -------                 "   . $exibe['tempo'] . " --------- " . $exibe['nome_categoria'] ; 
-			echo "</td>";
-			echo "</tr>";
-		}
-	 }
-  
-}   
+
+
+
+echo "<div class=container>
+            <div class=row> ";
+                $etapa = mysql_query("select * from etapa where idetapa='$id_etapa'");
+                while ($result = mysql_fetch_assoc($etapa)){
+                  echo '<br>';
+                  echo '<h3 align="center">' . $result['nome_etapa'] . "  -  " . $result['local_etapa'] . '</h3>';
+                  echo '<br>';
+                  if ($id_categoria <> 0) {
+                    $categoria = mysql_query("select * from categoria where idcategoria='$id_categoria'");
+                    while ($result2 = mysql_fetch_assoc($categoria)){
+                     echo '<br>';
+                     echo '<h3 align="center">' . "RESULTADO -  " . $result2['descricao'] . '</h3>';
+                     echo '<br>';
+                    }
+                  } else {
+                      echo '<br>';
+                      echo '<h3 align="center">' . "RESULTADO GERAL" . $cat . '</h3>';
+                      echo '<br>';
+                  } 
+                } 
+                  
+              
+ echo" </div>";
+                    $count=1;
+				      if ( $id_categoria <> 0) {
+                       echo" <div class=row>
+                         <table cellpadding=0  border=0   style=width:700px  align=center class=table table-striped table-bordered >
+                         <thead>
+                           <tr>
+					         <th>Número</th>
+					         <th>NOME</th>
+                             <th>UF</th>
+					         <th>TEMPO</th>
+                             </tr>
+                         </thead>
+                         <tbody> ";
+                      $sql = mysql_query("SELECT i.numero, p.nome, p.estado, i.tempo  FROM inscricao i join atleta p join categoria c 
+                          WHERE i.etapa_idetapa ='$id_etapa' and i.categoria_idcategoria = '$id_categoria' and i.atleta_cpf = p.cpf and i.tempo <> '00:00:00' and i.categoria_idcategoria = c.idcategoria order by i.tempo");
+					   while ($row = mysql_fetch_assoc($sql)){
+                            echo '<tr>';
+							               echo '<td>' . $row['numero'] . '</td>';
+                            echo '<td>'. $row['nome'] . '</td>';
+                            echo '<td>'. $row['estado'] . '</td>';
+						                echo '<td>'. $row['tempo'] . '</td>';
+                            echo '</tr>';
+                            $count++;
+                        }	
+
+                    }else {
+                  echo" <div class=row>
+                         <table cellpadding=0  border=0   style=width:700px  align=center class=table table-striped table-bordered >
+                         <thead>
+                           <tr>
+					         <th>Número</th>
+					         <th>NOME</th>
+                             <th>UF</th>
+                             <th>CATEGORIA</th>
+					         <th>TEMPO</th>
+                             </tr>
+                         </thead>
+                         <tbody> ";
+                      $sql = mysql_query("SELECT i.numero, p.nome, p.estado, c.descricao, i.tempo  FROM inscricao i join atleta p join categoria c 
+                          WHERE i.etapa_idetapa ='$id_etapa' and i.atleta_cpf = p.cpf and i.categoria_idcategoria = c.idcategoria and i.tempo <> '00:00:00' order by i.tempo");
+                       while ($row = mysql_fetch_assoc($sql)){
+                            echo '<tr>';
+							             echo '<td>' . $row['numero'] . '</td>';
+                            echo '<td>'. $row['nome'] . '</td>';
+                            echo '<td>'. $row['estado'] . '</td>';
+                            echo '<td>'. $row['descricao'] . '</td>';
+						                echo '<td>'. $row['tempo'] . '</td>';
+                            echo '</tr>';
+                            $count++;
+                       }
+
+                    }
+                   	while ($row = mysql_fetch_assoc($sql)){
+                            echo '<tr>';
+							              echo '<td>' . $row['numero'] . '</td>';
+                            echo '<td>'. $row['nome'] . '</td>';
+                            echo '<td>'. $row['estado'] . '</td>';
+						                echo '<td>'. $row['tempo'] . '</td>';
+                            echo '</tr>';
+                            $count++;
+                    }
+                  
+            echo"  </tbody>
+            </table>
+          </div>
+
+</div>";
+
+
+}
 ?>
 

@@ -7,38 +7,58 @@
 <html lang="en">
  
 <body>
-    <div class="container">
+<head>
+<style>
+body {
+    background-image: url("stdp_atletas.jpg"), url("stdp_resultados02.jpg");
+    background-repeat: no-repeat, repeat;
+    background-size:100% auto;
+    
+
+}
+</style>
+</head>
+   <div class="container">
             <div class="row">
                 <h3 align="center">ATLETAS CADASTRADOS</h3>
             </div>
+             <br></br>
+
             <div class="row">
-                
                 <table class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>#</th>
                           <th>CPF</th>
                           <th>Nome</th>
+                          <th>Data de Nasc</th>
+                          <th>Sexo</th>
                           <th>UF</th>
-                          <th>Email</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
                       <?php
                         $count=1;
-                        $sql = mysql_query("select * from participante ORDER by id_participante limit 500");
+                        $sql = mysql_query("select * from atleta ORDER by nome limit 500");
                         while ($row = mysql_fetch_assoc($sql)){
                                 echo '<tr>';
                                 echo '<td>'. $count . '</td>';
-                                echo '<td>'. $row['id_participante'] . '</td>';
-                                echo '<td>'. $row['nome_participante'] . '</td>';
+                                echo '<td>'. $row['cpf'] . '</td>';
+                                echo '<td>'. $row['nome'] . '</td>';
+                                echo '<td>'. $row['data_nascimento'] . '</td>';
+                  
+                               # $interval = $date->diff( new DateTime( '2015-12-31' ) ); // data definida
+                               # echo '<td>'. $interval->format( '%Y Anos' ). '</td>'; 
+                                
+                                echo '<td>'. $row['sexo'] . '</td>';
                                 echo '<td>'. $row['estado'] . '</td>';
-                                echo '<td>'. $row['email'] . '</td>';
-                                echo '<td width=150>';
-                                echo '<a class="btn btn-success" href="update.php?id='.$row['id_participante'].'">Update</a>';
+                                echo '<td width=250>';
+                                echo '<a class="btn btn-success" href="update.php?id='.$row['cpf'].'">Update</a>';
                                 echo ' ';
-                                echo '<a class="btn btn-danger" href="delete.php?id='.$row['id_participante'].'">Delete</a>';
+                                echo '<a class="btn btn-danger" href="delete.php?id='.$row['cpf'].'">Delete</a>';
+                                echo ' ';
+                                echo '<a class="btn btn-info" href="inscricao.php?id='.$row['cpf'].'">Inscrição</a>';
                                 echo '</td>';
                                 echo '</tr>';
                                 $count++;

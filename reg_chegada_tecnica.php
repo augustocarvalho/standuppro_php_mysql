@@ -24,8 +24,8 @@
          
         // validate input
         $valid = true;
-		$result = mysqli_query($con, "select * from inscricao where etapa_idetapa=$id and numero=$cod");
-        if (  (empty($cod) ) or (mysqli_num_rows($result)==0) ){
+		$result = mysql_query("select * from inscricao where etapa_idetapa=$id and numero=$cod");
+        if (  (empty($cod) ) or (mysql_num_rows($result)==0) ){
             $codError = 'Inscrição inválida';
             $valid = false;
         }
@@ -38,9 +38,9 @@
         
         // insert data
         if ($valid) {
-	            mysqli_query($con, "UPDATE inscricao SET tempo='$tempo' where numero='$cod' and etapa_idetapa='$id'");
+	            mysql_query("UPDATE inscricao SET podio_tecnica ='$tempo' where numero='$cod' and etapa_idetapa='$id'");
                 echo "<script>alert('Cadastro efetuado com sucesso.');</script>";
-                echo "<meta http-equiv='refresh' content='0, url=./reg_chegada.php?id=$id'>";
+                echo "<meta http-equiv='refresh' content='0, url=./reg_chegada_tecnica.php?id=$id'>";
         }
               
     }
@@ -54,25 +54,25 @@
      
                 <div class="span10 offset1">
                     <div class="row">
-                        <h3 align="center">Registro de Chegada - PROVA LONGA</h3>
+                        <h3 align="center">Registro de Chegada - PROVA TECNICA</h3>
                         <br>
                         <br>
                     </div>
              
-                    <form class="form-horizontal" action="reg_chegada.php?id=<?php echo $id?>" method="post">
+                    <form class="form-horizontal" action="reg_chegada_tecnica.php?id=<?php echo $id?>" method="post">
                       <div class="control-group <?php echo !empty($codError)?'error':'';?>">
                         <label class="control-label">Inscrição</label>
                         <div class="controls">
-                            <input style="min-height:35px;" name="cod" type="text" autofocus  placeholder="Número de Inscrição"value="<?php echo !empty($cod)?$cod:'';?>">
+                            <input style="min-height:35px;" name="cod" type="text"  placeholder="Número de Inscrição"value="<?php echo !empty($cod)?$cod:'';?>">
                             <?php if (!empty($codError)): ?>
                                 <span class="help-inline"><?php echo $codError;?></span>
                             <?php endif; ?>
                         </div>
                       </div>
                        <div class="control-group <?php echo !empty($tempoError)?'error':'';?>">
-                        <label class="control-label">Tempo</label>
+                        <label class="control-label">Colocação</label>
                         <div class="controls">
-                            <input style="min-height:35px;" name="tempo" type="text" class="time" placeholder="tempo" value="<?php echo !empty($tempo)?$tempo:'';?>">
+                            <input style="min-height:35px;" name="tempo" type="text"  placeholder="colocacao" value="<?php echo !empty($tempo)?$tempo:'';?>">
                             <?php if (!empty($tempoError)): ?>
                                 <span class="help-inline"><?php echo $tempoError;?></span>
                             <?php endif; ?>

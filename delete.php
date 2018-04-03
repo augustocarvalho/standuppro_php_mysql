@@ -11,7 +11,11 @@
         $id = $_POST['id'];
          
         // delete data
+<<<<<<< HEAD
         mysqli_query($con, "DELETE FROM atleta  WHERE cpf='$id'");
+=======
+        mysql_query("DELETE FROM atleta  WHERE cpf='$id'");
+>>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
         header("Location: listar_atleta.php");
          
     }

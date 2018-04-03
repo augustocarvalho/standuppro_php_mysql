@@ -37,13 +37,22 @@
                
         // update data
         if ($valid) {
+<<<<<<< HEAD
           mysqli_query($con, "UPDATE atleta  set nome='$nome_participante', data_nascimento='$data_nascimento', email='$email', estado='$estado', cidade='$cidade', cod_cbsup='$cod_cbsup', categoria_idcategoria='$categoria' WHERE cpf='$id'");
+=======
+          mysql_query("UPDATE atleta  set nome='$nome_participante', data_nascimento='$data_nascimento', email='$email', estado='$estado' WHERE cpf='$id'");
+>>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
           header("Location: listar_atleta.php");
 
         }
     } else {
+<<<<<<< HEAD
         $sql = mysqli_query($con, "SELECT * FROM atleta where cpf=$id");
         while ($data=mysqli_fetch_assoc($sql)){ 
+=======
+        $sql = mysql_query("SELECT * FROM atleta where cpf=$id");
+        while ($data=mysql_fetch_assoc($sql)){ 
+>>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
           $nome_participante = $data['nome'];
           $data_nascimento = $data['data_nascimento'];  
           $email = $data['email'];

@@ -16,7 +16,11 @@
         $id = $_POST['id'];
         $cod = $_POST['cod']; 
         // delete data
+<<<<<<< HEAD
         mysqli_query($con, "DELETE FROM inscricao  WHERE etapa_idetapa='$id' and numero='$cod'");
+=======
+        mysql_query("DELETE FROM inscricao  WHERE etapa_idetapa='$id' and numero='$cod'");
+>>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
         header("Location: inscritos.php?id=$id");
     }
 ?>

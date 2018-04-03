@@ -68,7 +68,6 @@ order by 1
 
 
 
-<<<<<<< HEAD
 DADOS DA INSCRICAO POR CATEGORIA
 SELECT i.podio_longa, i.tempo, i.podio_tecnica, i.tempo_t , i.numero, a.nome, a.estado, c.descricao 
 FROM inscricao i 
@@ -80,5 +79,3 @@ and i.categoria_idcategoria = 1
 ORDER by 1
 
 
-=======
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111

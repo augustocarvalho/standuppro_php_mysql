@@ -24,13 +24,8 @@
          
         // validate input
         $valid = true;
-<<<<<<< HEAD
 		$result = mysqli_query($con, "select * from inscricao where etapa_idetapa=$id and numero=$cod");
         if (  (empty($cod) ) or (mysqli_num_rows($result)==0) ){
-=======
-		$result = mysql_query("select * from inscricao where etapa_idetapa=$id and numero=$cod");
-        if (  (empty($cod) ) or (mysql_num_rows($result)==0) ){
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
             $codError = 'Inscrição inválida';
             $valid = false;
         }
@@ -43,11 +38,7 @@
         
         // insert data
         if ($valid) {
-<<<<<<< HEAD
 	            mysqli_query($con, "UPDATE inscricao SET tempo='$tempo' where numero='$cod' and etapa_idetapa='$id'");
-=======
-	            mysql_query("UPDATE inscricao SET tempo_t='$tempo' where numero='$cod' and etapa_idetapa='$id'");
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                 echo "<script>alert('Cadastro efetuado com sucesso.');</script>";
                 echo "<meta http-equiv='refresh' content='0, url=./reg_chegada.php?id=$id'>";
         }
@@ -81,11 +72,7 @@
                        <div class="control-group <?php echo !empty($tempoError)?'error':'';?>">
                         <label class="control-label">Tempo</label>
                         <div class="controls">
-<<<<<<< HEAD
                             <input style="min-height:35px;" name="tempo" type="text" class="time" placeholder="tempo" value="<?php echo !empty($tempo)?$tempo:'';?>">
-=======
-                            <input name="tempo" type="text" class="time" placeholder="tempo" value="<?php echo !empty($tempo)?$tempo:'';?>">
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                             <?php if (!empty($tempoError)): ?>
                                 <span class="help-inline"><?php echo $tempoError;?></span>
                             <?php endif; ?>

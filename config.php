@@ -1,10 +1,6 @@
 <?php
 # >> Defina o título do site
-<<<<<<< HEAD
    $titulo="Circuito ABASUP - 2018";
-=======
-   $titulo="Circuito SUP - 2016";
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
 
 
    

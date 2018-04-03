@@ -18,10 +18,7 @@
         $dt_nascimento = $_POST['dt_nascimento'];
         $sexo = $_POST['sexo'];
         $cod_cbsup = $_POST['cod_cbsup'];
-<<<<<<< HEAD
         $cidade = $_POST['cidade'];
-=======
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
          
 
         // validate input
@@ -39,15 +36,9 @@
         
         // insert data
         if ($valid) {
-<<<<<<< HEAD
             $sql_result = mysqli_query($con, "select * from atleta where cpf=$cpf");
               if (mysqli_num_rows($sql_result) == 0) {
                 mysqli_query($con, "INSERT INTO atleta (cpf,nome,estado,data_nascimento,sexo,email,cidade,cod_cbsup) values('$cpf','$name','$estado','$dt_nascimento','$sexo','$email','$cidade','$cod_cbsup')");
-=======
-            $sql_result = mysql_query("select * from atleta where cpf=$cpf");
-              if (mysql_num_rows($sql_result) == 0) {
-                mysql_query("INSERT INTO atleta (cpf,nome,estado,data_nascimento,sexo,email, cod_cbsup) values('$cpf','$name','$estado','$dt_nascimento','$sexo','$email','$cod_cbsup')");
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                 echo "<script>alert('Cadastro efetuado com sucesso.');</script>";
                 echo "<meta http-equiv='refresh' content='0, url=./inscricao.php?id=$cpf'>";
               }
@@ -94,11 +85,7 @@
                       <div class="control-group <?php echo !empty($dtError)?'error':'';?>">
                         <label class="control-label">Data de Nascimento</label>
                         <div class="controls">
-<<<<<<< HEAD
                             <input style="min-height:35px;" name="dt_nascimento" type="date"  placeholder="dt_nascimento" value="<?php echo !empty($dt_nascimento)?$dt_nascimento:'';?>">
-=======
-                            <input name="dt_nascimento" type="date"  placeholder="dt_nascimento" value="<?php echo !empty($dt_nascimento)?$dt_nascimento:'';?>">
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                             <?php if (!empty($dt_nascimentoError)): ?>
                                 <span class="help-inline"><?php echo $dt_nascimentoError;?></span>
                             <?php endif; ?>
@@ -130,11 +117,7 @@
                       <div class="control-group">
                         <label class="control-label">CÓDIGO CBSUP</label>
                         <div class="controls">
-<<<<<<< HEAD
                             <input style="min-height:35px;" name="cod_cbsup" type="text" placeholder="CBSUP" value="<?php echo !empty($cod_cbsup)?$cod_cbsup:'';?>">
-=======
-                            <input name="cod_cbsup" type="text" placeholder="CBSUP" value="<?php echo !empty($cod_cbsup)?$cod_cbsup:'';?>">
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                         </div>
                       </div>
 

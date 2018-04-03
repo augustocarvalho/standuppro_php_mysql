@@ -22,7 +22,6 @@ require_once "menu.php";
 	<tr>
  	  <td style="font-weight:bold"> ETAPA: </td>
       <td> <select name="etapa" id="etapa" class="selectpicker" > 
-<<<<<<< HEAD
        <option value="19">YACHT SUP RACE - 2017</option>
        <option value="17">ITACARE PADDLE RACE - 2017</option>
        <option value="14">BAHIA SUP RACE - 2017</option>
@@ -35,8 +34,6 @@ require_once "menu.php";
         <option data-divider="true"></option>
        <option value="07">YACHT CLUBE DA BAHIA - 2016</option>
        <option value="06">MAR DE ITACARÉ - 2016</option>
-=======
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
        <option value="05">BAHIA SUP ECO 2016</option>  
        <option value="04">CIRCUITO NAUTICO SSA-IOS</option>     
        <option data-divider="true"></option>
@@ -91,7 +88,6 @@ require_once "menu.php";
                     <option value="35">CANOA HAVAIANA OC3 FEM</option> -->
                     <option value="20">CANOA HAVAIANA OC1 MASC</option>
                     <option value="39">CANOA HAVAIANA OC1 MASC MASTER</option>
-<<<<<<< HEAD
                     <option value="43">CANOA HAVAIANA OC1 MASC G-MASTER</option>
                     <option value="33">CANOA HAVAIANA OC1 FEM</option>
                     <option value="40">CANOA HAVAIANA OC1 FEM MASTER</option>
@@ -106,10 +102,6 @@ require_once "menu.php";
                     <option value="51">ESTREANTE RACE FEMININO</option>
                     <option value="52">SURFSKI</option>
                     <option value="42">MILITAR</option>
-=======
-                    <option value="33">CANOA HAVAIANA OC1 FEM</option>
-                    <option value="36">CANOA HAVAIANA OC6 MISTA</option>
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
       </select> </td>
      </tr>
 <!--	  <td>
@@ -136,24 +128,14 @@ if (@$_POST['categoria'] !== null) {
 
 echo "<div class=container>
             <div class=row> ";
-<<<<<<< HEAD
                 $etapa = mysqli_query($con,"select * from etapa where idetapa='$id_etapa'");
                 while ($result = mysqli_fetch_assoc($etapa)){
-=======
-                $etapa = mysql_query("select * from etapa where idetapa='$id_etapa'");
-                while ($result = mysql_fetch_assoc($etapa)){
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                   echo '<br>';
                   echo '<h3 align="center">' . $result['nome_etapa'] . "  -  " . $result['local_etapa'] . '</h3>';
                   echo '<br>';
                   if ($id_categoria <> 0) {
-<<<<<<< HEAD
                     $categoria = mysqli_query($con,"select * from categoria where idcategoria='$id_categoria'");
                     while ($result2 = mysqli_fetch_assoc($categoria)){
-=======
-                    $categoria = mysql_query("select * from categoria where idcategoria='$id_categoria'");
-                    while ($result2 = mysql_fetch_assoc($categoria)){
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                      echo '<br>';
                      echo '<h3 align="center">' . "RESULTADO -  " . $result2['descricao'] . '</h3>';
                      echo '<br>';
@@ -173,15 +155,11 @@ echo "<div class=container>
                          <table cellpadding=0  border=0   style=width:700px  align=center class=table table-striped table-bordered >
                          <thead>
                            <tr>
-<<<<<<< HEAD
                    <th> #</th>        
-=======
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
 					         <th>Número</th>
 					         <th>NOME</th>
                              <th>UF</th>
 					         <th>TEMPO</th>
-<<<<<<< HEAD
                    <th>FILIADO</th>
                              </tr>
                          </thead>
@@ -200,19 +178,6 @@ echo "<div class=container>
                             } else {
                               echo '<td>'. "-" . '</td>';
                             }
-=======
-                             </tr>
-                         </thead>
-                         <tbody> ";
-                      $sql = mysql_query("SELECT i.numero, p.nome, p.estado, i.tempo  FROM inscricao i join atleta p join categoria c 
-                          WHERE i.etapa_idetapa ='$id_etapa' and i.categoria_idcategoria = '$id_categoria' and i.atleta_cpf = p.cpf and i.tempo <> '00:00:00' and i.categoria_idcategoria = c.idcategoria order by i.tempo");
-					   while ($row = mysql_fetch_assoc($sql)){
-                            echo '<tr>';
-							               echo '<td>' . $row['numero'] . '</td>';
-                            echo '<td>'. $row['nome'] . '</td>';
-                            echo '<td>'. $row['estado'] . '</td>';
-						                echo '<td>'. $row['tempo'] . '</td>';
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                             echo '</tr>';
                             $count++;
                         }	
@@ -222,7 +187,6 @@ echo "<div class=container>
                          <table cellpadding=0  border=0   style=width:700px  align=center class=table table-striped table-bordered >
                          <thead>
                            <tr>
-<<<<<<< HEAD
                            <th> #</th> 
 					                 <th>Número</th>
 					                 <th>NOME</th>
@@ -238,43 +202,22 @@ echo "<div class=container>
                        while ($row = mysqli_fetch_assoc($sql)){
                             echo '<tr>';
                             echo '<td>' . $count . '</td>';
-=======
-					         <th>Número</th>
-					         <th>NOME</th>
-                             <th>UF</th>
-                             <th>CATEGORIA</th>
-					         <th>TEMPO</th>
-                             </tr>
-                         </thead>
-                         <tbody> ";
-                      $sql = mysql_query("SELECT i.numero, p.nome, p.estado, c.descricao, i.tempo  FROM inscricao i join atleta p join categoria c 
-                          WHERE i.etapa_idetapa ='$id_etapa' and i.atleta_cpf = p.cpf and i.categoria_idcategoria = c.idcategoria and i.tempo <> '00:00:00' order by i.tempo");
-                       while ($row = mysql_fetch_assoc($sql)){
-                            echo '<tr>';
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
 							             echo '<td>' . $row['numero'] . '</td>';
                             echo '<td>'. $row['nome'] . '</td>';
                             echo '<td>'. $row['estado'] . '</td>';
                             echo '<td>'. $row['descricao'] . '</td>';
 						                echo '<td>'. $row['tempo'] . '</td>';
-<<<<<<< HEAD
                             if ($row['filiacao_abasup_2018']) {
                               echo '<td>'. "ok" . '</td>';
                             } else {
                               echo '<td>'. "-" . '</td>';
                             }
-=======
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                             echo '</tr>';
                             $count++;
                        }
 
                     }
-<<<<<<< HEAD
                    	while ($row = mysqli_fetch_assoc($sql)){
-=======
-                   	while ($row = mysql_fetch_assoc($sql)){
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                             echo '<tr>';
 							              echo '<td>' . $row['numero'] . '</td>';
                             echo '<td>'. $row['nome'] . '</td>';

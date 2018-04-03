@@ -63,7 +63,6 @@ require_once "menu.php";
                     <option value="19">PADDLE BOARD MASCULINO</option>
                     <option value="21">PADDLE BOARD FEMININO</option>
               <!--  <option value="19">PADDLE BOARD</option>
-<<<<<<< HEAD
                     <option value="18">UNLIMIT</option>
                     <option value="34">CANOA HAVAIANA OC3 MASC</option> 
                     <option value="40">CANOA HAVAIANA OC1 FEM MASTER</option>
@@ -72,18 +71,6 @@ require_once "menu.php";
                     <option value="39">CANOA HAVAIANA OC1 MASC MASTER</option>
                     <option value="33">CANOA HAVAIANA OC1 FEM</option>
                     <option value="36">CANOA HAVAIANA OC6 MISTA</option>-->
-=======
-                    <option value="30">RACE 14 MASC G_MASTER</option>
-                    <option value="32">RACE 14 FEM G-MASTER</option>
-                    <option value="18">UNLIMIT</option>
-                    <option value="34">CANOA HAVAIANA OC3 MASC</option> 
-                    <option value="40">CANOA HAVAIANA OC1 FEM MASTER</option>
-                    <option value="35">CANOA HAVAIANA OC3 FEM</option> -->
-                    <option value="20">CANOA HAVAIANA OC1 MASC</option>
-                    <option value="39">CANOA HAVAIANA OC1 MASC MASTER</option>
-                    <option value="33">CANOA HAVAIANA OC1 FEM</option>
-                    <option value="36">CANOA HAVAIANA OC6 MISTA</option>
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
       </select> </td>
      </tr>
 <!--	  <td>
@@ -102,11 +89,7 @@ require_once "menu.php";
 
 <?php
 if (@$_POST['categoria'] !== null) {
-<<<<<<< HEAD
   $id_etapa = 17;    
-=======
-  $id_etapa = 4;    
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
   $id_modalidade = $_POST['modalidade'];
   $id_categoria = $_POST['categoria'];
   $coluna = 1;
@@ -154,25 +137,17 @@ echo "<div class=container>
                    <th>RESULTADO</th>        
                    <th>NUMERO</th>
                    <th>NOME</th>
-<<<<<<< HEAD
                    <th>UF</th>
-=======
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                    <th>TEMPO</th>
                   </tr>
                   </thead>
                   <tbody> ";
                     $sql = mysql_query("SELECT
-<<<<<<< HEAD
                               a.nome, a.estado, i.numero, tempo, podio_longa
-=======
-                              a.nome, i.numero, tempo
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                               FROM inscricao i JOIN atleta a ON a.cpf = i.atleta_cpf
                               WHERE true 
                               and etapa_idetapa = $id_etapa
                               and categoria_idcategoria = $id_categoria
-<<<<<<< HEAD
                               and (podio_longa > 0 )
                               order by podio_longa"); 
                           while ($row = mysql_fetch_assoc($sql)){
@@ -181,15 +156,6 @@ echo "<div class=container>
                                 echo '<td>'. $row['numero'] . '</td>';
                                 echo '<td>'. $row['nome'] . '</td>';
                                 echo '<td>'. $row['estado'] . '</td>';
-=======
-                              and (tempo <> '00:00:00')
-                              order by tempo"); 
-                          while ($row = mysql_fetch_assoc($sql)){
-                                echo '<tr>';
-                                echo '<td>'. $count . '</td>';
-                                echo '<td>'. $row['numero'] . '</td>';
-                                echo '<td>'. $row['nome'] . '</td>';
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                                 echo '<td>'. $row['tempo'] . '</td>';
                                 echo '</tr>';
                                 $count++;
@@ -204,25 +170,16 @@ echo "<div class=container>
                    <th>RESULTADO</th>        
                    <th>NUMERO</th>
                    <th>NOME</th>
-<<<<<<< HEAD
                    <th>UF</th>
-=======
-                   <th>TEMPO</th>
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                   </tr>
                   </thead>
                   <tbody> ";
                       $sql = mysql_query("SELECT
-<<<<<<< HEAD
                                 a.nome, a.estado, i.numero, i.podio_tecnica
-=======
-                                a.nome, i.numero, tempo_t
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                                 FROM inscricao i JOIN atleta a ON a.cpf = i.atleta_cpf
                                 WHERE true 
                                 and etapa_idetapa = $id_etapa
                                 and categoria_idcategoria = $id_categoria
-<<<<<<< HEAD
                                 and podio_tecnica <> 0
                                 order by podio_tecnica"); 
                             while ($row = mysql_fetch_assoc($sql)){
@@ -232,17 +189,6 @@ echo "<div class=container>
                                   echo '<td>'. $row['nome'] . '</td>';
                                   echo '<td>'. $row['estado'] . '</td>';
 								  echo '</tr>';
-=======
-                                and (tempo_t is not null)
-                                order by tempo_t"); 
-                            while ($row = mysql_fetch_assoc($sql)){
-                                  echo '<tr>';
-                                  echo '<td>'. $count . '</td>';
-                                  echo '<td>'. $row['numero'] . '</td>';
-                                  echo '<td>'. $row['nome'] . '</td>';
-                                  echo '<td>'. $row['tempo_t'] . '</td>';
-                                  echo '</tr>';
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                                   $count++;
                             }           
                }                 
@@ -257,36 +203,21 @@ echo "<div class=container>
                    <th>TECNICA</th>
                    <th>NUMERO</th>
                    <th>NOME</th>
-<<<<<<< HEAD
                    <th>UF</th>
                    <th>TEMPO LONGA</th>
-=======
-                   <th>TEMPO LONGA</th>
-                   <th>TEMPO TECNICA</th>
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                   </tr>
                   </thead>
                   <tbody> ";
                     $sql = mysql_query("SELECT
                               podio_longa + podio_tecnica as total_pontos 
-<<<<<<< HEAD
                               , a.nome, a.estado, a.cod_cbsup, i.numero , tempo, podio_longa, tempo_t, podio_tecnica
-=======
-                              , a.nome, a.cod_cbsup, i.numero , tempo, podio_longa, tempo_t, podio_tecnica
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                               FROM inscricao i JOIN atleta a ON a.cpf = i.atleta_cpf
                               WHERE true 
                               and etapa_idetapa = $id_etapa
                               and categoria_idcategoria = $id_categoria
-<<<<<<< HEAD
                               and (podio_longa > 0)
                               and podio_tecnica <> 0
                               order by 1, podio_longa"); 
-=======
-                              and (tempo <> '00:00:00')
-                              and  tempo_t is not null
-                              order by 1,5"); 
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                           while ($row = mysql_fetch_assoc($sql)){
                                 echo '<tr>';
                                 echo '<td>'. $count . '</td>';
@@ -295,13 +226,8 @@ echo "<div class=container>
                                 echo '<td>'. $row['podio_tecnica'] . '</td>';
                                 echo '<td>'. $row['numero'] . '</td>';
                                 echo '<td>'. $row['nome'] . '</td>';
-<<<<<<< HEAD
                                 echo '<td>'. $row['estado'] . '</td>';
                                 echo '<td>'. $row['tempo'] . '</td>';
-=======
-                                echo '<td>'. $row['tempo'] . '</td>';
-                                echo '<td>'. $row['tempo_t'] . '</td>';
->>>>>>> 78a8c1f1ce2873b7af7e23a6e004503b67184111
                                 echo '</tr>';
                                 $count++;
                            }

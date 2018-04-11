@@ -156,7 +156,7 @@
                       <div class="control-group <?php echo !empty($emailError)?'error':'';?>">
                         <label class="control-label">Codigo CBSUP</label>
                         <div class="controls">
-                            <input name="cod_cbsup" type="text" placeholder="Cod CBSUP" value="<?php echo !empty($email)?$email:'';?>">
+                            <input name="cod_cbsup" type="text" placeholder="Cod CBSUP" value="<?php echo !empty($cod_cbsup)?$cod_cbsup:'';?>">
                             <?php if (!empty($emailError)): ?>
                                 <span class="help-inline"><?php echo $emailError;?></span>
                             <?php endif;?>

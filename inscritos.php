@@ -1,6 +1,6 @@
 <?php
+require_once "config.php";
 require_once "menu.php";
-include 'config.php';
 
     $id = null;
     if ( !empty($_GET['id'])) {
@@ -9,11 +9,6 @@ include 'config.php';
 ?>
 
 <html>
-<head>
-    <meta charset="utf-8">
-    <link   href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/bootstrap.min.js"></script>
-</head>
 <body>
        <head>
         <style>
@@ -225,10 +220,10 @@ echo"
                     }else {
                       $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, 
                             CASE WHEN (i.categoria_idcategoria in ('1','2','3','4','19','21')) THEN c.descricao
-                                 WHEN (i.categoria_idcategoria in ('5','8','11','12','13','14','17','28') 
-                                        AND (SELECT 1 FROM inscricao i1 WHERE i1.etapa_idetapa = i.etapa_idetapa and i1.numero = i.numero and i1.categoria_idcategoria in ('6','9','24','26','15','22','29','31'))) THEN concat(c.descricao, ' - ', ' MASTER') 
-                                WHEN (i.categoria_idcategoria in ('5','8','11','12','13','14','17','28') 
-                                        AND (SELECT 1 FROM inscricao i1 WHERE i1.etapa_idetapa = i.etapa_idetapa and i1.numero = i.numero and i1.categoria_idcategoria in ('7','10','25','27','16','23','30','32'))) THEN concat(c.descricao, ' - ', ' G-MASTER') 
+                                 WHEN (i.categoria_idcategoria in ('5','8','11','12','13','14','17','28','53','54') 
+                                        AND (SELECT 1 FROM inscricao i1 WHERE i1.etapa_idetapa = i.etapa_idetapa and i1.numero = i.numero and i1.categoria_idcategoria in ('6','9','24','26','15','22','29','31','55','57'))) THEN concat(c.descricao, ' - ', ' MASTER') 
+                                WHEN (i.categoria_idcategoria in ('5','8','11','12','13','14','17','28','53','54') 
+                                        AND (SELECT 1 FROM inscricao i1 WHERE i1.etapa_idetapa = i.etapa_idetapa and i1.numero = i.numero and i1.categoria_idcategoria in ('7','10','25','27','16','23','30','32','56','58'))) THEN concat(c.descricao, ' - ', ' G-MASTER') 
                                 ELSE concat(c.descricao, ' - ', ' OPEN') END as descricao 
                               , p.filiacao_abasup_2018, p.cod_cbsup  
                               FROM inscricao i 

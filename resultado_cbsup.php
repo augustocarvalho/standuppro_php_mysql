@@ -89,7 +89,7 @@ require_once "menu.php";
 
 <?php
 if (@$_POST['categoria'] !== null) {
-  $id_etapa = 17;    
+  $id_etapa = 20;    
   $id_modalidade = $_POST['modalidade'];
   $id_categoria = $_POST['categoria'];
   $coluna = 1;
@@ -97,13 +97,13 @@ if (@$_POST['categoria'] !== null) {
 
 echo "<div class=container>
             <div class=row> ";
-                $etapa = mysql_query("select * from etapa where idetapa=$id_etapa");
-                while ($result = mysql_fetch_assoc($etapa)){
+                $etapa = mysqli_query($con,"select * from etapa where idetapa=$id_etapa");
+                while ($result = mysqli_fetch_assoc($etapa)){
                   echo '<br>';
                   echo '<h3 align="center">' . $result['nome_etapa'] . "  -  " . $result['local_etapa'] . '</h3>';
                   echo '<br>';
-                    $categoria = mysql_query("select * from categoria where idcategoria='$id_categoria'");
-                    while ($result2 = mysql_fetch_assoc($categoria)){
+                    $categoria = mysqli_query($con,"select * from categoria where idcategoria='$id_categoria'");
+                    while ($result2 = mysqli_fetch_assoc($categoria)){
                      if ($id_modalidade <> 0) {
                        if ($id_modalidade == 01) {
                         echo '<br>';
@@ -142,15 +142,15 @@ echo "<div class=container>
                   </tr>
                   </thead>
                   <tbody> ";
-                    $sql = mysql_query("SELECT
+                    $sql = mysqli_query($con,"SELECT
                               a.nome, a.estado, i.numero, tempo, podio_longa
                               FROM inscricao i JOIN atleta a ON a.cpf = i.atleta_cpf
                               WHERE true 
                               and etapa_idetapa = $id_etapa
-                              and categoria_idcategoria = $id_categoria
+                              and i.categoria_idcategoria = $id_categoria
                               and (podio_longa > 0 )
                               order by podio_longa"); 
-                          while ($row = mysql_fetch_assoc($sql)){
+                          while ($row = mysqli_fetch_assoc($sql)){
                                 echo '<tr>';
                                 echo '<td>'. $row['podio_longa'] . '</td>';
                                 echo '<td>'. $row['numero'] . '</td>';
@@ -174,15 +174,15 @@ echo "<div class=container>
                   </tr>
                   </thead>
                   <tbody> ";
-                      $sql = mysql_query("SELECT
+                      $sql = mysqli_query($con,"SELECT
                                 a.nome, a.estado, i.numero, i.podio_tecnica
                                 FROM inscricao i JOIN atleta a ON a.cpf = i.atleta_cpf
                                 WHERE true 
                                 and etapa_idetapa = $id_etapa
-                                and categoria_idcategoria = $id_categoria
+                                and i.categoria_idcategoria = $id_categoria
                                 and podio_tecnica <> 0
                                 order by podio_tecnica"); 
-                            while ($row = mysql_fetch_assoc($sql)){
+                            while ($row = mysqli_fetch_assoc($sql)){
                                   echo '<tr>';
                                   echo '<td>'. $row['podio_tecnica'] . '</td>';
                                   echo '<td>'. $row['numero'] . '</td>';
@@ -208,17 +208,17 @@ echo "<div class=container>
                   </tr>
                   </thead>
                   <tbody> ";
-                    $sql = mysql_query("SELECT
+                    $sql = mysqli_query($con,"SELECT
                               podio_longa + podio_tecnica as total_pontos 
                               , a.nome, a.estado, a.cod_cbsup, i.numero , tempo, podio_longa, tempo_t, podio_tecnica
                               FROM inscricao i JOIN atleta a ON a.cpf = i.atleta_cpf
                               WHERE true 
                               and etapa_idetapa = $id_etapa
-                              and categoria_idcategoria = $id_categoria
+                              and i.categoria_idcategoria = $id_categoria
                               and (podio_longa > 0)
                               and podio_tecnica <> 0
                               order by 1, podio_longa"); 
-                          while ($row = mysql_fetch_assoc($sql)){
+                          while ($row = mysqli_fetch_assoc($sql)){
                                 echo '<tr>';
                                 echo '<td>'. $count . '</td>';
                                 echo '<td>'. $row['total_pontos'] . '</td>';

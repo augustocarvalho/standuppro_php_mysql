@@ -59,6 +59,12 @@
           if (($id_categoria==17) and ($idade>39) and ($idade<50) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','29','$inscricao')");
           }
+          if (($id_categoria==53) and ($idade>39) and ($idade<50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','55','$inscricao')");
+          }
+          if (($id_categoria==54) and ($idade>39) and ($idade<50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','57','$inscricao')");
+          }
           if (($id_categoria==28) and ($idade>39) and ($idade<50) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','31','$inscricao')");
           }
@@ -94,6 +100,12 @@
           }
           if (($id_categoria==17) and ($idade>49) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','30','$inscricao')");
+          }
+          if (($id_categoria==53) and ($idade>49) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','56','$inscricao')");
+          }
+          if (($id_categoria==54) and ($idade>49) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','58','$inscricao')");
           }
           if (($id_categoria==28) and ($idade>49) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','32','$inscricao')");
@@ -170,7 +182,7 @@
             <label class="control-label">Etapa:</label>
               <div class="controls">
                 <select class="span4" name="etapa" >
-                    <option value="19">YACHT RACE PRO 2017</option>
+                    <option value="20">Primeira Etapa ABASUP 2018</option>
                 </select> 
                </div>   
           </div>        
@@ -185,54 +197,17 @@
                     <option value="03">JUNIOR MASCULINO</option>
                     <option value="04"> JUNIOR FEMININO</option>
                     <option value="05">FUN RACE MASCULINO</option>
-                    <option value="06">FUN RACE MASCULINO MASTER</option>
-                    <option value="07"> FUN RACE MASCULINO GRAN MASTER</option>
                     <option value="08">FUN RACE FEMININO</option>
-                    <option value="09">FUN RACE FEMININO MASTER</option>
-                    <option value="10"> FUN RACE FEMININO GRAN MASTER</option>
-                    <option value="11">RACE AMADOR MASCULINO</option>
-                    <option value="24">RACE AMADOR MASCULINO MASTER</option>
-                    <option value="25">RACE AMADOR MASCULINO G-MASTER</option>
-                    <option value="12">RACE AMADOR FEMININO</option>
-                    <option value="26">RACE AMADOR FEMININO MASTER</option>
-                    <option value="27">RACE AMADOR FEMININO G-MASTER</option>                    
-                    <option value="13">RACE 12'6 MASCULINO </option>
-                    <option value="14">RACE 12'6 FEMININO </option>
-                    <option value="15">RACE 12'6 MASTER MASC</option>
-                    <option value="22">RACE 12'6 MASTER FEMININO</option>
-                    <option value="16">RACE 12'6 G-MASTER MASC</option>
-                    <option value="23">RACE 12'6 G-MASTER FEMININO</option>
-                    <option value="17">RACE 14 MASC</option>
-                    <option value="29">RACE 14 MASC MASTER</option>
-                    <option value="30">RACE 14 MASC G-MASTER</option>
-                    <option value="28">RACE 14 FEM</option>
-                    <option value="31">RACE 14 FEM MASTER</option>
-                    <option value="31">RACE 14 FEM G-MASTER</option>
+                    <option value="11">RACE 12'6 AMADOR MASCULINO</option>
+                    <option value="12">RACE 12'6 AMADOR FEMININO</option>
+                    <option value="53">RACE 14 AMADOR MASCULINO</option>
+                    <option value="54">RACE 14 AMADOR FEMININO</option>
+                    <option value="13">RACE 12'6 PRO MASCULINO </option>
+                    <option value="14">RACE 12'6 PRO FEMININO </option>
+                    <option value="17">RACE 14 PRO MASCULINO</option>
+                    <option value="28">RACE 14 PRO FEMININO</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
                     <option value="21">PADDLE BOARD FEMININO</option>
-              <!--  <option value="19">PADDLE BOARD</option>
-                    <option value="30">RACE 14 MASC G_MASTER</option>
-                    <option value="32">RACE 14 FEM G-MASTER</option>
-                    <option value="18">UNLIMIT</option>
-                    <option value="34">CANOA HAVAIANA OC3 MASC</option> 
-                    <option value="40">CANOA HAVAIANA OC1 FEM MASTER</option>
-                    <option value="35">CANOA HAVAIANA OC3 FEM</option> -->
-                    <option value="20">CANOA HAVAIANA OC1 MASC</option>
-                    <option value="39">CANOA HAVAIANA OC1 MASC MASTER</option>
-                    <option value="43">CANOA HAVAIANA OC1 MASC G-MASTER</option>
-                    <option value="33">CANOA HAVAIANA OC1 FEM</option>
-                    <option value="40">CANOA HAVAIANA OC1 FEM MASTER</option>
-                    <option value="44">CANOA HAVAIANA OC1 FEM G-MASTER</option>
-                    <option value="49">CANOA HAVAIANA OC1 KIDS</option>
-                    <option value="36">CANOA HAVAIANA OC6 MISTA</option>
-                    <option value="45">CANOA HAVAIANA OC6 FEM</option>
-                    <option value="46">CANOA HAVAIANA OC6 MASC</option>
-                    <option value="47">ESTREANTE MASCULINO</option>
-                    <option value="48">ESTREANTE FEMININO</option>
-                    <option value="50">ESTREANTE RACE MASCULINO</option>
-                    <option value="51">ESTREANTE RACE FEMININO</option>
-                    <option value="41">SUPWAVE</option>
-                    <option value="42">MILITAR</option>
                   </select> 
                </div>   
           </div>        

@@ -22,6 +22,8 @@ require_once "menu.php";
 	<tr>
  	  <td style="font-weight:bold"> ETAPA: </td>
       <td> <select name="etapa" id="etapa" class="selectpicker" > 
+       <option value="20">PRIMEIRA ETAPA ABASUP - 2018</option>
+       <option> ---- ETAPAS DE 2017 ----- </option>
        <option value="19">YACHT SUP RACE - 2017</option>
        <option value="17">ITACARE PADDLE RACE - 2017</option>
        <option value="14">BAHIA SUP RACE - 2017</option>

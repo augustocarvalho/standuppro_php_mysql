@@ -24,8 +24,8 @@
          
         // validate input
         $valid = true;
-		$result = mysql_query("select * from inscricao where etapa_idetapa=$id and numero=$cod");
-        if (  (empty($cod) ) or (mysql_num_rows($result)==0) ){
+		$result = mysqli_query($con,"select * from inscricao where etapa_idetapa=$id and numero=$cod");
+        if (  (empty($cod) ) or (mysqli_num_rows($result)==0) ){
             $codError = 'Inscrição inválida';
             $valid = false;
         }
@@ -38,7 +38,7 @@
         
         // insert data
         if ($valid) {
-	            mysql_query("UPDATE inscricao SET podio_tecnica ='$tempo' where numero='$cod' and etapa_idetapa='$id'");
+	            mysqli_query($con,"UPDATE inscricao SET podio_tecnica ='$tempo' where numero='$cod' and etapa_idetapa='$id'");
                 echo "<script>alert('Cadastro efetuado com sucesso.');</script>";
                 echo "<meta http-equiv='refresh' content='0, url=./reg_chegada_tecnica.php?id=$id'>";
         }

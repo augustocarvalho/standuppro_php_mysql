@@ -208,6 +208,9 @@
                     <option value="28">RACE 14 PRO FEMININO</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
                     <option value="21">PADDLE BOARD FEMININO</option>
+                    <option value="52">SURFSKI</option>
+                    <option value="20">CANOA OC1 MASCULINO</option>
+                    <option value="33">CANOA OC1 FEMININO</option>
                   </select> 
                </div>   
           </div>        

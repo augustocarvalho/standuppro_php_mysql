@@ -25,60 +25,50 @@ require_once "menu.php";
     <td style="font-weight:bold" > CATEGORIA: </td>
       <td> <select name='categoria' id="categoria" class="selectpicker" onchange="form.submit()" >
                     <option value="">Escolha uma abaixo</option>
-                    <option value="00"> GERAL</option>
-                    <option value="01"> KIDS MASCULINO</option>
+                    <option value="00">GERAL</option>
+                    <option value="01">KIDS MASCULINO</option>
                     <option value="02">KIDS FEMININO</option>
                     <option value="03">JUNIOR MASCULINO</option>
-                    <option value="04"> JUNIOR FEMININO</option>
+                    <option value="04">JUNIOR FEMININO</option>
                     <option value="05">FUN RACE MASCULINO</option>
                     <option value="06">FUN RACE MASCULINO MASTER</option>
-                    <option value="07"> FUN RACE MASCULINO GRAN MASTER</option>
+                    <option value="07">FUN RACE MASCULINO GRAN MASTER</option>
                     <option value="08">FUN RACE FEMININO</option>
                     <option value="09">FUN RACE FEMININO MASTER</option>
-                    <option value="10"> FUN RACE FEMININO GRAN MASTER</option>
-                    <option value="11">RACE AMADOR MASCULINO</option>
-                    <option value="24">RACE AMADOR MASCULINO MASTER</option>
-                    <option value="25">RACE AMADOR MASCULINO G-MASTER</option>
-                    <option value="12">RACE AMADOR FEMININO</option>
-                    <option value="26">RACE AMADOR FEMININO MASTER</option>
-                    <option value="27">RACE AMADOR FEMININO G-MASTER</option>                    
-                    <option value="13">RACE 12'6 MASCULINO </option>
-                    <option value="14">RACE 12'6 FEMININO </option>
-                    <option value="15">RACE 12'6 MASTER MASC</option>
-                    <option value="22">RACE 12'6 MASTER FEMININO</option>
-                    <option value="16">RACE 12'6 G-MASTER MASC</option>
-                    <option value="23">RACE 12'6 G-MASTER FEMININO</option>
-                    <option value="17">RACE 14 MASC</option>
-                    <option value="29">RACE 14 MASC MASTER</option>
-                    <option value="30">RACE 14 MASC G-MASTER</option>
-                    <option value="28">RACE 14 FEM</option>
-                    <option value="31">RACE 14 FEM MASTER</option>
-                    <option value="32">RACE 14 FEM G-MASTER</option>
+                    <option value="10">FUN RACE FEMININO GRAN MASTER</option>
+                    <option value="11">RACE 12'6 AMADOR MASCULINO</option>
+                    <option value="24">RACE 12'6 AMADOR MASCULINO MASTER</option>
+                    <option value="25">RACE 12'6 AMADOR MASCULINO G-MASTER</option>
+                    <option value="12">RACE 12'6 AMADOR FEMININO</option>
+                    <option value="26">RACE 12'6 AMADOR FEMININO MASTER</option>
+                    <option value="27">RACE 12'6 AMADOR FEMININO G-MASTER</option>
+                    <option value="53">RACE 14 AMADOR MASCULINO</option>
+                    <option value="55">RACE 14 AMADOR MASCULINO MASTER</option>
+                    <option value="56">RACE 14 AMADOR MASCULINO G-MASTER</option>
+                    <option value="54">RACE 14 AMADOR FEMININO</option>
+                    <option value="57">RACE 14 AMADOR FEMININO MASTER</option>
+                    <option value="58">RACE 14 AMADOR FEMININO G-MASTER</option>
+                    <option value="13">RACE 12'6 PRO MASCULINO </option>
+                    <option value="14">RACE 12'6 PRO FEMININO </option>
+                    <option value="15">RACE 12'6 PRO MASTER MASC</option>
+                    <option value="22">RACE 12'6 PRO MASTER FEMININO</option>
+                    <option value="16">RACE 12'6 PRO G-MASTER MASC</option>
+                    <option value="23">RACE 12'6 PRO G-MASTER FEMININO</option>
+                    <option value="17">RACE 14 PRO MASC</option>
+                    <option value="29">RACE 14 PRO MASC MASTER</option>
+                    <option value="30">RACE 14 PRO MASC G-MASTER</option>
+                    <option value="28">RACE 14 PRO FEM</option>
+                    <option value="31">RACE 14 PRO FEM MASTER</option>
+                    <option value="32">RACE 14 PRO FEM G-MASTER</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
                     <option value="21">PADDLE BOARD FEMININO</option>
-              <!--  <option value="19">PADDLE BOARD</option>
-                    <option value="30">RACE 14 MASC G_MASTER</option>
-                    <option value="32">RACE 14 FEM G-MASTER</option>
-                    <option value="18">UNLIMIT</option>
-                    <option value="34">CANOA HAVAIANA OC3 MASC</option> 
-                    <option value="40">CANOA HAVAIANA OC1 FEM MASTER</option>
-                    <option value="35">CANOA HAVAIANA OC3 FEM</option> -->
                     <option value="20">CANOA HAVAIANA OC1 MASC</option>
                     <option value="39">CANOA HAVAIANA OC1 MASC MASTER</option>
                     <option value="43">CANOA HAVAIANA OC1 MASC G-MASTER</option>
                     <option value="33">CANOA HAVAIANA OC1 FEM</option>
                     <option value="40">CANOA HAVAIANA OC1 FEM MASTER</option>
                     <option value="44">CANOA HAVAIANA OC1 FEM G-MASTER</option>
-                    <option value="49">CANOA HAVAIANA OC1 KIDS</option>
-                    <option value="36">CANOA HAVAIANA OC6 MISTA</option>
-                    <option value="45">CANOA HAVAIANA OC6 FEM</option>
-                    <option value="46">CANOA HAVAIANA OC6 MASC</option>
-                    <option value="47">ESTREANTE MASCULINO</option>
-                    <option value="48">ESTREANTE FEMININO</option>
-                    <option value="50">ESTREANTE RACE MASCULINO</option>
-                    <option value="51">ESTREANTE RACE FEMININO</option>
-                    <option value="41">SUPWAVE</option>
-                    <option value="42">MILITAR</option>
+                    <option value="52">SURFSKI</option>
           </select> </td>
      </tr>
    
@@ -129,32 +119,26 @@ echo"
 					 
                  	    <th>Número</th>
 					            <th class=col-sm-4>NOME</th>
+                      <th>Cidade</th>
                       <th>UF</th>
-					            <th>CATEGORIA</th>
-                      <th>FILIADO ABASUP</th>
-                    </tr>
+					          </tr>
                   </thead>
                   <tbody>";
                     $count=1;
 				            if ( $id_categoria <> 0) {
-                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, c.descricao, p.filiacao_abasup_2018  FROM inscricao i join atleta p join categoria c 
+                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, p.cidade, c.descricao, p.filiacao_abasup_2018  FROM inscricao i join atleta p join categoria c 
                           WHERE i.etapa_idetapa ='$id' and i.categoria_idcategoria = '$id_categoria' and i.atleta_cpf = p.cpf and i.categoria_idcategoria = c.idcategoria order by i.numero");
                     }else {
-                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, c.descricao, p.filiacao_abasup_2018  FROM inscricao i join atleta p join categoria c 
+                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, p.cidade, c.descricao, p.filiacao_abasup_2018  FROM inscricao i join atleta p join categoria c 
                           WHERE i.etapa_idetapa ='$id' and i.atleta_cpf = p.cpf and i.categoria_idcategoria = c.idcategoria order by i.numero");  
                     }
                    	while ($row = mysqli_fetch_assoc($sql)){
                             echo '<tr>';
 					           		    echo '<td>' . $row['numero'] . '</td>';
                             echo '<td>'. $row['nome'] . '</td>';
+                            echo '<td>'. $row['cidade'] . '</td>';
                             echo '<td>'. $row['estado'] . '</td>';
-						              	echo '<td>'. $row['descricao'] . '</td>';
-                            if ($row['filiacao_abasup_2018']) {
-                              echo '<td>'. "ok" . '</td>';
-                            } else {
-                              echo '<td>'. "-" . '</td>';
-                            }
-                            echo '<td width=150>';
+						              	echo '<td width=150>';
                             echo '<a class="btn btn-success" href="update_inscritos.php?id='.$id.'&cod='.$row['numero'].'">Update</a>';
                             echo ' ';
                             echo '<a class="btn btn-danger" href="delete_inscricao.php?id='.$id.'&cod='.$row['numero'].'">Delete</a>';
@@ -206,30 +190,27 @@ echo"
            
                       <th>Número</th>
                       <th class=col-sm-4>NOME</th>
+                      <th>CIDADE</th>
                       <th>UF</th>
                       <th>CATEGORIA</th>
-                      <th>FILIAÇÃO</th>
-                      <th>COD CBSUP</th>
-                   </tr>
+                      <th>FILIADO</th>
+                    </tr>
                   </thead>
                   <tbody>";
                     $count=1;
                     if ( $id_categoria <> 0) {
-                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, c.descricao, p.filiacao_abasup_2018, p.cod_cbsup  FROM inscricao i join atleta p join categoria c 
+                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.cidade, p.estado, c.descricao  FROM inscricao i join atleta p join categoria c 
                           WHERE i.etapa_idetapa ='$id' and i.categoria_idcategoria = '$id_categoria' and i.atleta_cpf = p.cpf and i.categoria_idcategoria = c.idcategoria order by i.numero");
                     }else {
-                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, 
-                            CASE WHEN (i.categoria_idcategoria in ('1','2','3','4','19','21')) THEN c.descricao
-                                 WHEN (i.categoria_idcategoria in ('5','8','11','12','13','14','17','28','53','54') 
-                                        AND (SELECT 1 FROM inscricao i1 WHERE i1.etapa_idetapa = i.etapa_idetapa and i1.numero = i.numero and i1.categoria_idcategoria in ('6','9','24','26','15','22','29','31','55','57'))) THEN concat(c.descricao, ' - ', ' MASTER') 
-                                WHEN (i.categoria_idcategoria in ('5','8','11','12','13','14','17','28','53','54') 
-                                        AND (SELECT 1 FROM inscricao i1 WHERE i1.etapa_idetapa = i.etapa_idetapa and i1.numero = i.numero and i1.categoria_idcategoria in ('7','10','25','27','16','23','30','32','56','58'))) THEN concat(c.descricao, ' - ', ' G-MASTER') 
-                                ELSE concat(c.descricao, ' - ', ' OPEN') END as descricao 
-                              , p.filiacao_abasup_2018, p.cod_cbsup  
+                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.cidade, p.estado, p.cod_cbsup, 
+                            CASE WHEN count(*) = 2 THEN (SELECT c1.descricao FROM categoria c1 WHERE c1.idcategoria = max(i.categoria_idcategoria)) 
+                              ELSE c.descricao END as descricao ,
+                             CASE WHEN (p.filiacao_abasup_2018 and p.categoria_idcategoria = i.categoria_idcategoria) THEN 'OK'
+                                  ELSE ' - ' END as filiacao_2018
                               FROM inscricao i 
                               join atleta p ON i.atleta_cpf = p.cpf 
                               join categoria c ON c.idcategoria = i.categoria_idcategoria
-                              WHERE i.etapa_idetapa = '$id' 
+                              WHERE i.etapa_idetapa = '$id'
                               and i.atleta_cpf = p.cpf 
                               and i.categoria_idcategoria = c.idcategoria 
                               GROUP by i.numero
@@ -239,14 +220,16 @@ echo"
                             echo '<tr>';
                             echo '<td>' . $row['numero'] . '</td>';
                             echo '<td>'. $row['nome'] . '</td>';
+                            echo '<td>'. $row['cidade'] . '</td>';
                             echo '<td>'. $row['estado'] . '</td>';
                             echo '<td>'. $row['descricao'] . '</td>';
-                            if ($row['filiacao_abasup_2018']) {
+                            echo '<td>'. $row['filiacao_2018'] . '</td>';
+                          /*  if ($row['filiacao_abasup_2018']) {
                               echo '<td>'. "ok" . '</td>';
                             } else {
                               echo '<td>'. "-" . '</td>';
                             }
-                            echo '<td>'. $row['cod_cbsup'] . '</td>';
+                            echo '<td>'. $row['cod_cbsup'] . '</td>'; */
                             echo '</tr>';
                             $count++;
                     }

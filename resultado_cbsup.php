@@ -32,34 +32,40 @@ require_once "menu.php";
       <td> <select name="categoria" id="categoria" class="selectpicker" onchange="form.submit()">
         			      <option value="">Escolha uma abaixo</option>
                     <!--<option value="00"> GERAL</option>-->
-                    <option value="01"> KIDS MASCULINO</option>
+                    <option value="01">KIDS MASCULINO</option>
                     <option value="02">KIDS FEMININO</option>
                     <option value="03">JUNIOR MASCULINO</option>
-                    <option value="04"> JUNIOR FEMININO</option>
+                    <option value="04">JUNIOR FEMININO</option>
                     <option value="05">FUN RACE MASCULINO</option>
                     <option value="08">FUN RACE FEMININO</option>
                     <option value="06">FUN RACE MASCULINO MASTER</option>
-                    <option value="07"> FUN RACE MASCULINO GRAN MASTER</option>
+                    <option value="07">FUN RACE MASCULINO GRAN MASTER</option>
                     <option value="09">FUN RACE FEMININO MASTER</option>
-                    <option value="10"> FUN RACE FEMININO GRAN MASTER</option>
-                    <option value="11">RACE AMADOR MASCULINO</option>
-                    <option value="24">RACE AMADOR MASCULINO MASTER</option>
-                    <option value="25">RACE AMADOR MASCULINO G-MASTER</option>
-                    <option value="12">RACE AMADOR FEMININO</option>
-                    <option value="26">RACE AMADOR FEMININO MASTER</option>
-                    <option value="27">RACE AMADOR FEMININO G-MASTER</option>                    
-                    <option value="13">RACE 12'6 MASCULINO </option>
-                    <option value="14">RACE 12'6 FEMININO </option>
-                    <option value="15">RACE 12'6 MASTER MASC</option>
-                    <option value="22">RACE 12'6 MASTER FEMININO</option>
-                    <option value="16">RACE 12'6 G-MASTER MASC</option>
-                    <option value="23">RACE 12'6 G-MASTER FEMININO</option>
-                    <option value="17">RACE 14 MASC</option>
-                    <option value="29">RACE 14 MASC MASTER</option>
-                    <option value="30">RACE 14 MASC G_MASTER</option>
-                    <option value="28">RACE 14 FEM</option>
-                    <option value="31">RACE 14 FEM MASTER</option>
-                    <option value="32">RACE 14 FEM G-MASTER</option>
+                    <option value="10">FUN RACE FEMININO GRAN MASTER</option>
+                    <option value="11">RACE 12'6 AMADOR MASCULINO</option>
+                    <option value="24">RACE 12'6 AMADOR MASCULINO MASTER</option>
+                    <option value="25">RACE 12'6 AMADOR MASCULINO G-MASTER</option>
+                    <option value="12">RACE 12'6 AMADOR FEMININO</option>
+                    <option value="26">RACE 12'6 AMADOR FEMININO MASTER</option>
+                    <option value="27">RACE 12'6 AMADOR FEMININO G-MASTER</option>
+                    <option value="53">RACE 14 AMADOR MASCULINO</option>
+                    <option value="55">RACE 14 AMADOR MASCULINO MASTER</option>
+                    <option value="56">RACE 14 AMADOR MASCULINO G-MASTER</option>
+                    <option value="54">RACE 14 AMADOR FEMININO</option>
+                    <option value="57">RACE 14 AMADOR FEMININO MASTER</option>
+                    <option value="58">RACE 14 AMADOR FEMININO G-MASTER</option>
+                    <option value="13">RACE 12'6 PRO MASCULINO </option>
+                    <option value="14">RACE 12'6 PRO FEMININO </option>
+                    <option value="15">RACE 12'6 PRO MASTER MASC</option>
+                    <option value="22">RACE 12'6 PRO MASTER FEMININO</option>
+                    <option value="16">RACE 12'6 PRO G-MASTER MASC</option>
+                    <option value="23">RACE 12'6 PRO G-MASTER FEMININO</option>
+                    <option value="17">RACE 14 PRO MASC</option>
+                    <option value="29">RACE 14 PRO MASC MASTER</option>
+                    <option value="30">RACE 14 PRO MASC G-MASTER</option>
+                    <option value="28">RACE 14 PRO FEM</option>
+                    <option value="31">RACE 14 PRO FEM MASTER</option>
+                    <option value="32">RACE 14 PRO FEM G-MASTER</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
                     <option value="21">PADDLE BOARD FEMININO</option>
               <!--  <option value="19">PADDLE BOARD</option>
@@ -137,13 +143,13 @@ echo "<div class=container>
                    <th>RESULTADO</th>        
                    <th>NUMERO</th>
                    <th>NOME</th>
-                   <th>UF</th>
+                   <th>CIDADE</th>
                    <th>TEMPO</th>
                   </tr>
                   </thead>
                   <tbody> ";
                     $sql = mysqli_query($con,"SELECT
-                              a.nome, a.estado, i.numero, tempo, podio_longa
+                              a.nome, a.estado, a.cidade, i.numero, tempo, podio_longa
                               FROM inscricao i JOIN atleta a ON a.cpf = i.atleta_cpf
                               WHERE true 
                               and etapa_idetapa = $id_etapa
@@ -155,7 +161,7 @@ echo "<div class=container>
                                 echo '<td>'. $row['podio_longa'] . '</td>';
                                 echo '<td>'. $row['numero'] . '</td>';
                                 echo '<td>'. $row['nome'] . '</td>';
-                                echo '<td>'. $row['estado'] . '</td>';
+                                echo '<td>'. $row['cidade'] . '</td>';
                                 echo '<td>'. $row['tempo'] . '</td>';
                                 echo '</tr>';
                                 $count++;
@@ -170,12 +176,12 @@ echo "<div class=container>
                    <th>RESULTADO</th>        
                    <th>NUMERO</th>
                    <th>NOME</th>
-                   <th>UF</th>
+                   <th>CIDADE</th>
                   </tr>
                   </thead>
                   <tbody> ";
                       $sql = mysqli_query($con,"SELECT
-                                a.nome, a.estado, i.numero, i.podio_tecnica
+                                a.nome, a.estado, a.cidade, i.numero, i.podio_tecnica
                                 FROM inscricao i JOIN atleta a ON a.cpf = i.atleta_cpf
                                 WHERE true 
                                 and etapa_idetapa = $id_etapa
@@ -187,7 +193,7 @@ echo "<div class=container>
                                   echo '<td>'. $row['podio_tecnica'] . '</td>';
                                   echo '<td>'. $row['numero'] . '</td>';
                                   echo '<td>'. $row['nome'] . '</td>';
-                                  echo '<td>'. $row['estado'] . '</td>';
+                                  echo '<td>'. $row['cidade'] . '</td>';
 								  echo '</tr>';
                                   $count++;
                             }           
@@ -203,14 +209,14 @@ echo "<div class=container>
                    <th>TECNICA</th>
                    <th>NUMERO</th>
                    <th>NOME</th>
-                   <th>UF</th>
+                   <th>CIDADE</th>
                    <th>TEMPO LONGA</th>
                   </tr>
                   </thead>
                   <tbody> ";
                     $sql = mysqli_query($con,"SELECT
                               podio_longa + podio_tecnica as total_pontos 
-                              , a.nome, a.estado, a.cod_cbsup, i.numero , tempo, podio_longa, tempo_t, podio_tecnica
+                              , a.nome, a.estado,a.cidade, a.cod_cbsup, i.numero , tempo, podio_longa, tempo_t, podio_tecnica
                               FROM inscricao i JOIN atleta a ON a.cpf = i.atleta_cpf
                               WHERE true 
                               and etapa_idetapa = $id_etapa
@@ -226,7 +232,7 @@ echo "<div class=container>
                                 echo '<td>'. $row['podio_tecnica'] . '</td>';
                                 echo '<td>'. $row['numero'] . '</td>';
                                 echo '<td>'. $row['nome'] . '</td>';
-                                echo '<td>'. $row['estado'] . '</td>';
+                                echo '<td>'. $row['cidade'] . '</td>';
                                 echo '<td>'. $row['tempo'] . '</td>';
                                 echo '</tr>';
                                 $count++;

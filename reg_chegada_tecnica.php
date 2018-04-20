@@ -38,7 +38,7 @@
         
         // insert data
         if ($valid) {
-	            mysqli_query($con,"UPDATE inscricao SET podio_tecnica ='$tempo' where numero='$cod' and etapa_idetapa='$id'");
+	            mysqli_query($con,"UPDATE inscricao SET tempo_t ='$tempo' where numero='$cod' and etapa_idetapa='$id'");
                 echo "<script>alert('Cadastro efetuado com sucesso.');</script>";
                 echo "<meta http-equiv='refresh' content='0, url=./reg_chegada_tecnica.php?id=$id'>";
         }
@@ -70,9 +70,9 @@
                         </div>
                       </div>
                        <div class="control-group <?php echo !empty($tempoError)?'error':'';?>">
-                        <label class="control-label">Colocação</label>
+                        <label class="control-label">Tempo</label>
                         <div class="controls">
-                            <input style="min-height:35px;" name="tempo" type="text"  placeholder="colocacao" value="<?php echo !empty($tempo)?$tempo:'';?>">
+                            <input style="min-height:35px;" name="tempo" type="text" class="time" placeholder="tempo" value="<?php echo !empty($tempo)?$tempo:'';?>">
                             <?php if (!empty($tempoError)): ?>
                                 <span class="help-inline"><?php echo $tempoError;?></span>
                             <?php endif; ?>

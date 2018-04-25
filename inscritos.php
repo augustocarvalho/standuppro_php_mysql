@@ -68,7 +68,10 @@ require_once "menu.php";
                     <option value="33">CANOA HAVAIANA OC1 FEM</option>
                     <option value="40">CANOA HAVAIANA OC1 FEM MASTER</option>
                     <option value="44">CANOA HAVAIANA OC1 FEM G-MASTER</option>
-                    <option value="52">SURFSKI</option>
+                    <option value="52">SURFSKI MASCULINO</option>
+                    <option value="59">SURFSKI MASC MASTER</option>
+                    <option value="60">SURFSKI MASC G-MASTER</option>
+                    <option value="61">SURFSKI FEMININO</option>
           </select> </td>
      </tr>
    

@@ -74,6 +74,9 @@
           if (($id_categoria==33) and ($idade>39) and ($idade<50) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','40','$inscricao')");
           }
+          if (($id_categoria==54) and ($idade>39) and ($idade<50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','59','$inscricao')");
+          }
           if (($id_categoria==33) and ($idade>49) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','44','$inscricao')");
           }
@@ -109,6 +112,9 @@
           }
           if (($id_categoria==28) and ($idade>49) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','32','$inscricao')");
+          }
+          if (($id_categoria==52) and ($idade>49) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','60','$inscricao')");
           }
           echo "<script>alert('INSCRIÇÃO REALIZADA COM SUCESSO!!!');</script>";
           echo "<meta http-equiv='refresh' content='0, url=./listar_atleta.php'>";
@@ -208,7 +214,8 @@
                     <option value="28">RACE 14 PRO FEMININO</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
                     <option value="21">PADDLE BOARD FEMININO</option>
-                    <option value="52">SURFSKI</option>
+                    <option value="52">SURFSKI MASCULINO</option>
+                    <option value="61">SURFSKI FEMININO</option>
                     <option value="20">CANOA OC1 MASCULINO</option>
                     <option value="33">CANOA OC1 FEMININO</option>
                   </select> 

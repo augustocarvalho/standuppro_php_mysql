@@ -6,7 +6,8 @@ require_once "menu.php";
 
 
 <html>
-<div id="cadastro">
+<div class="container" id="cadastro">
+  <div class="row">  
   <body>
      <head>
         <style>
@@ -17,7 +18,7 @@ require_once "menu.php";
         }
         </style>
       </head>    
-    <table id="form_selecao" style="margin-left:100px">
+    <table id="form_selecao">
   <form  method="post" > 
    <tr>
     <td style="font-weight:bold"> CATEGORIA: </td>
@@ -76,10 +77,6 @@ require_once "menu.php";
     
    </form>
    </table>
-
-        <br></br>
-        <br></br>
-        <br></br>
   </body>
 </div>  
 </html>
@@ -91,24 +88,21 @@ if (@$_POST['categoria'] !== null) {
   $coluna = 1;
 
 
-echo "<div class=container>
-            <div class=row> ";
+echo " <div class=row> 
+            <br>
+            <br>
+            <br>";
+
                     $categoria = mysqli_query($con,"select * from categoria where idcategoria='$id_categoria'");
                     while ($result2 = mysqli_fetch_assoc($categoria)){
-                     echo '<br>';
-                     echo '<br>';
-                     echo '<br>';
                      echo '<h2 align="center">' . "RANKING ABASUP 2017 " .  '</h2>';
                      echo '<h3 align="center">' .  $result2['descricao'] . '</h3>';
-                     echo '<br>';
                     };
                  
                   
-              
- echo" </div>";
-                    $count=1;
+              $count=1;
               if ( $id_categoria <> 0) {
-                   echo" <div class=row style=margin-left:-130px>
+                   echo" <div style=margin-left:-20px>
                    <table id='myTable' cellpadding=0  border=0   style=width:400  align=center class='table'>
                    <thead>
                     <tr>

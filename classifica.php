@@ -6,7 +6,7 @@ require_once "menu.php";
 
 
 <html>
-<div id="cadastro">
+<div class="container" id="cadastro">
   <body>
      <head>
         <style>
@@ -17,7 +17,7 @@ require_once "menu.php";
         }
         </style>
       </head>    
-    <table id="form_selecao" style="margin-left:100px">
+    <table id="form_selecao">
 	<form  method="post" > 
 	<tr>
  	  <td style="font-weight:bold"> ETAPA: </td>
@@ -119,11 +119,7 @@ require_once "menu.php";
 	  
 	 </form>
 	 </table>
-		    <br></br>
-        <br></br>
-        <br></br>
 	</body>
-</div>	
 </html>
 
 
@@ -133,10 +129,6 @@ if (@$_POST['categoria'] !== null) {
 	$id_categoria = $_POST['categoria'];
 	$coluna = 1;
 
-
-
-echo "<div class=container>
-            <div class=row> ";
                 $etapa = mysqli_query($con,"select * from etapa where idetapa='$id_etapa'");
                 while ($result = mysqli_fetch_assoc($etapa)){
                   echo '<br>';
@@ -155,12 +147,9 @@ echo "<div class=container>
                       echo '<br>';
                   } 
                 } 
-                  
-              
- echo" </div>";
-                    $count=1;
+              $count=1;
 				      if ( $id_categoria <> 0) {
-                       echo" <div class=row>
+                       echo"
                          <table cellpadding=0  border=0   style=width:700px  align=center class=table table-striped table-bordered >
                          <thead>
                            <tr>
@@ -237,10 +226,8 @@ echo "<div class=container>
                     }
                   
             echo"  </tbody>
-            </table>
-          </div>
-
-</div>";
+            </table> 
+            </div>";
 
 
 }

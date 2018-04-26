@@ -20,13 +20,12 @@ body {
 </head>
     <div class="container">
             <div class="row">
+                <br>
+                <br>
                 <h3 align="center">ATLETAS ABASUP 2018</h3>
-                <br>
-                <br>
             </div>
             <div class="row">
-                
-                <table class="table table-striped table-bordered">
+                <table cellpadding=0  border=0   style=width:700px  align=center class=table table-striped table-bordered >
                       <thead>
                         <tr>
                           <th>#</th>

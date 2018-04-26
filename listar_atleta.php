@@ -19,12 +19,12 @@ body {
 </style>
 </head>
    <div class="container">
-            <div class="row">
-                <h3 align="center">ATLETAS CADASTRADOS</h3>
-            </div>
-             <br></br>
-
-            <div class="row">
+        <div class="row">
+             <br>
+             <br>
+            <h3 align="center">ATLETAS CADASTRADOS</h3>
+        </div>
+        <div class="row">
                 <table class="table table-striped table-bordered">
                       <thead>
                         <tr>

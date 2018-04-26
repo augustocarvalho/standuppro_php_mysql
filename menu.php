@@ -21,9 +21,8 @@ require_once "config.php";
     
 
 
-<div class="navbar" id="menu">
-  <div class="navbar-inner">
-    <ul class="nav">
+<div class="navbar navbar-fixed-top navbar-inverse" id="menu">
+    <ul class="nav nav-pills">
       <li><a href="index.php">HOME</a></li>
       <li class="dropdown">
 		   <a href="#" class="dropdown-toggle" data-toggle="dropdown">ATLETA</a>
@@ -59,10 +58,6 @@ require_once "config.php";
       
       </li>   
     </ul>
-   </div>
-   </div>
-  </div> 
-  </div>
- </div>
+</div>
 </body>
 </html>

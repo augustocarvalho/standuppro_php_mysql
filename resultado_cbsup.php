@@ -6,7 +6,7 @@ require_once "menu.php";
 
 
 <html>
-<div id="cadastro">
+<div class="container" id="cadastro">
   <body>
      <head>
         <style>
@@ -17,7 +17,7 @@ require_once "menu.php";
         }
         </style>
       </head>    
-    <table id="form_selecao" style="margin-left:100px">
+    <table id="form_selecao">
 	<form  method="post" > 
 	<tr>
  	  <td style="font-weight:bold"> MODALIDADE: </td>
@@ -85,9 +85,6 @@ require_once "menu.php";
 	  
 	 </form>
 	 </table>
-		    <br></br>
-        <br></br>
-        <br></br>
 	</body>
 </div>	
 </html>
@@ -101,12 +98,10 @@ if (@$_POST['categoria'] !== null) {
   $coluna = 1;
 
 
-echo "<div class=container>
-            <div class=row> ";
+echo "<div class=row> ";
                 $etapa = mysqli_query($con,"select * from etapa where idetapa=$id_etapa");
                 while ($result = mysqli_fetch_assoc($etapa)){
-                  echo '<br>';
-                  echo '<h3 align="center">' . $result['nome_etapa'] . "  -  " . $result['local_etapa'] . '</h3>';
+                    echo '<h3 align="center">' . $result['nome_etapa'] . "  -  " . $result['local_etapa'] . '</h3>';
                   echo '<br>';
                     $categoria = mysqli_query($con,"select * from categoria where idcategoria='$id_categoria'");
                     while ($result2 = mysqli_fetch_assoc($categoria)){
@@ -177,11 +172,12 @@ echo "<div class=container>
                    <th>NUMERO</th>
                    <th>NOME</th>
                    <th>CIDADE</th>
+                   <th>TEMPO</th>
                   </tr>
                   </thead>
                   <tbody> ";
                       $sql = mysqli_query($con,"SELECT
-                                a.nome, a.estado, a.cidade, i.numero, i.podio_tecnica
+                                a.nome, a.estado, a.cidade, i.numero, i.podio_tecnica, i.tempo_t
                                 FROM inscricao i JOIN atleta a ON a.cpf = i.atleta_cpf
                                 WHERE true 
                                 and etapa_idetapa = $id_etapa
@@ -194,6 +190,7 @@ echo "<div class=container>
                                   echo '<td>'. $row['numero'] . '</td>';
                                   echo '<td>'. $row['nome'] . '</td>';
                                   echo '<td>'. $row['cidade'] . '</td>';
+                                  echo '<td>'. $row['tempo_t'] . '</td>';
 								  echo '</tr>';
                                   $count++;
                             }           
@@ -211,6 +208,7 @@ echo "<div class=container>
                    <th>NOME</th>
                    <th>CIDADE</th>
                    <th>TEMPO LONGA</th>
+                   <th>TEMPO TECNICA</th>
                   </tr>
                   </thead>
                   <tbody> ";
@@ -234,6 +232,7 @@ echo "<div class=container>
                                 echo '<td>'. $row['nome'] . '</td>';
                                 echo '<td>'. $row['cidade'] . '</td>';
                                 echo '<td>'. $row['tempo'] . '</td>';
+                                echo '<td>'. $row['tempo_t'] . '</td>';
                                 echo '</tr>';
                                 $count++;
                            }

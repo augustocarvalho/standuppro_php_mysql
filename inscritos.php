@@ -19,7 +19,9 @@ require_once "menu.php";
         }
         </style>
       </head> 
-  <table id="form_selecao" style="margin-left:100px">
+  <div class=container>  
+  <div class="row">
+  <table id="form_selecao"">
   <form method="post"> 
     <tr>
     <td style="font-weight:bold" > CATEGORIA: </td>
@@ -80,22 +82,17 @@ require_once "menu.php";
     </td> -->   
    </form>
    </table>
-     <br></br>
-     <br></br>
-     <br></br>
-
+   </div>
+   <div class="row">
+      <br>
+      <br>
+      <br>
 <?php
 if (@$_POST['categoria'] !== null) {
   $id_categoria = $_POST['categoria'];
   $coluna = 1;
-
-echo"
-    <div class=container>
-            <div class=row>";
-			       
                 $etapa = mysqli_query($con,"select * from etapa where idetapa='$id'");
                 while ($result = mysqli_fetch_assoc($etapa)){
-                  echo '<br>';
                   echo '<h3 align="center">' . $result['nome_etapa'] . "  -  " . $result['local_etapa'] . '</h3>';
                   echo '<br>';
                   if ($id_categoria <> 0) {
@@ -103,7 +100,6 @@ echo"
                     while ($result2 = mysqli_fetch_assoc($categoria)){
                      echo '<br>';
                      echo '<h3 align="center">' . "CATEGORIA: " . $result2['descricao'] . '</h3>';
-                     echo '<br>';
                     }
                   } else {
                       echo '<br>';
@@ -114,8 +110,6 @@ echo"
                   
                 
 echo"             
-            </div>
-            <div class=row>
                 <table cellpadding=0  border=0   style=width:700px  align=center class=table table-striped table-bordered >
                   <thead>
                     <tr>
@@ -159,14 +153,9 @@ echo"
 else {
   $id_categoria = 00;
   $coluna = 1;
-
-echo"
-    <div class=container>
-            <div class=row>";
-             
+            
                 $etapa = mysqli_query($con,"select * from etapa where idetapa='$id'");
                 while ($result = mysqli_fetch_assoc($etapa)){
-                  echo '<br>';
                   echo '<h3 align="center">' . $result['nome_etapa'] . "  -  " . $result['local_etapa'] . '</h3>';
                   echo '<br>';
                   if ($id_categoria <> 0) {
@@ -185,9 +174,7 @@ echo"
                   
                 
 echo"             
-            </div>
-            <div class=row>
-                <table cellpadding=0  border=0   style=width: 700px  align=center class=table table-striped table-bordered >
+                <table cellpadding=0  border=0   style=width:700px  align=center class=table table-striped table-bordered >
                   <thead>
                     <tr>
            

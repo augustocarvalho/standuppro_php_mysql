@@ -74,7 +74,7 @@
           if (($id_categoria==33) and ($idade>39) and ($idade<50) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','40','$inscricao')");
           }
-          if (($id_categoria==54) and ($idade>39) and ($idade<50) ){
+          if (($id_categoria==52) and ($idade>39) and ($idade<50) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','59','$inscricao')");
           }
           if (($id_categoria==33) and ($idade>49) ){

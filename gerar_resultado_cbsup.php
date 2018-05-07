@@ -81,6 +81,6 @@ while ($categoria = mysqli_fetch_assoc($cat) ) {
    }
 }
 
-echo "<meta http-equiv='refresh' content='0, url=./resultado_cbsup.php'>";
+echo "<meta http-equiv='refresh' content='0, url=./resultado_cbsup.php?id=$etapa'>";
 
 ?>

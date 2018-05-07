@@ -22,8 +22,6 @@ require_once "menu.php";
 	<tr>
  	  <td style="font-weight:bold"> ETAPA: </td>
       <td> <select name="etapa" id="etapa" class="selectpicker" > 
-       <option value="20">PRIMEIRA ETAPA ABASUP - 2018</option>
-       <option data-divider="true"></option>
        <option> ---- ETAPAS DE 2017 ----- </option>
        <option data-divider="true"></option>
        <option value="19">YACHT SUP RACE - 2017</option>
@@ -149,29 +147,32 @@ if (@$_POST['categoria'] !== null) {
                 } 
               $count=1;
 				      if ( $id_categoria <> 0) {
+                   if ( $id_etapa >= 20 ) {    
                        echo"
                          <table cellpadding=0  border=0   style=width:700px  align=center class=table table-striped table-bordered >
                          <thead>
                            <tr>
-                   <th> #</th>        
-					         <th>Número</th>
-					         <th>NOME</th>
+                             <th> #</th>        
+					                   <th>Número</th>
+					                   <th>NOME</th>
+                             <th>Cidade</th>
                              <th>UF</th>
-					         <th>TEMPO</th>
-                   <th>FILIADO</th>
-                             </tr>
+					                   <th>TEMPO</th>
+                             <th>ABASUP-2018</th>
+                            </tr>
                          </thead>
                          <tbody> ";
-                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, i.tempo, p.filiacao_abasup_2018  FROM inscricao i join atleta p join categoria c 
+                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, p.cidade, i.tempo, p.filiacao_abasup_2018, p.categoria_idcategoria  FROM inscricao i join atleta p join categoria c 
                           WHERE i.etapa_idetapa ='$id_etapa' and i.categoria_idcategoria = '$id_categoria' and i.atleta_cpf = p.cpf and i.tempo <> '00:00:00' and i.categoria_idcategoria = c.idcategoria order by i.tempo");
 					             while ($row = mysqli_fetch_assoc($sql)){
                             echo '<tr>';
 							              echo '<td>' . $count . '</td>';
                             echo '<td>' . $row['numero'] . '</td>';
                             echo '<td>'. $row['nome'] . '</td>';
+                            echo '<td>'. $row['cidade'] . '</td>';
                             echo '<td>'. $row['estado'] . '</td>';
 						                echo '<td>'. $row['tempo'] . '</td>';
-                            if ($row['filiacao_abasup_2018']) {
+                            if ($row['filiacao_abasup_2018'] && $id_categoria == $row['categoria_idcategoria'] ) {
                               echo '<td>'. "ok" . '</td>';
                             } else {
                               echo '<td>'. "-" . '</td>';
@@ -179,6 +180,33 @@ if (@$_POST['categoria'] !== null) {
                             echo '</tr>';
                             $count++;
                         }	
+                      } else {
+                        echo"
+                         <table cellpadding=0  border=0   style=width:700px  align=center class=table table-striped table-bordered >
+                         <thead>
+                           <tr>
+                             <th> #</th>        
+                             <th>Número</th>
+                             <th>NOME</th>
+                             <th>UF</th>
+                             <th>TEMPO</th>
+                            </tr>
+                         </thead>
+                         <tbody> ";
+                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, i.tempo, p.filiacao_abasup_2018  FROM inscricao i join atleta p join categoria c 
+                          WHERE i.etapa_idetapa ='$id_etapa' and i.categoria_idcategoria = '$id_categoria' and i.atleta_cpf = p.cpf and i.tempo <> '00:00:00' and i.categoria_idcategoria = c.idcategoria order by i.tempo");
+                       while ($row = mysqli_fetch_assoc($sql)){
+                            echo '<tr>';
+                            echo '<td>' . $count . '</td>';
+                            echo '<td>' . $row['numero'] . '</td>';
+                            echo '<td>'. $row['nome'] . '</td>';
+                            echo '<td>'. $row['estado'] . '</td>';
+                            echo '<td>'. $row['tempo'] . '</td>';
+                            echo '</tr>';
+                            $count++;
+                        }
+
+                      }
 
                     }else {
                   echo" <div class=row>
@@ -191,8 +219,7 @@ if (@$_POST['categoria'] !== null) {
                            <th>UF</th>
                            <th>CATEGORIA</th>
 					                 <th>TEMPO</th>
-                           <th>FILIADO</th>
-                          </tr>
+                           </tr>
                          </thead>
                          <tbody> ";
                       $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, c.descricao, i.tempo, p.filiacao_abasup_2018  FROM inscricao i join atleta p join categoria c 
@@ -205,25 +232,12 @@ if (@$_POST['categoria'] !== null) {
                             echo '<td>'. $row['estado'] . '</td>';
                             echo '<td>'. $row['descricao'] . '</td>';
 						                echo '<td>'. $row['tempo'] . '</td>';
-                            if ($row['filiacao_abasup_2018']) {
-                              echo '<td>'. "ok" . '</td>';
-                            } else {
-                              echo '<td>'. "-" . '</td>';
-                            }
                             echo '</tr>';
                             $count++;
                        }
 
                     }
-                   	while ($row = mysqli_fetch_assoc($sql)){
-                            echo '<tr>';
-							              echo '<td>' . $row['numero'] . '</td>';
-                            echo '<td>'. $row['nome'] . '</td>';
-                            echo '<td>'. $row['estado'] . '</td>';
-						                echo '<td>'. $row['tempo'] . '</td>';
-                            echo '</tr>';
-                            $count++;
-                    }
+                   	
                   
             echo"  </tbody>
             </table> 

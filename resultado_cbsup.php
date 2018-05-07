@@ -1,6 +1,12 @@
 <?php
 require_once "config.php";
 require_once "menu.php";
+
+    $id = null;
+    if ( !empty($_GET['id'])) {
+        $id = $_REQUEST['id'];
+    }
+
 ?>
 
 
@@ -92,7 +98,7 @@ require_once "menu.php";
 
 <?php
 if (@$_POST['categoria'] !== null) {
-  $id_etapa = 20;    
+  $id_etapa = $id;    
   $id_modalidade = $_POST['modalidade'];
   $id_categoria = $_POST['categoria'];
   $coluna = 1;
@@ -191,7 +197,7 @@ echo "<div class=row> ";
                                   echo '<td>'. $row['nome'] . '</td>';
                                   echo '<td>'. $row['cidade'] . '</td>';
                                   echo '<td>'. $row['tempo_t'] . '</td>';
-								  echo '</tr>';
+ 								  echo '</tr>';
                                   $count++;
                             }           
                }                 
@@ -209,12 +215,20 @@ echo "<div class=row> ";
                    <th>CIDADE</th>
                    <th>TEMPO LONGA</th>
                    <th>TEMPO TECNICA</th>
+                   <th>ABASUP 2018</th>
                   </tr>
                   </thead>
                   <tbody> ";
                     $sql = mysqli_query($con,"SELECT
                               podio_longa + podio_tecnica as total_pontos 
-                              , a.nome, a.estado,a.cidade, a.cod_cbsup, i.numero , tempo, podio_longa, tempo_t, podio_tecnica
+                              , a.nome, a.estado,a.cidade, a.cod_cbsup, i.numero , tempo, podio_longa, tempo_t, podio_tecnica,
+                               CASE WHEN (a.filiacao_abasup_2018 AND a.categoria_idcategoria = $id_categoria) THEN 'ok'
+                                     WHEN (a.filiacao_abasup_2018 AND a.categoria_idcategoria in
+                                     (SELECT categoria_idcategoria FROM inscricao i2 
+                                       WHERE i2.etapa_idetapa = i.etapa_idetapa
+                                          AND i2.numero = i.numero 
+                                          AND i2.categoria_idcategoria <> i.categoria_idcategoria)) THEN 'ok'
+                                ELSE ' - ' END as filiado_2018 
                               FROM inscricao i JOIN atleta a ON a.cpf = i.atleta_cpf
                               WHERE true 
                               and etapa_idetapa = $id_etapa
@@ -233,6 +247,7 @@ echo "<div class=row> ";
                                 echo '<td>'. $row['cidade'] . '</td>';
                                 echo '<td>'. $row['tempo'] . '</td>';
                                 echo '<td>'. $row['tempo_t'] . '</td>';
+                                echo '<td>'. $row['filiado_2018'] . '</td>';
                                 echo '</tr>';
                                 $count++;
                            }

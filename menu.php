@@ -16,6 +16,8 @@ require_once "config.php";
       $('.time').mask('00:00:00');
     })
    </script>
+
+
 </head>
 <body>
     
@@ -23,6 +25,7 @@ require_once "config.php";
 
 <div class="navbar navbar-fixed-top navbar-inverse" id="menu">
     <ul class="nav nav-pills">
+      
       <li><a href="index.php">HOME</a></li>
       <li class="dropdown">
 		   <a href="#" class="dropdown-toggle" data-toggle="dropdown">ATLETA</a>
@@ -46,17 +49,24 @@ require_once "config.php";
       </li>
 
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">REULTADOS</span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">RESULTADOS</span></a>
           <ul class="dropdown-menu">
-                 <li><a href="classifica.php">PROVA LONGA</a></li>
+                 <li><a href="resultado_cbsup.php?id=20">2018 - PRIMEIRA ETAPA</a></li> 
+                 <li class="divider"></li>
+                 <li><a href="classifica.php">2017 / 2016 / 2015</a></li>
          </ul>
       </li>
 
       <li class="dropdown">
-       <a href="ranking_categoria.php">RANKING 2017</a> </li>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">RANKING</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="ranking_categoria_2018.php">RANKING 2018</a> </li>
+            <li class="divider"></li>
+            <li><a href="ranking_categoria.php">RANKING 2017</a> </li>
       </li> 
-      
+ 
       </li>   
+
     </ul>
 </div>
 </body>

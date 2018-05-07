@@ -158,6 +158,7 @@ SELECT a.cpf, a.nome as nome, r.categoria_idcategoria
 FROM ranking r
 JOIN atleta a ON a.cpf = r.atleta_cpf
 LEFT JOIN discartes d ON d.atleta_cpf = r.atleta_cpf and d.categoria_idcategoria = r.categoria_idcategoria
+WHERE etapa_idetapa in (10,11,12,13,14,17,19)
 ) as resul
 WHERE categoria_idcategoria = $id_categoria
 GROUP by 1

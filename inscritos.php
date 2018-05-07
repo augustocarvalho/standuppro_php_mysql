@@ -204,7 +204,7 @@ echo"
                               and i.atleta_cpf = p.cpf 
                               and i.categoria_idcategoria = c.idcategoria 
                               GROUP by i.numero
-                              order by i.numero");  
+                              order by p.nome");  
                     }
                     while ($row = mysqli_fetch_assoc($sql)){
                             echo '<tr>';

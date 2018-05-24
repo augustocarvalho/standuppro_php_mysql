@@ -17,6 +17,10 @@ require_once "menu.php";
             background-repeat: no-repeat, repeat;
             background-size:100% auto;
         }
+
+       .nav > li > a > img {
+          height: 80px;
+        }
         </style>
       </head> 
   <div class=container>  
@@ -64,16 +68,16 @@ require_once "menu.php";
                     <option value="32">RACE 14 PRO FEM G-MASTER</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
                     <option value="21">PADDLE BOARD FEMININO</option>
-                    <option value="20">CANOA HAVAIANA OC1 MASC</option>
-                    <option value="39">CANOA HAVAIANA OC1 MASC MASTER</option>
-                    <option value="43">CANOA HAVAIANA OC1 MASC G-MASTER</option>
-                    <option value="33">CANOA HAVAIANA OC1 FEM</option>
-                    <option value="40">CANOA HAVAIANA OC1 FEM MASTER</option>
-                    <option value="44">CANOA HAVAIANA OC1 FEM G-MASTER</option>
-                    <option value="52">SURFSKI MASCULINO</option>
-                    <option value="59">SURFSKI MASC MASTER</option>
-                    <option value="60">SURFSKI MASC G-MASTER</option>
-                    <option value="61">SURFSKI FEMININO</option>
+                    <option value="41">SUP WAVE PRO MASCULINO</option>
+                    <option value="63">SUP WAVE PRO MASTER MASCULINO</option>
+                    <option value="64">SUP WAVE G-MASTER MASCULINO</option>
+                    <option value="68">SUP WAVE PRO FEM</option>
+                    <option value="66">SUP WAVE PRO MASTER FEMININO</option>
+                    <option value="67">SUP WAVE G-MASTER FEMININO</option>
+                    <option value="62">SUP WAVE AMADOR OPEN MASC</option>
+                    <option value="65">SUP WAVE AMADOR OPEN FEM</option>
+                    <option value="70">SUP WAVE JUNIOR</option>
+                    <option value="69">SUP WAVE KIDS</option>
           </select> </td>
      </tr>
    

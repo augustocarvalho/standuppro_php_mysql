@@ -95,5 +95,12 @@ require_once "menu.php";
     </div><!-- /.carousel -->
 </div>
 
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Developed by Augusto Carvalho - StandupPRO.com.br</span>
+      </div>
+    </footer>
+
+
 </body>
 </html>

@@ -188,7 +188,7 @@
             <label class="control-label">Etapa:</label>
               <div class="controls">
                 <select class="span4" name="etapa" >
-                    <option value="20">Primeira Etapa ABASUP 2018</option>
+                    <option value="21">Primeira Etapa CBSUP 2018</option>
                 </select> 
                </div>   
           </div>        
@@ -214,10 +214,19 @@
                     <option value="28">RACE 14 PRO FEMININO</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
                     <option value="21">PADDLE BOARD FEMININO</option>
-                    <option value="52">SURFSKI MASCULINO</option>
-                    <option value="61">SURFSKI FEMININO</option>
                     <option value="20">CANOA OC1 MASCULINO</option>
                     <option value="33">CANOA OC1 FEMININO</option>
+                    <option value="41">SUP WAVE PRO MASCULINO</option>
+                    <option value="63">SUP WAVE PRO MASTER MASCULINO</option>
+                    <option value="64">SUP WAVE G-MASTER MASCULINO</option>
+                    <option value="68">SUP WAVE PRO FEM</option>
+                    <option value="66">SUP WAVE PRO MASTER FEMININO</option>
+                    <option value="67">SUP WAVE G-MASTER FEMININO</option>
+                    <option value="62">SUP WAVE AMADOR OPEN MASC</option>
+                    <option value="65">SUP WAVE AMADOR OPEN FEM</option>
+                    <option value="70">SUP WAVE JUNIOR</option>
+                    <option value="69">SUP WAVE KIDS</option>
+                
                   </select> 
                </div>   
           </div>        

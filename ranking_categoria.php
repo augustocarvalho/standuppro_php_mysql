@@ -16,6 +16,9 @@ require_once "menu.php";
             background-repeat: no-repeat, repeat;
             background-size:100% auto;
         }
+       .nav > li > a > img {
+          height: 80px;
+        }
         </style>
       </head>    
     <table id="form_selecao">

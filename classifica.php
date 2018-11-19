@@ -25,51 +25,33 @@ require_once "menu.php";
 	<tr>
  	  <td style="font-weight:bold"> ETAPA: </td>
       <td> <select name="etapa" id="etapa" class="selectpicker" > 
-       <option> ---- ETAPAS DE 2017 ----- </option>
-       <option data-divider="true"></option>
-       <option value="19">YACHT SUP RACE - 2017</option>
-       <option value="17">ITACARE PADDLE RACE - 2017</option>
-       <option value="14">BAHIA SUP RACE - 2017</option>
-       <option value="13">MARCILIO DIAS - 2017</option>
-       <option value="12">MORRO SUP FES - 2017</option>
-       <option value="11">SUPBA INEMA - 2017</option>      
-       <option value="10">REGATA SSA-IOS - 2017</option>
-       <option data-divider="true"></option>
-       <option> ---- ETAPAS DE 2016 ----- </option>
-        <option data-divider="true"></option>
-       <option value="07">YACHT CLUBE DA BAHIA - 2016</option>
-       <option value="06">MAR DE ITACARÉ - 2016</option>
-       <option value="05">BAHIA SUP ECO 2016</option>  
-       <option value="04">CIRCUITO NAUTICO SSA-IOS</option>     
-       <option data-divider="true"></option>
-       <option> ---- ETAPAS DE 2015 ----- </option>
-       <option data-divider="true"></option>
-       <option value="03">REGATA MARCILIO DIAS</option>     
-		   <option value="02">MAX FORCE</option>
-		   <option value="01">DESAFIO DOS FORTES</option>
+       <option value="28">BARRA PADDLE SUP RACE</option>
       </td>
 	</tr> 
     <tr>
 	  <td style="font-weight:bold"> CATEGORIA: </td>
-      <td> <select name="categoria" id="categoria" class="selectpicker" onchange="form.submit()">
+      <td> 
+            <select name="categoria" id="categoria" class="selectpicker" onchange="form.submit()">
         			      <option value="">Escolha uma abaixo</option>
-                    <option value="00"> GERAL</option>
-                    <option value="01"> KIDS MASCULINO</option>
+                    <option value="00">GERAL</option>
+                    <option value="01">KIDS MASCULINO</option>
                     <option value="02">KIDS FEMININO</option>
                     <option value="03">JUNIOR MASCULINO</option>
-                    <option value="04"> JUNIOR FEMININO</option>
+                    <option value="04">JUNIOR FEMININO</option>
                     <option value="05">FUN RACE MASCULINO</option>
                     <option value="08">FUN RACE FEMININO</option>
                     <option value="06">FUN RACE MASCULINO MASTER</option>
-                    <option value="07"> FUN RACE MASCULINO GRAN MASTER</option>
+                    <option value="07">FUN RACE MASCULINO GRAN MASTER</option>
                     <option value="09">FUN RACE FEMININO MASTER</option>
-                    <option value="10"> FUN RACE FEMININO GRAN MASTER</option>
+                    <option value="10">FUN RACE FEMININO GRAN MASTER</option>
                     <option value="11">RACE 12'6 AMADOR MASCULINO</option>
                     <option value="24">RACE 12'6 AMADOR MASCULINO MASTER</option>
                     <option value="25">RACE 12'6 AMADOR MASCULINO G-MASTER</option>
+                    <option value="71">RACE 12'6 AMADOR MASCULINO LEGEND</option>
                     <option value="12">RACE 12'6 AMADOR FEMININO</option>
                     <option value="26">RACE 12'6 AMADOR FEMININO MASTER</option>
                     <option value="27">RACE 12'6 AMADOR FEMININO G-MASTER</option>
+                    <option value="72">RACE 12'6 AMADOR FEMININO LEGEND</option>
                     <option value="53">RACE 14 AMADOR MASCULINO</option>
                     <option value="55">RACE 14 AMADOR MASCULINO MASTER</option>
                     <option value="56">RACE 14 AMADOR MASCULINO G-MASTER</option>
@@ -90,29 +72,18 @@ require_once "menu.php";
                     <option value="32">RACE 14 PRO FEM G-MASTER</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
                     <option value="21">PADDLE BOARD FEMININO</option>
-              <!--  <option value="19">PADDLE BOARD</option>
-                    <option value="30">RACE 14 MASC G_MASTER</option>
-                    <option value="32">RACE 14 FEM G-MASTER</option>
-                    <option value="18">UNLIMIT</option>
-                    <option value="34">CANOA HAVAIANA OC3 MASC</option> 
-                    <option value="40">CANOA HAVAIANA OC1 FEM MASTER</option>
-                    <option value="35">CANOA HAVAIANA OC3 FEM</option> -->
-                    <option value="20">CANOA HAVAIANA OC1 MASC</option>
-                    <option value="39">CANOA HAVAIANA OC1 MASC MASTER</option>
-                    <option value="43">CANOA HAVAIANA OC1 MASC G-MASTER</option>
-                    <option value="33">CANOA HAVAIANA OC1 FEM</option>
-                    <option value="40">CANOA HAVAIANA OC1 FEM MASTER</option>
-                    <option value="44">CANOA HAVAIANA OC1 FEM G-MASTER</option>
-                    <option value="49">CANOA HAVAIANA OC1 KIDS</option>
-                    <option value="36">CANOA HAVAIANA OC6 MISTA</option>
-                    <option value="45">CANOA HAVAIANA OC6 FEM</option>
-                    <option value="46">CANOA HAVAIANA OC6 MASC</option>
-                    <option value="52">SURFSKI MASCULINO</option>
-                    <option value="59">SURFSKI MASTER MASC</option>
-                    <option value="60">SURFSKI G-MASTER MASC</option>
-                    <option value="61">SURFSKI FEMININO</option>
-                    
-      </select> </td>
+                    <option value="20">CANOA OC1 MASCULINO</option>
+                    <option value="39">CANOA OC1 MASCULINO MASTER</option>
+                    <option value="43">CANOA OC1 MASCULINO G-MASTER</option>
+                    <option value="33">CANOA OC1 FEMININO</option>
+                    <option value="40">CANOA OC1 FEMININO MASTER</option>
+                    <option value="44">CANOA OC1 FEMININO G-MASTER</option>    
+                    <option value="46">CANOA OC6 MASCULINO</option>
+                    <option value="45">CANOA OC6 FEMININO</option> 
+                    <option value="49">CANOA OC1 KIDS</option>
+                    <option value="73">CANOA OC1 KIDS FEMININO</option>
+                  </select>
+         </td>
      </tr>
 <!--	  <td>
 	      <input type="submit" name="action" value="PÓDIO" style="font-weight:bold" class="btn" id="btnCad">
@@ -161,25 +132,25 @@ if (@$_POST['categoria'] !== null) {
                              <th>Cidade</th>
                              <th>UF</th>
 					                   <th>TEMPO</th>
-                             <th>ABASUP-2018</th>
-                            </tr>
+                           </tr>
                          </thead>
                          <tbody> ";
-                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, p.cidade, i.tempo, p.filiacao_abasup_2018, p.categoria_idcategoria  FROM inscricao i join atleta p join categoria c 
+                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, p.cidade, i.tempo, p.filiacao_abasup_2018, p.cod_cbsup, p.categoria_idcategoria  FROM inscricao i join atleta p join categoria c 
                           WHERE i.etapa_idetapa ='$id_etapa' and i.categoria_idcategoria = '$id_categoria' and i.atleta_cpf = p.cpf and i.tempo <> '00:00:00' and i.categoria_idcategoria = c.idcategoria order by i.tempo");
 					             while ($row = mysqli_fetch_assoc($sql)){
                             echo '<tr>';
 							              echo '<td>' . $count . '</td>';
                             echo '<td>' . $row['numero'] . '</td>';
-                            echo '<td>'. $row['nome'] . '</td>';
+                            echo '<td>'. ucwords(strtolower($row['nome'])) . '</td>';
                             echo '<td>'. $row['cidade'] . '</td>';
                             echo '<td>'. $row['estado'] . '</td>';
 						                echo '<td>'. $row['tempo'] . '</td>';
-                            if ($row['filiacao_abasup_2018'] && $id_categoria == $row['categoria_idcategoria'] ) {
+                            
+ /*                         if ($row['filiacao_abasup_2018'] && $id_categoria == $row['categoria_idcategoria'] ) {
                               echo '<td>'. "ok" . '</td>';
                             } else {
                               echo '<td>'. "-" . '</td>';
-                            }
+                            } */
                             echo '</tr>';
                             $count++;
                         }	
@@ -202,7 +173,7 @@ if (@$_POST['categoria'] !== null) {
                             echo '<tr>';
                             echo '<td>' . $count . '</td>';
                             echo '<td>' . $row['numero'] . '</td>';
-                            echo '<td>'. $row['nome'] . '</td>';
+                            echo '<td>'. ucwords(strtolower($row['nome'])) . '</td>';
                             echo '<td>'. $row['estado'] . '</td>';
                             echo '<td>'. $row['tempo'] . '</td>';
                             echo '</tr>';
@@ -231,7 +202,7 @@ if (@$_POST['categoria'] !== null) {
                             echo '<tr>';
                             echo '<td>' . $count . '</td>';
 							             echo '<td>' . $row['numero'] . '</td>';
-                            echo '<td>'. $row['nome'] . '</td>';
+                            echo '<td>'. ucwords(strtolower($row['nome'])) . '</td>';
                             echo '<td>'. $row['estado'] . '</td>';
                             echo '<td>'. $row['descricao'] . '</td>';
 						                echo '<td>'. $row['tempo'] . '</td>';

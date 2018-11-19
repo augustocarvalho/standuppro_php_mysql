@@ -172,7 +172,7 @@ ORDER BY total desc, primeiros desc, segundos desc, terceiros desc");
                             sort($menor);
                             #mysqli_query($con,"update discartes SET discarte1 = $menor[0], discarte2 = $menor[1] WHERE atleta_cpf = $row[cpf] and $row[categoria_idcategoria] = $id_categoria");
                             echo '<td>' . $count . '</td>';
-                            echo '<td>' . $row['nome'] . '</td>';
+                            echo '<td>' . ucwords(strtolower($row['nome'])) . '</td>';
                             echo '<td>'. $row['col_etapa1'] . '</td>';
                             echo '<td>'. $row['pontos1'] . '</td>';
                             echo '<td>'. $row['col_etapa2'] . '</td>';

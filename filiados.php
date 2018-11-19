@@ -48,7 +48,7 @@ body {
                         while ($row = mysqli_fetch_assoc($sql)){
                                 echo '<tr>';
                                 echo '<td>'. $count . '</td>';
-                                echo '<td>'. $row['nome'] . '</td>';
+                                echo '<td>'. ucwords(strtolower($row['nome'])) . '</td>';
                                 echo '<td>'. $row['sexo'] . '</td>';
                                 echo '<td>'. $row['cidade'] . '</td>';
                                 echo '<td>'. $row['estado'] . '</td>';

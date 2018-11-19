@@ -36,6 +36,7 @@ body {
                           <th>UF</th>
                           <th>Action</th>
                           <th>2018</th>
+                          <th>CBSUP</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -46,7 +47,7 @@ body {
                                 echo '<tr>';
                                 echo '<td>'. $count . '</td>';
                                 echo '<td>'. $row['cpf'] . '</td>';
-                                echo '<td>'. $row['nome'] . '</td>';
+                                echo '<td>'. ucwords(strtolower($row['nome'])) . '</td>';
                                 echo '<td>'. $row['data_nascimento'] . '</td>';
 
                                # $interval = $date->diff( new DateTime( '2015-12-31' ) ); // data definida
@@ -68,6 +69,7 @@ body {
                               } else {
                                 echo '<td>'. "-" . '</td>';
                               }
+                                 echo '<td>'. $row['cod_cbsup'] . '</td>';
                                 echo '</tr>';
                                 $count++;
                         }

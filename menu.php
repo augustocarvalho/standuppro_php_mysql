@@ -41,26 +41,31 @@ require_once "config.php";
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">ETAPA</span></a>
           <ul class="dropdown-menu">
-                 <li><a href="inscritos.php?id=21">INSCRITOS</a></li>
-                 <li><a href="reg_chegada.php?id=21">CHEGADA LONGA</a></li>
-                 <li><a href="reg_chegada_tecnica.php?id=21">CHEGADA TECNICA</a></li>
-                 <li><a href="gerar_resultado_cbsup.php">GERAR RESULTADO FINAL</a></li>
+                 <li><a href="inscritos.php?id=29">INSCRITOS WAVE</a></li>
+                 <li><a href="inscritos.php?id=30">INSCRITOS YCB 2018</a></li>
+                 <li><a href="reg_chegada.php?id=30">CHEGADA LONGA</a></li>
+                 <li><a href="reg_chegada_tecnica.php?id=30">CHEGADA TECNICA</a></li>
+                 <li><a href="gerar_resultado_cbsup.php?id=30">GERAR RESULTADO FINAL</a></li>
          </ul>
       </li>
 
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">RESULTADOS</span></a>
           <ul class="dropdown-menu">
-                 <li><a href="resultado_cbsup.php?id=20">2018 - PRIMEIRA ETAPA</a></li> 
+                 <li><a href="resultado_cbsup.php?id=22">Segunda ETAPA ABASUP</a></li> 
+                 <li><a href="resultado_cbsup.php?id=20">Primeira ETAPA ABASUP</a></li> 
                  <li class="divider"></li>
-                 <li><a href="classifica.php">2017 / 2016 / 2015</a></li>
+                 <li><a href="resultado_cbsup.php?id=21">Primeira ETAPA CBSUP</a></li> 
+                 <li class="divider"></li>
+                 <li><a href="classifica.php">PROVAS LONGA</a></li>
          </ul>
       </li>
 
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">RANKING</span></a>
           <ul class="dropdown-menu">
-            <li><a href="ranking_categoria_2018.php">RANKING 2018</a> </li>
+            <li><a href="ranking_categoria_2018.php">RANKING ABASUP 2018</a> </li>
+            <li><a href="ranking_ycb_2018.php">RANKING YCB 2018</a> </li>
             <li class="divider"></li>
             <li><a href="ranking_categoria.php">RANKING 2017</a> </li>
       </li> 

@@ -45,9 +45,11 @@ require_once "menu.php";
                     <option value="11">RACE 12'6 AMADOR MASCULINO</option>
                     <option value="24">RACE 12'6 AMADOR MASCULINO MASTER</option>
                     <option value="25">RACE 12'6 AMADOR MASCULINO G-MASTER</option>
+                    <option value="71">RACE 12'6 AMADOR MASCULINO LEGEND</option>
                     <option value="12">RACE 12'6 AMADOR FEMININO</option>
                     <option value="26">RACE 12'6 AMADOR FEMININO MASTER</option>
                     <option value="27">RACE 12'6 AMADOR FEMININO G-MASTER</option>
+                    <option value="72">RACE 12'6 AMADOR FEMININO LEGEND</option>
                     <option value="53">RACE 14 AMADOR MASCULINO</option>
                     <option value="55">RACE 14 AMADOR MASCULINO MASTER</option>
                     <option value="56">RACE 14 AMADOR MASCULINO G-MASTER</option>
@@ -68,16 +70,16 @@ require_once "menu.php";
                     <option value="32">RACE 14 PRO FEM G-MASTER</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
                     <option value="21">PADDLE BOARD FEMININO</option>
-                    <option value="41">SUP WAVE PRO MASCULINO</option>
-                    <option value="63">SUP WAVE PRO MASTER MASCULINO</option>
-                    <option value="64">SUP WAVE G-MASTER MASCULINO</option>
-                    <option value="68">SUP WAVE PRO FEM</option>
-                    <option value="66">SUP WAVE PRO MASTER FEMININO</option>
-                    <option value="67">SUP WAVE G-MASTER FEMININO</option>
-                    <option value="62">SUP WAVE AMADOR OPEN MASC</option>
-                    <option value="65">SUP WAVE AMADOR OPEN FEM</option>
-                    <option value="70">SUP WAVE JUNIOR</option>
-                    <option value="69">SUP WAVE KIDS</option>
+                    <option value="20">CANOA OC1 MASCULINO</option>
+                    <option value="39">CANOA OC1 MASCULINO MASTER</option>
+                    <option value="43">CANOA OC1 MASCULINO G-MASTER</option>
+                    <option value="33">CANOA OC1 FEMININO</option>
+                    <option value="40">CANOA OC1 FEMININO MASTER</option>
+                    <option value="44">CANOA OC1 FEMININO G-MASTER</option>    
+                    <option value="46">CANOA OC6 MASCULINO</option>
+                    <option value="45">CANOA OC6 FEMININO</option> 
+                    <option value="49">CANOA OC1 KIDS</option>
+                    <option value="73">CANOA OC1 KIDS FEMININO</option>
           </select> </td>
      </tr>
    
@@ -114,32 +116,56 @@ if (@$_POST['categoria'] !== null) {
                   
                 
 echo"             
-                <table cellpadding=0  border=0   style=width:700px  align=center class=table table-striped table-bordered >
+                <table cellpadding=0  border=0   style=width:800px  align=center class=table table-striped table-bordered >
                   <thead>
                     <tr>
 					 
                  	    <th>Número</th>
 					            <th class=col-sm-4>NOME</th>
                       <th>Cidade</th>
-                      <th>UF</th>
-					          </tr>
+                      <th>UF</th>";
+                     if ($id_categoria == 0) {
+                       echo"<th>Categoria</th>";
+                      }
+					    echo"</tr>
                   </thead>
                   <tbody>";
                     $count=1;
 				            if ( $id_categoria <> 0) {
-                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, p.cidade, c.descricao, p.filiacao_abasup_2018  FROM inscricao i join atleta p join categoria c 
-                          WHERE i.etapa_idetapa ='$id' and i.categoria_idcategoria = '$id_categoria' and i.atleta_cpf = p.cpf and i.categoria_idcategoria = c.idcategoria order by i.numero");
+                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, p.cidade, c.descricao
+                        , CASE WHEN count(*) = 2 THEN (SELECT c1.descricao FROM categoria c1 WHERE c1.idcategoria = max(i.categoria_idcategoria)) 
+                              ELSE c.descricao END as descricao ,
+                             CASE WHEN (p.filiacao_abasup_2018 and p.categoria_idcategoria = i.categoria_idcategoria) THEN 'OK'
+                                  ELSE ' - ' END as filiacao_2018
+                          , p.cod_cbsup  
+                          FROM inscricao i join atleta p join categoria c 
+                          WHERE i.etapa_idetapa ='$id' and i.categoria_idcategoria = '$id_categoria' and i.atleta_cpf = p.cpf and i.categoria_idcategoria = c.idcategoria GROUP by i.numero
+                            order by i.numero");
                     }else {
-                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, p.cidade, c.descricao, p.filiacao_abasup_2018  FROM inscricao i join atleta p join categoria c 
-                          WHERE i.etapa_idetapa ='$id' and i.atleta_cpf = p.cpf and i.categoria_idcategoria = c.idcategoria order by i.numero");  
+                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.cidade, p.estado, p.cod_cbsup, 
+                            CASE WHEN count(*) = 2 THEN (SELECT c1.descricao FROM categoria c1 WHERE c1.idcategoria = max(i.categoria_idcategoria)) 
+                              ELSE c.descricao END as descricao ,
+                             CASE WHEN (p.filiacao_abasup_2018 and p.categoria_idcategoria = i.categoria_idcategoria) THEN 'OK'
+                                  ELSE ' - ' END as filiacao_2018
+                              FROM inscricao i 
+                              join atleta p ON i.atleta_cpf = p.cpf 
+                              join categoria c ON c.idcategoria = i.categoria_idcategoria
+                              WHERE i.etapa_idetapa = '$id'
+                              and i.atleta_cpf = p.cpf 
+                              and i.categoria_idcategoria = c.idcategoria 
+                              GROUP by i.numero
+                              order by i.numero");  
                     }
                    	while ($row = mysqli_fetch_assoc($sql)){
                             echo '<tr>';
-					           		    echo '<td>' . $row['numero'] . '</td>';
-                            echo '<td>'. $row['nome'] . '</td>';
+                            echo '<td>' . $row['numero'] . '</td>';
+                            echo '<td>'.  ucwords(strtolower($row['nome'])) . '</td>';
                             echo '<td>'. $row['cidade'] . '</td>';
                             echo '<td>'. $row['estado'] . '</td>';
-						              	echo '<td width=150>';
+                            if ($id_categoria == 0) {
+                              echo '<td>'. $row['descricao'] . '</td>';
+                            }
+                            echo '<td width=150>';
                             echo '<a class="btn btn-success" href="update_inscritos.php?id='.$id.'&cod='.$row['numero'].'">Update</a>';
                             echo ' ';
                             echo '<a class="btn btn-danger" href="delete_inscricao.php?id='.$id.'&cod='.$row['numero'].'">Delete</a>';
@@ -178,7 +204,7 @@ else {
                   
                 
 echo"             
-                <table cellpadding=0  border=0   style=width:700px  align=center class=table table-striped table-bordered >
+                <table cellpadding=0  border=0   style=width:800px  align=center class=table table-striped table-bordered >
                   <thead>
                     <tr>
            
@@ -187,7 +213,7 @@ echo"
                       <th>CIDADE</th>
                       <th>UF</th>
                       <th>CATEGORIA</th>
-                      <th>FILIADO</th>
+                      <th>ABASUP 2018</th>
                     </tr>
                   </thead>
                   <tbody>";
@@ -213,7 +239,7 @@ echo"
                     while ($row = mysqli_fetch_assoc($sql)){
                             echo '<tr>';
                             echo '<td>' . $row['numero'] . '</td>';
-                            echo '<td>'. $row['nome'] . '</td>';
+                            echo '<td>'. ucwords(strtolower($row['nome'])) . '</td>';
                             echo '<td>'. $row['cidade'] . '</td>';
                             echo '<td>'. $row['estado'] . '</td>';
                             echo '<td>'. $row['descricao'] . '</td>';

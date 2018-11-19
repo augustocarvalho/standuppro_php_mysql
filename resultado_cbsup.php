@@ -62,7 +62,7 @@ require_once "menu.php";
                     <option value="56">RACE 14 AMADOR MASCULINO G-MASTER</option>
                     <option value="54">RACE 14 AMADOR FEMININO</option>
                     <option value="57">RACE 14 AMADOR FEMININO MASTER</option>
-                    <option value="58">RACE 14 AMADOR FEMININO G-MASTER</option>
+                    <option value="58">RACE 14 AMADOR FEMININO G-MASTER</option> 
                     <option value="13">RACE 12'6 PRO MASCULINO </option>
                     <option value="14">RACE 12'6 PRO FEMININO </option>
                     <option value="15">RACE 12'6 PRO MASTER MASC</option>
@@ -144,7 +144,7 @@ echo "<div class=row> ";
                   <table cellpadding=0  border=0   style=width:700px  align=center class=table table-striped table-bordered >
                   <thead>
                   <tr>
-                   <th>RESULTADO</th>        
+                   <th>#</th>        
                    <th>NUMERO</th>
                    <th>NOME</th>
                    <th>CIDADE</th>
@@ -164,7 +164,7 @@ echo "<div class=row> ";
                                 echo '<tr>';
                                 echo '<td>'. $row['podio_longa'] . '</td>';
                                 echo '<td>'. $row['numero'] . '</td>';
-                                echo '<td>'. $row['nome'] . '</td>';
+                                echo '<td>'. ucwords(strtolower($row['nome'])) . '</td>';
                                 echo '<td>'. $row['cidade'] . '</td>';
                                 echo '<td>'. $row['tempo'] . '</td>';
                                 echo '</tr>';
@@ -177,7 +177,7 @@ echo "<div class=row> ";
                   <table cellpadding=0  border=0   style=width:700px  align=center class=table table-striped table-bordered >
                   <thead>
                   <tr>
-                   <th>RESULTADO</th>        
+                   <th>#</th>        
                    <th>NUMERO</th>
                    <th>NOME</th>
                    <th>CIDADE</th>
@@ -197,7 +197,7 @@ echo "<div class=row> ";
                                   echo '<tr>';
                                   echo '<td>'. $row['podio_tecnica'] . '</td>';
                                   echo '<td>'. $row['numero'] . '</td>';
-                                  echo '<td>'. $row['nome'] . '</td>';
+                                  echo '<td>'. ucwords(strtolower($row['nome'])) . '</td>';
                                   echo '<td>'. $row['cidade'] . '</td>';
                                   echo '<td>'. $row['tempo_t'] . '</td>';
  								  echo '</tr>';
@@ -206,19 +206,19 @@ echo "<div class=row> ";
                }                 
            }else{				      
                echo" <div class=row>
-                  <table cellpadding=0  border=0   style=width:500px  align=center class=table table-striped table-bordered >
+                  <table cellpadding=0  border=0   style=width:900px  align=center class=table table-striped table-bordered >
                   <thead>
                   <tr>
                    <th>#</th>        
-                   <th>PONTOS</th> 
-                   <th>LONGA</th>
-                   <th>TECNICA</th>
+                   <th>Pnts</th> 
+                   <th>LONG</th>
+                   <th>TEC</th>
                    <th>NUMERO</th>
                    <th>NOME</th>
                    <th>CIDADE</th>
                    <th>TEMPO LONGA</th>
                    <th>TEMPO TECNICA</th>
-                   <th>ABASUP 2018</th>
+                   
                   </tr>
                   </thead>
                   <tbody> ";
@@ -246,11 +246,11 @@ echo "<div class=row> ";
                                 echo '<td>'. $row['podio_longa'] . '</td>';
                                 echo '<td>'. $row['podio_tecnica'] . '</td>';
                                 echo '<td>'. $row['numero'] . '</td>';
-                                echo '<td>'. $row['nome'] . '</td>';
+                                echo '<td>'. ucwords(strtolower($row['nome'])) . '</td>';
                                 echo '<td>'. $row['cidade'] . '</td>';
                                 echo '<td>'. $row['tempo'] . '</td>';
                                 echo '<td>'. $row['tempo_t'] . '</td>';
-                                echo '<td>'. $row['filiado_2018'] . '</td>';
+                                
                                 echo '</tr>';
                                 $count++;
                            }

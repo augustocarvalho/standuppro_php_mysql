@@ -89,14 +89,20 @@
           if (($id_categoria==8) and ($idade>49) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','10','$inscricao')");
           }
-          if (($id_categoria==11) and ($idade>49) ){
+          if (($id_categoria==11) and ($idade>49) and ($idade<60)){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','25','$inscricao')");
+          }
+          if (($id_categoria==11) and ($idade>59)){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','71','$inscricao')");
           }
           if (($id_categoria==13) and ($idade>49) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','16','$inscricao')");
           }  
-          if (($id_categoria==12) and ($idade>49) ){
+          if (($id_categoria==12) and ($idade>49) and ($idade<60) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','27','$inscricao')");
+          }
+          if (($id_categoria==12) and ($idade>59)){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','72','$inscricao')");
           }
           if (($id_categoria==14) and ($idade>49) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','23','$inscricao')");
@@ -188,7 +194,7 @@
             <label class="control-label">Etapa:</label>
               <div class="controls">
                 <select class="span4" name="etapa" >
-                    <option value="21">Primeira Etapa CBSUP 2018</option>
+                    <option value="30">YCB SUP RACE 2018</option>
                 </select> 
                </div>   
           </div>        
@@ -201,7 +207,7 @@
                     <option value="01"> KIDS MASCULINO</option>
                     <option value="02">KIDS FEMININO</option>
                     <option value="03">JUNIOR MASCULINO</option>
-                    <option value="04"> JUNIOR FEMININO</option>
+                    <option value="04">JUNIOR FEMININO</option>
                     <option value="05">FUN RACE MASCULINO</option>
                     <option value="08">FUN RACE FEMININO</option>
                     <option value="11">RACE 12'6 AMADOR MASCULINO</option>
@@ -215,18 +221,22 @@
                     <option value="19">PADDLE BOARD MASCULINO</option>
                     <option value="21">PADDLE BOARD FEMININO</option>
                     <option value="20">CANOA OC1 MASCULINO</option>
-                    <option value="33">CANOA OC1 FEMININO</option>
-                    <option value="41">SUP WAVE PRO MASCULINO</option>
-                    <option value="63">SUP WAVE PRO MASTER MASCULINO</option>
-                    <option value="64">SUP WAVE G-MASTER MASCULINO</option>
+                    <option value="33">CANOA OC1 FEMININO</option>    
+                    <option value="46">CANOA OC6 MASCULINO</option>
+                    <option value="45">CANOA OC6 FEMININO</option>  
+                    <option value="49">CANOA OC1 KIDS</option>
+                    <option value="73">CANOA OC1 KIDS FEMININO</option>
+                    <option value="41">SUP WAVE PRO MASC</option>
                     <option value="68">SUP WAVE PRO FEM</option>
-                    <option value="66">SUP WAVE PRO MASTER FEMININO</option>
-                    <option value="67">SUP WAVE G-MASTER FEMININO</option>
                     <option value="62">SUP WAVE AMADOR OPEN MASC</option>
-                    <option value="65">SUP WAVE AMADOR OPEN FEM</option>
-                    <option value="70">SUP WAVE JUNIOR</option>
+                    <option value="65">SUP WAVE OPEN AMADOR FEM</option>
+                    <option value="63">SUP WAVE PRO MASCULINO MASTER</option>
+                    <option value="64">SUP WAVE MASCULINO G-MASTER</option>
+                    <option value="66">SUP WAVE FEMININO MASTER</option>
+                    <option value="67">SUP WAVE FEMININO G-MASTER</option>
                     <option value="69">SUP WAVE KIDS</option>
-                
+                    <option value="70">SUP WAVE JUNIOR</option>
+
                   </select> 
                </div>   
           </div>        

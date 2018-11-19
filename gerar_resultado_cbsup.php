@@ -1,9 +1,11 @@
 <?php
 include 'config.php';
-$ultima_etapa = mysqli_query($con, "SELECT max(idetapa) as idetapa FROM etapa");
-while ($row_etapa = mysqli_fetch_assoc($ultima_etapa)) {
-  $etapa = $row_etapa['idetapa'];
-} #DEFINIR QUAL ETAPA DESEJA GERAR RESULTADO
+
+$etapa = null;
+if ( !empty($_GET['id'])) {
+    $etapa = $_REQUEST['id'];
+} 
+
 $cat = mysqli_query($con,"SELECT idcategoria FROM categoria order by idcategoria");
 while ($categoria = mysqli_fetch_assoc($cat) ) {
    

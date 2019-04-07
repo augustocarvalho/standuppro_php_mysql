@@ -137,9 +137,9 @@ echo " <div class=row>
                             ,  discarte1 
                             ,  discarte2
                             , ((pontos1+pontos2+pontos3+pontos4+pontos5+pontos6+pontos7) - discarte1) - discarte2 as total
-                            , (Select count(*) FROM ranking WHERE atleta_cpf = cpf AND etapa_idetapa in (10,11,12,13,14,17,19) AND colocacao = 1) as primeiros
-                            ,(Select count(*) FROM ranking WHERE atleta_cpf = cpf AND etapa_idetapa in (10,11,12,13,14,17,19) AND colocacao = 2) as segundos
-                            , (Select count(*) FROM ranking WHERE atleta_cpf = cpf AND etapa_idetapa in (10,11,12,13,14,17,19) AND colocacao = 3) as terceiros    
+                            , (Select count(*) FROM ranking rr WHERE atleta_cpf = cpf AND etapa_idetapa in (10,11,12,13,14,17,19) AND colocacao = 1 and rr.categoria_idcategoria = resul.categoria_idcategoria) as primeiros
+                            ,(Select count(*) FROM ranking rr WHERE atleta_cpf = cpf AND etapa_idetapa in (10,11,12,13,14,17,19) AND colocacao = 2 and rr.categoria_idcategoria = resul.categoria_idcategoria) as segundos
+                            , (Select count(*) FROM ranking rr WHERE atleta_cpf = cpf AND etapa_idetapa in (10,11,12,13,14,17,19) AND colocacao = 3 and rr.categoria_idcategoria = resul.categoria_idcategoria) as terceiros    
                              FROM (
 SELECT a.cpf, a.nome as nome, r.categoria_idcategoria 
 ,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 10 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa1  
@@ -160,7 +160,7 @@ SELECT a.cpf, a.nome as nome, r.categoria_idcategoria
 , d.discarte2
 FROM ranking r
 JOIN atleta a ON a.cpf = r.atleta_cpf
-LEFT JOIN discartes d ON d.atleta_cpf = r.atleta_cpf and d.categoria_idcategoria = r.categoria_idcategoria
+LEFT JOIN discartes d ON d.atleta_cpf = r.atleta_cpf and d.categoria_idcategoria = r.categoria_idcategoria and ano = 2017 and id_circuito = 1
 WHERE etapa_idetapa in (10,11,12,13,14,17,19)
 ) as resul
 WHERE categoria_idcategoria = $id_categoria
@@ -170,7 +170,7 @@ ORDER BY total desc, primeiros desc, segundos desc, terceiros desc");
                             echo '<tr>';
                             $menor = array($row['pontos1'], $row['pontos2'], $row['pontos3'], $row['pontos4'], $row['pontos5'], $row['pontos6'], $row['pontos7'] );
                             sort($menor);
-                            #mysqli_query($con,"update discartes SET discarte1 = $menor[0], discarte2 = $menor[1] WHERE atleta_cpf = $row[cpf] and $row[categoria_idcategoria] = $id_categoria");
+                            #mysqli_query($con,"update discartes SET discarte1 = $menor[0], discarte2 = $menor[1] WHERE atleta_cpf = $row[cpf] and categoria_idcategoria = $row[categoria_idcategoria] and ano = 2017 and id_circuito = 1");
                             echo '<td>' . $count . '</td>';
                             echo '<td>' . ucwords(strtolower($row['nome'])) . '</td>';
                             echo '<td>'. $row['col_etapa1'] . '</td>';

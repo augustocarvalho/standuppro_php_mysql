@@ -40,7 +40,7 @@ require_once "config.php";
 
 
 
-$etapa=28;
+$etapa=32;
 
 $contador = 1;
 $categorias = mysqli_query($con,"SELECT distinct(categoria_idcategoria) 
@@ -58,8 +58,8 @@ order by categoria_idcategoria , geral, podio_longa ") ;
 $colocacao = 1;
 while ($pontua = mysqli_fetch_assoc($ordenar)){
 # In Case Race and Tecnica comentar a linha abaixo 
-  $colocacao = $pontua[podio_longa];  
-  switch ($colocacao){
+  #$colocacao = $pontua[podio_longa];  
+   switch ($colocacao){
     case 1:
        mysqli_query($con,"update ranking set pontos = 925 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");   
        break;
@@ -155,6 +155,6 @@ while ($pontua = mysqli_fetch_assoc($ordenar)){
   };
   
 };
-echo "<script>alert('ETAPA PONTUADA NO BAHIANO 2018!! ');</script>";
-echo "<meta http-equiv='refresh' content='0, url=./ranking_categoria_2018.php'>";
+echo "<script>alert('ETAPA PONTUADA NO BAHIANO 2019!! ');</script>";
+echo "<meta http-equiv='refresh' content='0, url=./ranking_categoria_2019.php'>";
 ?>

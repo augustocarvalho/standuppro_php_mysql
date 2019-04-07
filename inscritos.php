@@ -69,17 +69,44 @@ require_once "menu.php";
                     <option value="31">RACE 14 PRO FEM MASTER</option>
                     <option value="32">RACE 14 PRO FEM G-MASTER</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
-                    <option value="21">PADDLE BOARD FEMININO</option>
-                    <option value="20">CANOA OC1 MASCULINO</option>
-                    <option value="39">CANOA OC1 MASCULINO MASTER</option>
-                    <option value="43">CANOA OC1 MASCULINO G-MASTER</option>
-                    <option value="33">CANOA OC1 FEMININO</option>
-                    <option value="40">CANOA OC1 FEMININO MASTER</option>
-                    <option value="44">CANOA OC1 FEMININO G-MASTER</option>    
-                    <option value="46">CANOA OC6 MASCULINO</option>
-                    <option value="45">CANOA OC6 FEMININO</option> 
-                    <option value="49">CANOA OC1 KIDS</option>
-                    <option value="73">CANOA OC1 KIDS FEMININO</option>
+                    <option value="21">PADDLE BOARD FEMININO</option> 
+         <!--            <option value="20">V1R MASC</option>
+                    <option value="39">V1R MASC 40+</option>
+                    <option value="43">V1R MASC 50+</option>
+                    <option value="74">V1R MASC 60+</option>
+                    <option value="33">V1R FEM</option>
+                    <option value="40">V1R FEM 40+</option>
+                    <option value="44">V1R FEM 50+</option>
+                    <option value="79">V2R MASC</option>
+                    <option value="80">V2R MASC 40+</option>
+                    <option value="81">V2R MASC 50+</option>
+                    <option value="82">V2R FEM</option>
+                    <option value="83">V2R FEM 40+</option>
+                    <option value="84">V2R FEM 50+</option>
+                    <option value="85">V2R MISTA</option>
+                    <option value="86">V2R MISTA 40+</option>
+                    <option value="87">V2R MISTA 50+</option>
+                    <option value="46">V6 MASC</option>
+                    <option value="93">V6 MASC 40+</option>
+                    <option value="94">V6 MASC 50+</option>
+                    <option value="45">V6 FEM</option>
+                    <option value="95">V6 FEM 40+</option>
+                    <option value="96">V6 FEM 50+</option>
+                    <option value="92">V6 MISTA</option>
+                    <option value="97">V6 MISTA 40+</option>
+                    <option value="98">V6 MISTA 50+</option>
+                    <option value="52">SURFSKI MASCULINO</option>
+                    <option value="59">SURFSKI MASC 40+</option>
+                    <option value="60">SURFSKI MASC 50+</option>
+                    <option value="78">SURFSKI MASC 60+</option>
+                    <option value="61">SURFSKI FEMININO</option>
+                    <option value="76">SURFSKI FEM 40+</option>
+                    <option value="77">SURFSKI FEM 50+</option>
+                    <option value="88">SURFSKI DUPLO</option>
+                    <option value="89">SURFSKI DUPLO 40+</option>
+                    <option value="90">SURFSKI DUPLO 50+</option>
+                    <option value="90">SURFSKI DUPLO 60+</option>
+                    <option value="75">V1 MASC</option> -->
           </select> </td>
      </tr>
    
@@ -123,7 +150,9 @@ echo"
                  	    <th>Número</th>
 					            <th class=col-sm-4>NOME</th>
                       <th>Cidade</th>
-                      <th>UF</th>";
+                      <th>UF</th>
+                      <th>CBSUP</th>
+                      <th>ABASUP</th>";
                      if ($id_categoria == 0) {
                        echo"<th>Categoria</th>";
                       }
@@ -134,9 +163,12 @@ echo"
 				            if ( $id_categoria <> 0) {
                       $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, p.cidade, c.descricao
                         , CASE WHEN count(*) = 2 THEN (SELECT c1.descricao FROM categoria c1 WHERE c1.idcategoria = max(i.categoria_idcategoria)) 
-                              ELSE c.descricao END as descricao ,
-                             CASE WHEN (p.filiacao_abasup_2018 and p.categoria_idcategoria = i.categoria_idcategoria) THEN 'OK'
-                                  ELSE ' - ' END as filiacao_2018
+                              ELSE c.descricao END as descricao 
+                        , CASE WHEN (SELECT 1 
+                                      FROM filiacao f 
+                                        WHERE f.ano = 2019 AND f.atleta_cpf = p.cpf and 
+                                         f.categoria_idcategoria = i.categoria_idcategoria) then 'ok'
+                               ELSE ' - ' END as abasup        
                           , p.cod_cbsup  
                           FROM inscricao i join atleta p join categoria c 
                           WHERE i.etapa_idetapa ='$id' and i.categoria_idcategoria = '$id_categoria' and i.atleta_cpf = p.cpf and i.categoria_idcategoria = c.idcategoria GROUP by i.numero
@@ -144,9 +176,12 @@ echo"
                     }else {
                       $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.cidade, p.estado, p.cod_cbsup, 
                             CASE WHEN count(*) = 2 THEN (SELECT c1.descricao FROM categoria c1 WHERE c1.idcategoria = max(i.categoria_idcategoria)) 
-                              ELSE c.descricao END as descricao ,
-                             CASE WHEN (p.filiacao_abasup_2018 and p.categoria_idcategoria = i.categoria_idcategoria) THEN 'OK'
-                                  ELSE ' - ' END as filiacao_2018
+                              ELSE c.descricao END as descricao
+                              , CASE WHEN (SELECT 1 
+                                      FROM filiacao f 
+                                        WHERE f.ano = 2019 AND f.atleta_cpf = p.cpf and 
+                                         f.categoria_idcategoria = i.categoria_idcategoria) then 'ok'
+                               ELSE ' - ' END as abasup 
                               FROM inscricao i 
                               join atleta p ON i.atleta_cpf = p.cpf 
                               join categoria c ON c.idcategoria = i.categoria_idcategoria
@@ -162,6 +197,8 @@ echo"
                             echo '<td>'.  ucwords(strtolower($row['nome'])) . '</td>';
                             echo '<td>'. $row['cidade'] . '</td>';
                             echo '<td>'. $row['estado'] . '</td>';
+                            echo '<td>'. $row['cod_cbsup'] . '</td>';
+                            echo '<td>'. $row['abasup'] . '</td>';
                             if ($id_categoria == 0) {
                               echo '<td>'. $row['descricao'] . '</td>';
                             }
@@ -213,20 +250,24 @@ echo"
                       <th>CIDADE</th>
                       <th>UF</th>
                       <th>CATEGORIA</th>
-                      <th>ABASUP 2018</th>
+                      <th>CBSUP</th>
+                      <th>ABASUP</th>
                     </tr>
                   </thead>
                   <tbody>";
                     $count=1;
                     if ( $id_categoria <> 0) {
-                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.cidade, p.estado, c.descricao  FROM inscricao i join atleta p join categoria c 
+                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.cidade, p.estado, c.descricao, p.cod_cbsup  FROM inscricao i join atleta p join categoria c 
                           WHERE i.etapa_idetapa ='$id' and i.categoria_idcategoria = '$id_categoria' and i.atleta_cpf = p.cpf and i.categoria_idcategoria = c.idcategoria order by i.numero");
                     }else {
                       $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.cidade, p.estado, p.cod_cbsup, 
                             CASE WHEN count(*) = 2 THEN (SELECT c1.descricao FROM categoria c1 WHERE c1.idcategoria = max(i.categoria_idcategoria)) 
                               ELSE c.descricao END as descricao ,
-                             CASE WHEN (p.filiacao_abasup_2018 and p.categoria_idcategoria = i.categoria_idcategoria) THEN 'OK'
-                                  ELSE ' - ' END as filiacao_2018
+                             CASE WHEN (SELECT 1 
+                                      FROM filiacao f 
+                                        WHERE f.ano = 2019 AND f.atleta_cpf = p.cpf and 
+                                         f.categoria_idcategoria = i.categoria_idcategoria) then 'ok'
+                               ELSE ' - ' END as abasup 
                               FROM inscricao i 
                               join atleta p ON i.atleta_cpf = p.cpf 
                               join categoria c ON c.idcategoria = i.categoria_idcategoria
@@ -243,13 +284,8 @@ echo"
                             echo '<td>'. $row['cidade'] . '</td>';
                             echo '<td>'. $row['estado'] . '</td>';
                             echo '<td>'. $row['descricao'] . '</td>';
-                            echo '<td>'. $row['filiacao_2018'] . '</td>';
-                          /*  if ($row['filiacao_abasup_2018']) {
-                              echo '<td>'. "ok" . '</td>';
-                            } else {
-                              echo '<td>'. "-" . '</td>';
-                            }
-                            echo '<td>'. $row['cod_cbsup'] . '</td>'; */
+                            echo '<td>'. $row['cod_cbsup'] . '</td>';
+                            echo '<td>'. $row['abasup'] . '</td>';
                             echo '</tr>';
                             $count++;
                     }

@@ -126,11 +126,20 @@ echo " <div class=row>
                      <th>Pts3</th>
                      <th>4ª</th>
                      <th>Pts4</th>
-                     <th>Total</th>
+                     <th>5ª</th>
+                     <th>Pts5</th>
+                     <th>SOMA</th>
+                     <th>Dct 1</th>
+                     <th>Pts FINAL</th>
                      </tr>
                    </thead>
                    <tbody> ";
-                      $sql = mysqli_query($con,"SELECT nome, cpf, categoria_idcategoria, col_etapa1, pontos1, col_etapa2, pontos2, col_etapa3, pontos3, col_etapa4, pontos4, (pontos1 + pontos2 + pontos3 + pontos4) as total
+                      $sql = mysqli_query($con,"SELECT nome, cpf, categoria_idcategoria, col_etapa1, pontos1, col_etapa2, pontos2, col_etapa3, pontos3, col_etapa4, pontos4, col_etapa5, pontos5, (pontos1 + pontos2 + pontos3 + pontos4 + pontos5)  as soma
+                            ,  discarte1 
+                            , ((pontos1+pontos2+pontos3+pontos4+pontos5) - discarte1) as total
+                            , (Select count(*) FROM ranking rr WHERE atleta_cpf = cpf AND etapa_idetapa in (20,22,26,28,30) AND colocacao = 1 and rr.categoria_idcategoria = resul.categoria_idcategoria) as primeiros
+                            ,(Select count(*) FROM ranking rr WHERE atleta_cpf = cpf AND etapa_idetapa in  (20,22,26,28,30) AND colocacao = 2 and rr.categoria_idcategoria = resul.categoria_idcategoria) as segundos
+                            , (Select count(*) FROM ranking rr WHERE atleta_cpf = cpf AND etapa_idetapa in (20,22,26,28,30) AND colocacao = 3 and rr.categoria_idcategoria = resul.categoria_idcategoria) as terceiros    
                              FROM (
 SELECT a.cpf, a.nome as nome, r.categoria_idcategoria 
 ,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 20 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa1  
@@ -141,14 +150,22 @@ SELECT a.cpf, a.nome as nome, r.categoria_idcategoria
 ,ifnull((SELECT pontos FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 26 and categoria_idcategoria = r.categoria_idcategoria), 0) as pontos3 
 ,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 28 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa4  
 ,ifnull((SELECT pontos FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 28 and categoria_idcategoria = r.categoria_idcategoria), 0) as pontos4
+,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 30 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa5  
+,ifnull((SELECT pontos FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 30 and categoria_idcategoria = r.categoria_idcategoria), 0) as pontos5
+, d.discarte1
 FROM ranking r
 JOIN atleta a ON a.cpf = r.atleta_cpf
-WHERE etapa_idetapa in (20,22,26,28)
+LEFT JOIN discartes d ON d.atleta_cpf = r.atleta_cpf and d.categoria_idcategoria = r.categoria_idcategoria and ano = 2018 and id_circuito = 1
+WHERE etapa_idetapa in (20,22,26,28,30)
 ) as resul
 WHERE categoria_idcategoria = $id_categoria
-GROUP by 1 order by total desc");
+GROUP by 1
+ORDER BY total desc, primeiros desc, segundos desc, terceiros desc");
                        while ($row = mysqli_fetch_assoc($sql)){
                             echo '<tr>';
+                           $menor = array($row['pontos1'], $row['pontos2'], $row['pontos3'], $row['pontos4'], $row['pontos5'] );
+                            sort($menor);
+                            #mysqli_query($con,"update discartes SET discarte1 = $menor[0] WHERE atleta_cpf = $row[cpf] and categoria_idcategoria = $id_categoria and ano = 2018 and id_circuito = 1");
                             echo '<td>' . $count . '</td>';
                             echo '<td>' . ucwords(strtolower($row['nome'])) . '</td>';
                             echo '<td>'. $row['col_etapa1'] . '</td>';
@@ -159,6 +176,10 @@ GROUP by 1 order by total desc");
                             echo '<td>'. $row['pontos3'] . '</td>';
                             echo '<td>'. $row['col_etapa4'] . '</td>';
                             echo '<td>'. $row['pontos4'] . '</td>';
+                            echo '<td>'. $row['col_etapa5'] . '</td>';
+                            echo '<td>'. $row['pontos5'] . '</td>';
+                            echo '<td>'. $row['soma'] . '</td>';
+                            echo '<td>'. $row['discarte1'] . '</td>';
                             echo '<td>'. $row['total'] . '</td>';
                             echo '</tr>';
                             $count++;

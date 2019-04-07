@@ -77,11 +77,59 @@
           if (($id_categoria==52) and ($idade>39) and ($idade<50) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','59','$inscricao')");
           }
+          if (($id_categoria==61) and ($idade>39) and ($idade<50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','76','$inscricao')");
+          }
+          if (($id_categoria==88) and ($idade>39) and ($idade<50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','89','$inscricao')");
+          }
+          if (($id_categoria==85) and ($idade>39) and ($idade<50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','86','$inscricao')");
+          }
+          if (($id_categoria==46) and ($idade>39) and ($idade<50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','93','$inscricao')");
+          }
+          if (($id_categoria==45) and ($idade>39) and ($idade<50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','95','$inscricao')");
+          }
+          if (($id_categoria==92) and ($idade>39) and ($idade<50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','97','$inscricao')");
+          }
+          if (($id_categoria==85) and ($idade>50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','87','$inscricao')");
+          }
+          if (($id_categoria==46) and ($idade>50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','94','$inscricao')");
+          }
+          if (($id_categoria==45) and ($idade>50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','96','$inscricao')");
+          }
+          if (($id_categoria==92) and ($idade>50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','98','$inscricao')");
+          }
+          if (($id_categoria==61) and ($idade>50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','77','$inscricao')");
+          }
+          if (($id_categoria==82) and ($idade>39) and ($idade<50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','83','$inscricao')");
+          }
+          if (($id_categoria==82) and ($idade>50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','84','$inscricao')");
+          }
+          if (($id_categoria==79) and ($idade>39) and ($idade<50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','80','$inscricao')");
+          }
+          if (($id_categoria==79) and ($idade>50) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','81','$inscricao')");
+          }
           if (($id_categoria==33) and ($idade>49) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','44','$inscricao')");
           }
-          if (($id_categoria==20) and ($idade>49) ){
+          if (($id_categoria==20) and ($idade>49) and ($idade<60)){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','43','$inscricao')");
+          }
+          if (($id_categoria==20) and ($idade>59) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','74','$inscricao')");
           }  
           if (($id_categoria==05) and ($idade>49) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','07','$inscricao')");
@@ -119,8 +167,17 @@
           if (($id_categoria==28) and ($idade>49) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','32','$inscricao')");
           }
-          if (($id_categoria==52) and ($idade>49) ){
+          if (($id_categoria==52) and ($idade>49) and ($idade<60) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','60','$inscricao')");
+          }
+          if (($id_categoria==52) and ($idade>59) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','78','$inscricao')");
+          }
+          if (($id_categoria==88) and ($idade>49) and ($idade<60) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','90','$inscricao')");
+          }
+          if (($id_categoria==88) and ($idade>59) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','91','$inscricao')");
           }
           echo "<script>alert('INSCRIÇÃO REALIZADA COM SUCESSO!!!');</script>";
           echo "<meta http-equiv='refresh' content='0, url=./listar_atleta.php'>";
@@ -194,7 +251,7 @@
             <label class="control-label">Etapa:</label>
               <div class="controls">
                 <select class="span4" name="etapa" >
-                    <option value="30">YCB SUP RACE 2018</option>
+                    <option value="32">1ª ETAPA 2019</option>
                 </select> 
                </div>   
           </div>        
@@ -219,24 +276,19 @@
                     <option value="17">RACE 14 PRO MASCULINO</option>
                     <option value="28">RACE 14 PRO FEMININO</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
-                    <option value="21">PADDLE BOARD FEMININO</option>
-                    <option value="20">CANOA OC1 MASCULINO</option>
-                    <option value="33">CANOA OC1 FEMININO</option>    
-                    <option value="46">CANOA OC6 MASCULINO</option>
-                    <option value="45">CANOA OC6 FEMININO</option>  
-                    <option value="49">CANOA OC1 KIDS</option>
-                    <option value="73">CANOA OC1 KIDS FEMININO</option>
-                    <option value="41">SUP WAVE PRO MASC</option>
-                    <option value="68">SUP WAVE PRO FEM</option>
-                    <option value="62">SUP WAVE AMADOR OPEN MASC</option>
-                    <option value="65">SUP WAVE OPEN AMADOR FEM</option>
-                    <option value="63">SUP WAVE PRO MASCULINO MASTER</option>
-                    <option value="64">SUP WAVE MASCULINO G-MASTER</option>
-                    <option value="66">SUP WAVE FEMININO MASTER</option>
-                    <option value="67">SUP WAVE FEMININO G-MASTER</option>
-                    <option value="69">SUP WAVE KIDS</option>
-                    <option value="70">SUP WAVE JUNIOR</option>
-
+                    <option value="21">PADDLE BOARD FEMININO</option> 
+              <!--      <option value="20">V1R MASC</option>
+                    <option value="33">V1R FEM</option>
+                    <option value="79">V2R MASC</option>
+                    <option value="82">V2R FEM</option>
+                    <option value="85">V2R MISTA</option>
+                    <option value="46">V6 MASC</option>
+                    <option value="45">V6 FEM</option>
+                    <option value="92">V6 MISTA</option>
+                    <option value="52">SURFSKI MASCULINO</option>
+                    <option value="61">SURFSKI FEMININO</option>
+                    <option value="88">SURFSKI DUPLO</option>
+                    <option value="75">V1 MASC</option> -->
                   </select> 
                </div>   
           </div>        

@@ -1,6 +1,13 @@
 <?php
      require_once "config.php";  
      require_once "menu.php";
+
+    $ano= 2019;
+    if ( !empty($_GET['id'])) {
+      $ano = $_GET['id'];
+    }  
+
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +29,9 @@ body {
             <div class="row">
                 <br>
                 <br>
-                <h3 align="center">ATLETAS ABASUP 2018</h3>
+                 <?php
+                  echo '<h3 align="center">ATLETAS ABASUP '. $ano . '</h3>'
+                ?>
             </div>
             <div class="row">
                 <table cellpadding=0  border=0   style=width:700px  align=center class=table table-striped table-bordered >
@@ -39,10 +48,14 @@ body {
                       </thead>
                       <tbody>
                       <?php
+
                         $count=1;
-                        $sql = mysqli_query($con, "select a.*, c.descricao 
-                                               FROM atleta a LEFT JOIN categoria c ON c.idcategoria = a.categoria_idcategoria
-                                               WHERE filiacao_abasup_2018 ORDER by descricao, nome");
+                        $sql = mysqli_query($con, "SELECT a.*, c.descricao
+                                        FROM filiacao f
+                                          JOIN atleta a ON f.atleta_cpf = a.cpf
+                                          JOIN categoria c ON f.categoria_idcategoria = c.idcategoria
+                                          WHERE f.ano = $ano
+                                          ORDER by  nome, descricao");
                         $year = date("Y");
                         $jrkids = array('1','2','3','4');
                         while ($row = mysqli_fetch_assoc($sql)){

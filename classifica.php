@@ -25,7 +25,7 @@ require_once "menu.php";
 	<tr>
  	  <td style="font-weight:bold"> ETAPA: </td>
       <td> <select name="etapa" id="etapa" class="selectpicker" > 
-       <option value="28">BARRA PADDLE SUP RACE</option>
+       <option value="32">PRIMEIRA ETAPA 2019</option>
       </td>
 	</tr> 
     <tr>
@@ -58,12 +58,6 @@ require_once "menu.php";
                     <option value="54">RACE 14 AMADOR FEMININO</option>
                     <option value="57">RACE 14 AMADOR FEMININO MASTER</option>
                     <option value="58">RACE 14 AMADOR FEMININO G-MASTER</option>
-                    <option value="13">RACE 12'6 PRO MASCULINO </option>
-                    <option value="14">RACE 12'6 PRO FEMININO </option>
-                    <option value="15">RACE 12'6 PRO MASTER MASC</option>
-                    <option value="22">RACE 12'6 PRO MASTER FEMININO</option>
-                    <option value="16">RACE 12'6 PRO G-MASTER MASC</option>
-                    <option value="23">RACE 12'6 PRO G-MASTER FEMININO</option>
                     <option value="17">RACE 14 PRO MASC</option>
                     <option value="29">RACE 14 PRO MASC MASTER</option>
                     <option value="30">RACE 14 PRO MASC G-MASTER</option>
@@ -71,17 +65,7 @@ require_once "menu.php";
                     <option value="31">RACE 14 PRO FEM MASTER</option>
                     <option value="32">RACE 14 PRO FEM G-MASTER</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
-                    <option value="21">PADDLE BOARD FEMININO</option>
-                    <option value="20">CANOA OC1 MASCULINO</option>
-                    <option value="39">CANOA OC1 MASCULINO MASTER</option>
-                    <option value="43">CANOA OC1 MASCULINO G-MASTER</option>
-                    <option value="33">CANOA OC1 FEMININO</option>
-                    <option value="40">CANOA OC1 FEMININO MASTER</option>
-                    <option value="44">CANOA OC1 FEMININO G-MASTER</option>    
-                    <option value="46">CANOA OC6 MASCULINO</option>
-                    <option value="45">CANOA OC6 FEMININO</option> 
-                    <option value="49">CANOA OC1 KIDS</option>
-                    <option value="73">CANOA OC1 KIDS FEMININO</option>
+                    <option value="21">PADDLE BOARD FEMININO</option> 
                   </select>
          </td>
      </tr>

@@ -4,103 +4,43 @@ require_once "menu.php";
 ?>
 
 <html>
-
-    <style>
-     body {
+<head>
+<style>
+   	     body {
 			background: -moz-linear-gradient(45deg, rgba(42, 27, 161, 0.6), rgba(29, 210, 177, 0.6) 100%);
     		background: -webkit-linear-gradient(45deg, rgba(42, 27, 161, 0.6), rgba(29, 210, 177, 0.6) 100%);
     		background: -webkit-gradient(linear, 45deg, from(rgba(42, 27, 161, 0.6)), to(rgba(29, 210, 177, 0.6)));
     		background: -o-linear-gradient(45deg, rgba(42, 27, 161, 0.6), rgba(29, 210, 177, 0.6) 100%);
     		background: linear-gradient(to 45deg, rgba(42, 27, 161, 0.6), rgba(29, 210, 177, 0.6) 100%); 
       }
+  
+</style>
 
-          /* Carousel base class */
-    .carousel {
-      margin-bottom: 60px;
-    }
+</head>
 
-    .carousel .container {
-      position: relative;
-      z-index: 9;
-    }
-
-    .carousel-control {
-      height: 80px;
-      margin-top: 0;
-      font-size: 120px;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4);
-      background-color: transparent;
-      border: 0;
-      z-index: 10;
-    }
-
-    .carousel .item {
-      height: 500px;
-    }
-    .carousel img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      height: 500px;
-    }
-
-    .carousel-caption {
-      background-color: transparent;
-      position: static;
-      max-width: 550px;
-      padding: 0 20px;
-      margin-top: 200px;
-    }
-    .carousel-caption h1,
-    .carousel-caption .lead {
-      margin: 0;
-      line-height: 1.25;
-      color: #001471;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4);
-    }
-    .carousel-caption .btn {
-      margin-top: 10px;
-    }
-    </style>
 <body>
-  <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
- <div class="container">
- <div id="myCarousel" class="carousel slide">
-      <div class="carousel-inner">
-        <div class="item active">
-          <img src="./itacimirim_2018_1.jpg" alt="">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Primeira Etapa 2018</h1>
-              <p class="lead">Ínicio de temporada aconteceu em Itacimim/Ba no SuperSUP ABASUP 2018</p>
-              <a class="btn btn-large btn-primary" href="./resultado_cbsup.php?id=20">Resultado Geral</a>
-            </div>
-          </div>
+
+
+<div class="container">
+
+     <div class="hero-unit">
+        <h1>Aloha</h1>
+        <p>StandupPRO foi desenvolvido para gerir eventos de Standup Paddle Race. Em parceria com a Associação Baiana de Standup (ABASUP) desde 2014 o sistema já computou mais de 20 Etapas Estaduais e cinco edições de nível nacional pela CBSUP. Podendo ser aplicado em diversos outros eventos como natação, triatlo, karts e corridas em gerais.</p>
+        <div class="pull-right">
+          <a href="#"><img src="standuppro.png" style="height: 100px"></a>
         </div>
-        <div class="item">
-          <img src="./itacimirim_2018_2.jpg" alt="">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Ranking 2018</h1>
-              <p class="lead">Ocorreu a Premiação dos melhores de 2017, e o início do novo ranking 2018 entre os filiados ABASUP.</p>
-              <a class="btn btn-large btn-primary" href="./ranking_categoria_2018.php">Ranking 2018</a>
-            </div>
-          </div>
-        </div>
-        
+        <p> Acompanhe os eventos dos clubes abaixo:
+        <p>
+         <a href="/abasup" style="padding-right:70px"><img src="logo_2018.png"></a>                 
+         <a href="/ycb" style="padding-right:70px"><img src="ycb.png"></a>                        
+         <a href="/cbsup" href="/cbsup"><img src="cbsup_logo_blue.png"></a>
+        </p>
       </div>
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-    </div><!-- /.carousel -->
+      <footer>
+        <p>by AugustoCarvalho</p>
+        <p>Contato: abasup.standuppro@gmail.com </p>
+      </footer>
 </div>
-
-    <footer class="footer">
-      <div class="container">
-        <span class="text-muted">Developed by Augusto Carvalho - StandupPRO.com.br</span>
-      </div>
-    </footer>
-
 
 </body>
 </html>

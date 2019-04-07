@@ -35,14 +35,16 @@ body {
                           <th>Sexo</th>
                           <th>UF</th>
                           <th>Action</th>
-                          <th>2018</th>
+                          <th>2019</th>
                           <th>CBSUP</th>
                         </tr>
                       </thead>
                       <tbody>
                       <?php
                         $count=1;
-                        $sql = mysqli_query($con, "select * from atleta ORDER by nome");
+                        $sql = mysqli_query($con, "SELECT a.*, f.ano as ano from atleta a
+                                                      left join filiacao f on f.atleta_cpf = a.cpf and f.ano = 2019
+                                                    ORDER by nome");
                         while ($row = mysqli_fetch_assoc($sql)){
                                 echo '<tr>';
                                 echo '<td>'. $count . '</td>';
@@ -64,7 +66,7 @@ body {
                                 echo ' ';
                                 echo '<a class="btn btn-info" href="filiacao.php?id='.$row['cpf'].'">FILIAR</a>';
                                 echo '</td>';
-                              if ($row['filiacao_abasup_2018']) {
+                              if ($row['ano'] <> null ) {
                                 echo '<td>'. "ok" . '</td>';
                               } else {
                                 echo '<td>'. "-" . '</td>';

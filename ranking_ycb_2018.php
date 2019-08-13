@@ -27,52 +27,77 @@ require_once "menu.php";
     <td style="font-weight:bold"> CATEGORIA: </td>
       <td> <select name="categoria" id="categoria" class="selectpicker" onchange="form.submit()">
                     <option value="">Escolha uma abaixo</option>
-                    <option value="01"> KIDS MASCULINO</option>
+                    <option value="01">KIDS MASCULINO</option>
                     <option value="02">KIDS FEMININO</option>
                     <option value="03">JUNIOR MASCULINO</option>
-                    <option value="04"> JUNIOR FEMININO</option>
+                    <option value="04">JUNIOR FEMININO</option>
                     <option value="05">FUN RACE MASCULINO</option>
                     <option value="08">FUN RACE FEMININO</option>
                     <option value="06">FUN RACE MASCULINO MASTER</option>
-                    <option value="07"> FUN RACE MASCULINO GRAN MASTER</option>
+                    <option value="07">FUN RACE MASCULINO GRAN MASTER</option>
                     <option value="09">FUN RACE FEMININO MASTER</option>
-                    <option value="10"> FUN RACE FEMININO GRAN MASTER</option>
+                    <option value="10">FUN RACE FEMININO GRAN MASTER</option>
                     <option value="11">RACE 12'6 AMADOR MASCULINO</option>
                     <option value="24">RACE 12'6 AMADOR MASCULINO MASTER</option>
                     <option value="25">RACE 12'6 AMADOR MASCULINO G-MASTER</option>
+                    <option value="71">RACE 12'6 AMADOR MASCULINO LEGEND</option>
                     <option value="12">RACE 12'6 AMADOR FEMININO</option>
                     <option value="26">RACE 12'6 AMADOR FEMININO MASTER</option>
-                    <option value="27">RACE 12'6 AMADOR FEMININO G-MASTER</option>                    
-                    <option value="13">RACE 12'6 PRO MASCULINO </option>
-                    <option value="14">RACE 12'6 PRO FEMININO </option>
-                    <option value="15">RACE 12'6 PRO MASTER MASC</option>
-                    <option value="22">RACE 12'6 PRO MASTER FEMININO</option>
-                    <option value="16">RACE 12'6 PRO G-MASTER MASC</option>
-                    <option value="23">RACE 12'6 PRO G-MASTER FEMININO</option>
+                    <option value="27">RACE 12'6 AMADOR FEMININO G-MASTER</option>
+                    <option value="72">RACE 12'6 AMADOR FEMININO LEGEND</option>
+                    <option value="53">RACE 14 AMADOR MASCULINO</option>
+                    <option value="55">RACE 14 AMADOR MASCULINO MASTER</option>
+                    <option value="56">RACE 14 AMADOR MASCULINO G-MASTER</option>
+                    <option value="54">RACE 14 AMADOR FEMININO</option>
+                    <option value="57">RACE 14 AMADOR FEMININO MASTER</option>
+                    <option value="58">RACE 14 AMADOR FEMININO G-MASTER</option>
                     <option value="17">RACE 14 PRO MASC</option>
                     <option value="29">RACE 14 PRO MASC MASTER</option>
-                    <option value="30">RACE 14 PRO MASC G_MASTER</option>
+                    <option value="30">RACE 14 PRO MASC G-MASTER</option>
                     <option value="28">RACE 14 PRO FEM</option>
                     <option value="31">RACE 14 PRO FEM MASTER</option>
                     <option value="32">RACE 14 PRO FEM G-MASTER</option>
-                    <option value="53">RACE 14 AMADOR MASC</option>
-                    <option value="55">RACE 14 AMADOR MASC MASTER</option>
-                    <option value="56">RACE 14 AMADOR MASC G_MASTER</option>
-                    <option value="54">RACE 14 AMADOR FEM</option>
-                    <option value="57">RACE 14 AMADOR FEM MASTER</option>
-                    <option value="58">RACE 14 AMADOR FEM G-MASTER</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
-                    <option value="21">PADDLE BOARD FEMININO</option>
-                    <option value="20">CANOA HAVAIANA OC1 MASC</option>
-                    <option value="39">CANOA HAVAIANA OC1 MASC MASTER</option>
-                    <option value="43">CANOA HAVAIANA OC1 MASC G-MASTER</option>
-                    <option value="33">CANOA HAVAIANA OC1 FEM</option>
-                    <option value="40">CANOA HAVAIANA OC1 FEM MASTER</option>
-                    <option value="44">CANOA HAVAIANA OC1 FEM G-MASTER</option>
-                    <option value="46">CANOA HAVAIANA OC6 MASCULINO</option>
-                    <option value="45">CANOA HAVAIANA OC6 FEMININO</option>
-                    <option value="49">CANOA HAVAIANA OC1 KIDS MASC</option>
-                    <option value="73">CANOA HAVAIANA OC1 KIDS FEM</option>
+                    <option value="21">PADDLE BOARD FEMININO</option> 
+                    <option value="49">V1R KIDS MASC</option>
+                    <option value="73">V1R KIDS FEM</option>
+                    <option value="20">V1R MASC</option>
+                    <option value="39">V1R MASC 40+</option>
+                    <option value="43">V1R MASC 50+</option>
+                    <option value="74">V1R MASC 60+</option>
+                    <option value="33">V1R FEM</option>
+                    <option value="40">V1R FEM 40+</option>
+                    <option value="44">V1R FEM 50+</option>
+                    <option value="79">V2R MASC</option>
+                    <option value="80">V2R MASC 40+</option>
+                    <option value="81">V2R MASC 50+</option>
+                    <option value="82">V2R FEM</option>
+                    <option value="83">V2R FEM 40+</option>
+                    <option value="84">V2R FEM 50+</option>
+                    <option value="85">V2R MISTA</option>
+                    <option value="86">V2R MISTA 40+</option>
+                    <option value="87">V2R MISTA 50+</option>
+                    <option value="46">V6 MASC</option>
+                    <option value="93">V6 MASC 40+</option>
+                    <option value="94">V6 MASC 50+</option>
+                    <option value="45">V6 FEM</option>
+                    <option value="95">V6 FEM 40+</option>
+                    <option value="96">V6 FEM 50+</option>
+                    <option value="92">V6 MISTA</option>
+                    <option value="97">V6 MISTA 40+</option>
+                    <option value="98">V6 MISTA 50+</option>
+                    <option value="52">SURFSKI MASCULINO</option>
+                    <option value="59">SURFSKI MASC 40+</option>
+                    <option value="60">SURFSKI MASC 50+</option>
+                    <option value="78">SURFSKI MASC 60+</option>
+                    <option value="61">SURFSKI FEMININO</option>
+                    <option value="76">SURFSKI FEM 40+</option>
+                    <option value="77">SURFSKI FEM 50+</option>
+                    <option value="88">SURFSKI DUPLO</option>
+                    <option value="89">SURFSKI DUPLO 40+</option>
+                    <option value="90">SURFSKI DUPLO 50+</option>
+                    <option value="90">SURFSKI DUPLO 60+</option>
+                    <option value="75">V1 MASC</option>
                     
       </select> </td>
      </tr>
@@ -100,7 +125,7 @@ echo " <div class=row>
 
                     $categoria = mysqli_query($con,"select * from categoria where idcategoria='$id_categoria'");
                     while ($result2 = mysqli_fetch_assoc($categoria)){
-                     echo '<h2 align="center">' . "RANKING YCB 2018 " .  '</h2>';
+                     echo '<h2 align="center">' . "RANKING YCB 2019 " .  '</h2>';
                      echo '<h3 align="center">' .  $result2['descricao'] . '</h3>';
                      echo '<br>';
                     };
@@ -116,45 +141,31 @@ echo " <div class=row>
                      <th>ATLETA</th>
                      <th>1ª*</th>
                      <th>Pts1</th>
-                     <th>2ª</th>
+                     <th>2ª*</th>
                      <th>Pts2</th>
-                     <th>3ª</th>
+                     <th>3ª*</th>
                      <th>Pts3</th>
-                     <th>4ª</th>
-                     <th>Pts4</th>
                      <th>SOMA</th>
-                     <th>Dct 1</th>
-                     <th>Pts FINAL</th>
                      </tr>
                    </thead>
                    <tbody> ";
-                      $sql = mysqli_query($con,"SELECT nome, cpf, categoria_idcategoria, col_etapa1, pontos1, col_etapa2, pontos2, col_etapa3, pontos3, col_etapa4, pontos4
-                          , (pontos1 + pontos2 + pontos3 + pontos4) as soma
-                          ,  discarte1
-                          , ((pontos1+pontos2+pontos3+pontos4) - discarte1) as total 
+                      $sql = mysqli_query($con,"SELECT nome, cpf, categoria_idcategoria, col_etapa1, pontos1,col_etapa2, pontos2,col_etapa3, pontos3, (pontos1+pontos2+pontos3)  as soma
                              FROM (
 SELECT a.cpf, a.nome as nome, r.categoria_idcategoria 
-,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 23 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa1  
-,ifnull((SELECT pontos FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 23 and categoria_idcategoria = r.categoria_idcategoria), 0) as pontos1 
-,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 24 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa2  
-,ifnull((SELECT pontos FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 24 and categoria_idcategoria = r.categoria_idcategoria), 0) as pontos2 
-,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 25 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa3  
-,ifnull((SELECT pontos FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 25 and categoria_idcategoria = r.categoria_idcategoria), 0) as pontos3 
-,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 27 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa4  
-,ifnull((SELECT pontos FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 27 and categoria_idcategoria = r.categoria_idcategoria), 0) as pontos4
-, d.discarte1
+,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 33 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa1  
+,ifnull((SELECT pontos FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 33 and categoria_idcategoria = r.categoria_idcategoria), 0) as pontos1 
+,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 34 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa2  
+,ifnull((SELECT pontos FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 34 and categoria_idcategoria = r.categoria_idcategoria), 0) as pontos2
+,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 37 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa3  
+,ifnull((SELECT pontos FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 37 and categoria_idcategoria = r.categoria_idcategoria), 0) as pontos3
 FROM ranking r
 JOIN atleta a ON a.cpf = r.atleta_cpf
-LEFT JOIN discartes d ON d.atleta_cpf = r.atleta_cpf and d.categoria_idcategoria = r.categoria_idcategoria and ano = 2018 and id_circuito = 4
-WHERE etapa_idetapa in (23,24,25,27)
+WHERE etapa_idetapa in (33,34,37)
 ) as resul
 WHERE categoria_idcategoria = $id_categoria
-GROUP by 1 order by total desc, col_etapa4");
+GROUP by 1 order by soma desc");
                        while ($row = mysqli_fetch_assoc($sql)){
                             echo '<tr>';
-                            $menor = array($row['pontos1'], $row['pontos2'], $row['pontos3'], $row['pontos4'] );
-                            sort($menor);
-                            #mysqli_query($con,"update discartes SET discarte1 = $menor[0] WHERE atleta_cpf = $row[cpf] and $row[categoria_idcategoria] = categoria_idcategoria and ano = 2018 and id_circuito = 4 ");
                             echo '<td>' . $count . '</td>';
                             echo '<td>' . ucwords(strtolower($row['nome'])) . '</td>';
                             echo '<td>'. $row['col_etapa1'] . '</td>';
@@ -163,11 +174,7 @@ GROUP by 1 order by total desc, col_etapa4");
                             echo '<td>'. $row['pontos2'] . '</td>';
                             echo '<td>'. $row['col_etapa3'] . '</td>';
                             echo '<td>'. $row['pontos3'] . '</td>';
-                            echo '<td>'. $row['col_etapa4'] . '</td>';
-                            echo '<td>'. $row['pontos4'] . '</td>';
                             echo '<td>'. $row['soma'] . '</td>';
-                            echo '<td>'. $row['discarte1'] . '</td>';
-                            echo '<td>'. $row['total'] . '</td>';
                             echo '</tr>';
                             $count++;
                         } 

@@ -42,10 +42,10 @@ require_once "config.php";
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">ETAPA</span></a>
           <ul class="dropdown-menu">
-                 <li><a href="inscritos.php?id=32">INSCRITOS PRIMEIRA ETAPA 2019</a></li>
-                 <li><a href="reg_chegada.php?id=32">CHEGADA LONGA</a></li>
-                 <li><a href="reg_chegada_tecnica.php?id=32">CHEGADA TECNICA</a></li>
-                 <li><a href="gerar_resultado_cbsup.php?id=32">GERAR RESULTADO FINAL</a></li>
+                 <li><a href="inscritos.php?id=37">INSCRITOS TERCEIRA ETAPA 2019</a></li>
+                 <li><a href="reg_chegada.php?id=37">CHEGADA LONGA</a></li>
+                 <li><a href="reg_chegada_tecnica.php?id=37">CHEGADA TECNICA</a></li>
+                 <li><a href="gerar_resultado_cbsup.php?id=37">GERAR RESULTADO FINAL</a></li>
          </ul>
       </li>
 

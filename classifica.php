@@ -25,7 +25,7 @@ require_once "menu.php";
 	<tr>
  	  <td style="font-weight:bold"> ETAPA: </td>
       <td> <select name="etapa" id="etapa" class="selectpicker" > 
-       <option value="32">PRIMEIRA ETAPA 2019</option>
+       <option value="37">TERCEIRA ETAPA YCB 2019</option>
       </td>
 	</tr> 
     <tr>
@@ -66,6 +66,49 @@ require_once "menu.php";
                     <option value="32">RACE 14 PRO FEM G-MASTER</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
                     <option value="21">PADDLE BOARD FEMININO</option> 
+                    <option value="49">V1R KIDS MASC</option>
+                    <option value="73">V1R KIDS FEM</option>
+                    <option value="20">V1R MASC</option>
+                    <option value="39">V1R MASC 40+</option>
+                    <option value="43">V1R MASC 50+</option>
+                    <option value="74">V1R MASC 60+</option>
+                    <option value="33">V1R FEM</option>
+                    <option value="40">V1R FEM 40+</option>
+                    <option value="44">V1R FEM 50+</option>
+                    <option value="79">V2R MASC</option>
+                    <option value="80">V2R MASC 40+</option>
+                    <option value="81">V2R MASC 50+</option>
+                    <option value="82">V2R FEM</option>
+                    <option value="83">V2R FEM 40+</option>
+                    <option value="84">V2R FEM 50+</option>
+                    <option value="85">V2R MISTA</option>
+                    <option value="86">V2R MISTA 40+</option>
+                    <option value="87">V2R MISTA 50+</option>
+                    <option value="99">V4R MASC</option>
+                    <option value="100">V4R FEM</option>
+                    <option value="101">V4R MISTA</option>
+                    <option value="102">V4R JUNIOR</option>
+                    <option value="46">V6 MASC</option>
+                    <option value="93">V6 MASC 40+</option>
+                    <option value="94">V6 MASC 50+</option>
+                    <option value="45">V6 FEM</option>
+                    <option value="95">V6 FEM 40+</option>
+                    <option value="96">V6 FEM 50+</option>
+                    <option value="92">V6 MISTA</option>
+                    <option value="97">V6 MISTA 40+</option>
+                    <option value="98">V6 MISTA 50+</option>
+                    <option value="52">SURFSKI MASCULINO</option>
+                    <option value="59">SURFSKI MASC 40+</option>
+                    <option value="60">SURFSKI MASC 50+</option>
+                    <option value="78">SURFSKI MASC 60+</option>
+                    <option value="61">SURFSKI FEMININO</option>
+                    <option value="76">SURFSKI FEM 40+</option>
+                    <option value="77">SURFSKI FEM 50+</option>
+                    <option value="88">SURFSKI DUPLO</option>
+                    <option value="89">SURFSKI DUPLO 40+</option>
+                    <option value="90">SURFSKI DUPLO 50+</option>
+                    <option value="90">SURFSKI DUPLO 60+</option>
+                    <option value="75">V1 MASC</option>
                   </select>
          </td>
      </tr>

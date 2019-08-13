@@ -251,7 +251,7 @@
             <label class="control-label">Etapa:</label>
               <div class="controls">
                 <select class="span4" name="etapa" >
-                    <option value="32">1ª ETAPA 2019</option>
+                    <option value="36">3ª ETAPA ABASUP 2019</option>
                 </select> 
                </div>   
           </div>        
@@ -277,18 +277,24 @@
                     <option value="28">RACE 14 PRO FEMININO</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
                     <option value="21">PADDLE BOARD FEMININO</option> 
-              <!--      <option value="20">V1R MASC</option>
+                    <option value="49">V1R KIDS MASC</option>
+                    <option value="73">V1R KIDS FEM</option>
+                    <option value="20">V1R MASC</option>
                     <option value="33">V1R FEM</option>
                     <option value="79">V2R MASC</option>
                     <option value="82">V2R FEM</option>
                     <option value="85">V2R MISTA</option>
+                    <option value="99">V4R MASC</option>
+                    <option value="100">V4R FEM</option>
+                    <option value="101">V4R MISTA</option>
+                    <option value="102">V4R JUNIOR</option>
                     <option value="46">V6 MASC</option>
                     <option value="45">V6 FEM</option>
                     <option value="92">V6 MISTA</option>
                     <option value="52">SURFSKI MASCULINO</option>
                     <option value="61">SURFSKI FEMININO</option>
                     <option value="88">SURFSKI DUPLO</option>
-                    <option value="75">V1 MASC</option> -->
+                    <option value="75">V1 MASC</option> 
                   </select> 
                </div>   
           </div>        

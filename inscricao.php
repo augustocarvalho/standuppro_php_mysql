@@ -179,6 +179,24 @@
           if (($id_categoria==88) and ($idade>59) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','91','$inscricao')");
           }
+          if (($id_categoria==104) and ($idade>49) and ($idade<60) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','105','$inscricao')");
+          }
+          if (($id_categoria==104) and ($idade>59) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','106','$inscricao')");
+          }
+          if (($id_categoria==107) and ($idade>49) and ($idade<60) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','108','$inscricao')");
+          }
+          if (($id_categoria==107) and ($idade>59) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','109','$inscricao')");
+          }
+          if (($id_categoria==110) and ($idade>49) and ($idade<60) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','111','$inscricao')");
+          }
+          if (($id_categoria==110) and ($idade>59) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','112','$inscricao')");
+          }
           echo "<script>alert('INSCRIÇÃO REALIZADA COM SUCESSO!!!');</script>";
           echo "<meta http-equiv='refresh' content='0, url=./listar_atleta.php'>";
           #header("Location: listar_atleta.php");
@@ -251,7 +269,7 @@
             <label class="control-label">Etapa:</label>
               <div class="controls">
                 <select class="span4" name="etapa" >
-                    <option value="36">3ª ETAPA ABASUP 2019</option>
+                    <option value="41">TRAVESSIA SSA MSP 2020</option>
                 </select> 
                </div>   
           </div>        
@@ -294,7 +312,11 @@
                     <option value="52">SURFSKI MASCULINO</option>
                     <option value="61">SURFSKI FEMININO</option>
                     <option value="88">SURFSKI DUPLO</option>
-                    <option value="75">V1 MASC</option> 
+                    <option value="75">V1 MASC</option>
+                    <option value="103">V1 FEM</option>
+                    <option value="104">OC6 MASC</option>
+                    <option value="107">OC6 FEM</option>
+                    <option value="110">OC6 MISTA</option> 
                   </select> 
                </div>   
           </div>        

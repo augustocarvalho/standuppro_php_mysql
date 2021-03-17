@@ -34,6 +34,7 @@ require_once "config.php";
             <li class="divider"></li>
             <li><a href="listar_atleta.php">LISTAR ATLETAS</a></li>
             <li class="divider"></li>
+            <li><a href="filiados.php?id=2020">FILIADOS 2020</a></li>
             <li><a href="filiados.php?id=2019">FILIADOS 2019</a></li>
             <li><a href="filiados.php?id=2018">FILIADOS 2018</a></li>
           </ul>
@@ -42,10 +43,11 @@ require_once "config.php";
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">ETAPA</span></a>
           <ul class="dropdown-menu">
-                 <li><a href="inscritos.php?id=37">INSCRITOS TERCEIRA ETAPA 2019</a></li>
-                 <li><a href="reg_chegada.php?id=37">CHEGADA LONGA</a></li>
-                 <li><a href="reg_chegada_tecnica.php?id=37">CHEGADA TECNICA</a></li>
-                 <li><a href="gerar_resultado_cbsup.php?id=37">GERAR RESULTADO FINAL</a></li>
+                 <li><a href="inscritos.php?id=42">INSCRITOS PRIMEIRA ETAPA 2020</a></li>
+                 <li><a href="reg_chegada.php?id=42">CHEGADA LONGA</a></li>
+                 <li><a href="reg_chegada_tecnica.php?id=42">CHEGADA TECNICA</a></li>
+                 <li><a href="reg_chegada_canoa.php?id=42">CHEGADA CANOA</a></li>
+                 <li><a href="gerar_resultado_cbsup.php?id=42">GERAR RESULTADO FINAL</a></li>
          </ul>
       </li>
 
@@ -59,6 +61,8 @@ require_once "config.php";
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">RANKING</span></a>
           <ul class="dropdown-menu">
+            <li><a href="ranking_categoria_2020.php">RANKING ABASUP 2020</a> </li>
+            <li><a href="ranking_categoria_2019.php">RANKING ABASUP 2019</a> </li>
             <li><a href="ranking_categoria_2018.php">RANKING ABASUP 2018</a> </li>
             <li><a href="ranking_ycb_2018.php">RANKING YCB 2018</a> </li>
             <li class="divider"></li>

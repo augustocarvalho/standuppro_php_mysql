@@ -25,7 +25,7 @@ require_once "menu.php";
 	<tr>
  	  <td style="font-weight:bold"> ETAPA: </td>
       <td> <select name="etapa" id="etapa" class="selectpicker" > 
-       <option value="37">TERCEIRA ETAPA YCB 2019</option>
+       <option value="42">PRIMEIRA ETAPA ABASUP 2020</option>
       </td>
 	</tr> 
     <tr>
@@ -48,6 +48,10 @@ require_once "menu.php";
                     <option value="24">RACE 12'6 AMADOR MASCULINO MASTER</option>
                     <option value="25">RACE 12'6 AMADOR MASCULINO G-MASTER</option>
                     <option value="71">RACE 12'6 AMADOR MASCULINO LEGEND</option>
+                    <option value="113">RACE AMADOR LEGEND MASC</option>
+                    <option value="114">RACE AMADOR KAHUNA MASC</option>
+                    <option value="116">RACE AMADOR LEGEND FEM</option>
+                    <option value="115">RACE AMADOR KAHUNA FEM</option>
                     <option value="12">RACE 12'6 AMADOR FEMININO</option>
                     <option value="26">RACE 12'6 AMADOR FEMININO MASTER</option>
                     <option value="27">RACE 12'6 AMADOR FEMININO G-MASTER</option>
@@ -109,6 +113,16 @@ require_once "menu.php";
                     <option value="90">SURFSKI DUPLO 50+</option>
                     <option value="90">SURFSKI DUPLO 60+</option>
                     <option value="75">V1 MASC</option>
+                    <option value="103">V1 FEM</option>
+                    <option value="104">OC6 MASC</option>
+                    <option value="105">OC6 MASC 40+</option>
+                    <option value="106">OC6 MASC 50+</option>
+                    <option value="107">OC6 FEM</option>
+                    <option value="108">OC6 FEM 40+</option>
+                    <option value="109">OC6 FEM 50+</option>
+                    <option value="110">OC6 MISTA</option> 
+                    <option value="111">OC6 MISTA 40+</option>
+                    <option value="112">OC6 MISTA 50+</option>
                   </select>
          </td>
      </tr>

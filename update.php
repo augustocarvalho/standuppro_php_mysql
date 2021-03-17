@@ -145,6 +145,10 @@
                                    <option <?php if ($categoria == 8 ) echo 'selected' ; ?> value="08">FUN RACE FEMININO</option>
                                    <option <?php if ($categoria == 11 ) echo 'selected' ; ?> value="11">RACE 12'6 AMADOR MASCULINO</option>
                                    <option <?php if ($categoria == 12 ) echo 'selected' ; ?> value="12">RACE 12'6 AMADOR FEMININO</option>
+                                   <option <?php if ($categoria == 113 ) echo 'selected' ; ?> value="113">RACE AMADOR LEGEND MASC</option>
+                                   <option <?php if ($categoria == 114 ) echo 'selected' ; ?> value="114">RACE AMADOR KAHUNA MASC</option>
+                                   <option <?php if ($categoria == 115 ) echo 'selected' ; ?> value="115">RACE AMADOR KAHUNA FEM</option>
+                                   <option <?php if ($categoria == 116 ) echo 'selected' ; ?> value="116">RACE AMADOR LEGEND FEM</option>
                                    <option <?php if ($categoria == 53 ) echo 'selected' ; ?> value="53">RACE 14'' AMADOR MASCULINO</option>
                                    <option <?php if ($categoria == 54 ) echo 'selected' ; ?> value="54">RACE 14'' AMADOR FEMININO</option>
                                    <option <?php if ($categoria == 19 ) echo 'selected' ; ?> value="19">PADDLE BOARD MASCULINO</option>

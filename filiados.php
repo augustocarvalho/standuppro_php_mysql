@@ -2,7 +2,7 @@
      require_once "config.php";  
      require_once "menu.php";
 
-    $ano= 2019;
+    $ano= 2020;
     if ( !empty($_GET['id'])) {
       $ano = $_GET['id'];
     }  
@@ -58,6 +58,7 @@ body {
                                           ORDER by  nome, descricao");
                         $year = date("Y");
                         $jrkids = array('1','2','3','4');
+                        $kahunalegend = array('113','114','115','116');
                         while ($row = mysqli_fetch_assoc($sql)){
                                 echo '<tr>';
                                 echo '<td>'. $count . '</td>';
@@ -69,14 +70,14 @@ body {
                                 sscanf($row['data_nascimento'], '%d-%d-%d', $ano, $mes, $dia);               
                                 $idade = $year - $ano;
                                 
-                                if (($idade>39) and ($idade<50)) {
+                                if ( ($idade>39) and ($idade<50) and (!in_array($row['categoria_idcategoria'], $kahunalegend )) ) {
                                   echo '<td>'. "MASTER" . '</td>';  
                                 }    
-                                elseif ($idade>49) {
+                                elseif ( ($idade>49) and (!in_array($row['categoria_idcategoria'], $kahunalegend )) ) {
                                   echo '<td>'. "G-MASTER" . '</td>';
                                 }
                                 else {
-                                  if ( in_array($row['categoria_idcategoria'] , $jrkids ) ) {
+                                  if ( (in_array($row['categoria_idcategoria'],$jrkids)) or (in_array($row['categoria_idcategoria'],$kahunalegend)) ) {
                                     echo '<td>'. "-" . '</td>';  
                                   } else {
                                     echo '<td>'. 'OPEN' . '</td>';

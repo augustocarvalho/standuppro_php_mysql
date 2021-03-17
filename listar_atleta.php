@@ -35,7 +35,7 @@ body {
                           <th>Sexo</th>
                           <th>UF</th>
                           <th>Action</th>
-                          <th>2019</th>
+                          <th>2020</th>
                           <th>CBSUP</th>
                         </tr>
                       </thead>
@@ -43,7 +43,7 @@ body {
                       <?php
                         $count=1;
                         $sql = mysqli_query($con, "SELECT a.*, f.ano as ano from atleta a
-                                                      left join filiacao f on f.atleta_cpf = a.cpf and f.ano = 2019
+                                                      left join filiacao f on f.atleta_cpf = a.cpf and f.ano = 2020
                                                     ORDER by nome");
                         while ($row = mysqli_fetch_assoc($sql)){
                                 echo '<tr>';

@@ -25,7 +25,7 @@ require_once "menu.php";
 	<tr>
  	  <td style="font-weight:bold"> ETAPA: </td>
       <td> <select name="etapa" id="etapa" class="selectpicker" > 
-       <option value="42">PRIMEIRA ETAPA ABASUP 2020</option>
+       <option value="55">abasup etapa 3</option>        
       </td>
 	</tr> 
     <tr>
@@ -38,20 +38,18 @@ require_once "menu.php";
                     <option value="02">KIDS FEMININO</option>
                     <option value="03">JUNIOR MASCULINO</option>
                     <option value="04">JUNIOR FEMININO</option>
-                    <option value="05">FUN RACE MASCULINO</option>
-                    <option value="08">FUN RACE FEMININO</option>
-                    <option value="06">FUN RACE MASCULINO MASTER</option>
-                    <option value="07">FUN RACE MASCULINO GRAN MASTER</option>
-                    <option value="09">FUN RACE FEMININO MASTER</option>
-                    <option value="10">FUN RACE FEMININO GRAN MASTER</option>
+                    <option value="05">ALL BOARD MASCULINO</option>
+                    <option value="08">ALL BOARD FEMININO</option>
+                    <option value="06">ALL BOARD MASCULINO MASTER</option>
+                    <option value="07">ALL BOARD MASCULINO GRAN MASTER</option>
+                    <option value="119">ALL BOARD MASCULINO KAHUNA</option>
+                    <option value="09">ALL BOARD FEMININO MASTER</option>
+                    <option value="10">ALL BOARD FEMININO GRAN MASTER</option>
+                    <option value="120">ALL BOARD FEMININO KAHUNA</option>
                     <option value="11">RACE 12'6 AMADOR MASCULINO</option>
                     <option value="24">RACE 12'6 AMADOR MASCULINO MASTER</option>
                     <option value="25">RACE 12'6 AMADOR MASCULINO G-MASTER</option>
                     <option value="71">RACE 12'6 AMADOR MASCULINO LEGEND</option>
-                    <option value="113">RACE AMADOR LEGEND MASC</option>
-                    <option value="114">RACE AMADOR KAHUNA MASC</option>
-                    <option value="116">RACE AMADOR LEGEND FEM</option>
-                    <option value="115">RACE AMADOR KAHUNA FEM</option>
                     <option value="12">RACE 12'6 AMADOR FEMININO</option>
                     <option value="26">RACE 12'6 AMADOR FEMININO MASTER</option>
                     <option value="27">RACE 12'6 AMADOR FEMININO G-MASTER</option>
@@ -62,6 +60,16 @@ require_once "menu.php";
                     <option value="54">RACE 14 AMADOR FEMININO</option>
                     <option value="57">RACE 14 AMADOR FEMININO MASTER</option>
                     <option value="58">RACE 14 AMADOR FEMININO G-MASTER</option>
+                    <option value="113">RACE LEGEND MASC</option>
+                    <option value="114">RACE KAHUNA MASC</option>
+                    <option value="116">RACE LEGEND FEM</option>
+                    <option value="115">RACE KAHUNA FEM</option>
+                    <option value="13">RACE 12'6 PRO MASCULINO </option>
+                    <option value="14">RACE 12'6 PRO FEMININO </option>
+                    <option value="15">RACE 12'6 PRO MASTER MASC</option>
+                    <option value="22">RACE 12'6 PRO MASTER FEMININO</option>
+                    <option value="16">RACE 12'6 PRO G-MASTER MASC</option>
+                    <option value="23">RACE 12'6 PRO G-MASTER FEMININO</option>
                     <option value="17">RACE 14 PRO MASC</option>
                     <option value="29">RACE 14 PRO MASC MASTER</option>
                     <option value="30">RACE 14 PRO MASC G-MASTER</option>
@@ -69,7 +77,9 @@ require_once "menu.php";
                     <option value="31">RACE 14 PRO FEM MASTER</option>
                     <option value="32">RACE 14 PRO FEM G-MASTER</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
-                    <option value="21">PADDLE BOARD FEMININO</option> 
+                    <option value="21">PADDLE BOARD FEMININO</option>
+                    <option value="117">PADDLE BOARD ELITE MASCULINO</option>
+                    <option value="118">PADDLE BOARD ELITE FEMININO</option>  
                     <option value="49">V1R KIDS MASC</option>
                     <option value="73">V1R KIDS FEM</option>
                     <option value="20">V1R MASC</option>
@@ -122,7 +132,7 @@ require_once "menu.php";
                     <option value="109">OC6 FEM 50+</option>
                     <option value="110">OC6 MISTA</option> 
                     <option value="111">OC6 MISTA 40+</option>
-                    <option value="112">OC6 MISTA 50+</option>
+                    <option value="112">OC6 MISTA 50+</option> 
                   </select>
          </td>
      </tr>

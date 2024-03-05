@@ -83,6 +83,8 @@ require_once "menu.php";
                     <option value="32">RACE 14 PRO FEM G-MASTER</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
                     <option value="21">PADDLE BOARD FEMININO</option>
+                    <option value="117">PADDLE BOARD ELITE MASCULINO</option>
+                    <option value="118">PADDLE BOARD ELITE FEMININO</option> 
               <!--  <option value="19">PADDLE BOARD</option>
                     <option value="18">UNLIMIT</option>
                     <option value="34">CANOA HAVAIANA OC3 MASC</option> 

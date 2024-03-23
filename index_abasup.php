@@ -76,12 +76,12 @@ require_once "menu.php";
  <div id="myCarousel" class="carousel slide">
       <div class="carousel-inner">
         <div class="item active">
-          <img src="./itacimirim_2018_1.jpg" alt="">
+          <img src="./newlg.png" alt="">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Primeira Etapa 2018</h1>
-              <p class="lead">Ínicio de temporada aconteceu em Itacimim/Ba no SuperSUP ABASUP 2018</p>
-              <a class="btn btn-large btn-primary" href="./resultado_cbsup.php?id=20">Resultado Geral</a>
+              <h1>Ranking 2024</h1>
+              <p class="lead">Ranking Geral</p>
+              <a class="btn btn-large btn-primary" href="./ranking_categoria_2024.php">2024</a>
             </div>
           </div>
         </div>

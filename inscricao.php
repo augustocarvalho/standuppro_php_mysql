@@ -135,7 +135,7 @@
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','07','$inscricao')");
           }
           if (($id_categoria==05) and ($idade>59)){
-            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','07','$inscricao')");
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','119','$inscricao')");
           }
           if (($id_categoria==8) and ($idade>49) and ($idade<60)){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','10','$inscricao')");
@@ -301,8 +301,8 @@
                     <option value="02">KIDS FEMININO</option>
                     <option value="03">JUNIOR MASCULINO</option>
                     <option value="04">JUNIOR FEMININO</option>
-                    <option value="05">FUN RACE MASCULINO</option>
-                    <option value="08">FUN RACE FEMININO</option>
+                    <option value="05">ALL BOARD MASCULINO</option>
+                    <option value="08">ALL BOARD FEMININO</option>
                     <option value="11">RACE 12'6 AMADOR MASCULINO</option>
                     <option value="12">RACE 12'6 AMADOR FEMININO</option>
                     <option value="53">RACE 14 AMADOR MASCULINO</option>

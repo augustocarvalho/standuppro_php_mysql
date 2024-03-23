@@ -57,13 +57,13 @@ require_once "menu.php";
                     <option value="53">RACE 14 AMADOR MASCULINO</option>
                     <option value="55">RACE 14 AMADOR MASCULINO MASTER</option>
                     <option value="56">RACE 14 AMADOR MASCULINO G-MASTER</option>
+                    <option value="114">RACE 14 AMADOR KAHUNA MASC</option>
                     <option value="54">RACE 14 AMADOR FEMININO</option>
                     <option value="57">RACE 14 AMADOR FEMININO MASTER</option>
                     <option value="58">RACE 14 AMADOR FEMININO G-MASTER</option>
+                    <option value="115">RACE 14 AMADOR FEMININO KAHUNA</option>
                     <option value="113">RACE LEGEND MASC</option>
-                    <option value="114">RACE KAHUNA MASC</option>
-                    <option value="116">RACE LEGEND FEM</option>
-                    <option value="115">RACE KAHUNA FEM</option>
+                    <option value="116">RACE LEGEND FEM</option>                    
                     <option value="13">RACE 12'6 PRO MASCULINO </option>
                     <option value="14">RACE 12'6 PRO FEMININO </option>
                     <option value="15">RACE 12'6 PRO MASTER MASC</option>

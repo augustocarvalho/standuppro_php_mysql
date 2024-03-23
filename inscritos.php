@@ -75,7 +75,7 @@ require_once "menu.php";
                     <option value="28">RACE 14 PRO FEM</option>
                     <option value="31">RACE 14 PRO FEM MASTER</option>
                     <option value="32">RACE 14 PRO FEM G-MASTER</option>
-                    <option value="121">RACE 14 PRO FEM KAHUNA</option>
+                    <option value="122">RACE 14 PRO FEM KAHUNA</option>
                     <option value="19">PADDLE BOARD MASCULINO</option>
                     <option value="21">PADDLE BOARD FEMININO</option>
                     <option value="117">PADDLE BOARD ELITE MASCULINO</option>

@@ -33,21 +33,17 @@ require_once "config.php";
 		        <li><a href="novo_atleta.php">NOVO </a></li>
             <li class="divider"></li>
             <li><a href="listar_atleta.php">LISTAR ATLETAS</a></li>
-            <li class="divider"></li>
-            <li><a href="filiados.php?id=2020">FILIADOS 2020</a></li>
-            <li><a href="filiados.php?id=2019">FILIADOS 2019</a></li>
-            <li><a href="filiados.php?id=2018">FILIADOS 2018</a></li>
           </ul>
 	    </li>
 
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">ETAPA</span></a>
           <ul class="dropdown-menu">
-                 <li><a href="inscritos.php?id=54">INSCRITOS ETAPA 2022</a></li>
-                 <li><a href="reg_chegada.php?id=54">CHEGADA LONGA</a></li>
-                 <li><a href="reg_chegada_tecnica.php?id=54">CHEGADA TECNICA</a></li>
-                 <li><a href="reg_chegada_canoa.php?id=54">CHEGADA CANOA</a></li>
-                 <li><a href="gerar_resultado_cbsup.php?id=54">GERAR RESULTADO FINAL</a></li>
+                 <li><a href="inscritos.php?id=59">INSCRITOS</a></li>
+                 <li><a href="reg_chegada.php?id=59">CHEGADA LONGA</a></li>
+                 <li><a href="reg_chegada_tecnica.php?id=59">CHEGADA TECNICA</a></li>
+                 <li><a href="reg_chegada_canoa.php?id=59">CHEGADA CANOA</a></li>
+                 <li><a href="gerar_resultado_cbsup.php?id=59">GERAR RESULTADO FINAL</a></li>
          </ul>
       </li>
 
@@ -61,7 +57,7 @@ require_once "config.php";
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">RANKING</span></a>
           <ul class="dropdown-menu">
-            <li><a href="ranking_categoria_2023.php">RANKING ABASUP 2023</a> </li>                        
+            <li><a href="ranking_categoria_2024.php">RANKING ABASUP 2024</a> </li>                        
       </li> 
  
       </li>   

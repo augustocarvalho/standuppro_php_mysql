@@ -1,12 +1,12 @@
 <?php
 # >> Defina o título do site
-   $titulo="Circuito ABASUP - 2019";
+   $titulo="Circuito ABASUP - 2024";
 
 
    
 # >> Dados do mySql
-   $user="root"; # usuário do mySql
-   $pass=""; # senha do mySql
+   $user="abasup"; # usuário do mySql
+   $pass="abasup"; # senha do mySql
    $bd="circuito"; # nome do banco de dados
    
 # >> Conexão

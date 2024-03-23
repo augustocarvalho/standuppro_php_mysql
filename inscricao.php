@@ -131,11 +131,17 @@
           if (($id_categoria==20) and ($idade>59) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','74','$inscricao')");
           }  
-          if (($id_categoria==05) and ($idade>49) ){
+          if (($id_categoria==05) and ($idade>49) and ($idade<60)){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','07','$inscricao')");
           }
-          if (($id_categoria==8) and ($idade>49) ){
+          if (($id_categoria==05) and ($idade>59)){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','07','$inscricao')");
+          }
+          if (($id_categoria==8) and ($idade>49) and ($idade<60)){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','10','$inscricao')");
+          }
+          if (($id_categoria==8) and ($idade>59)){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','120','$inscricao')");
           }
           if (($id_categoria==11) and ($idade>49) and ($idade<60)){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','25','$inscricao')");
@@ -155,17 +161,29 @@
           if (($id_categoria==14) and ($idade>49) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','23','$inscricao')");
           }
-          if (($id_categoria==17) and ($idade>49) ){
+          if (($id_categoria==17) and ($idade>49) and ($idade<60) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','30','$inscricao')");
           }
-          if (($id_categoria==53) and ($idade>49) ){
+          if (($id_categoria==17) and ($idade>59) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','121','$inscricao')");
+          }
+          if (($id_categoria==53) and ($idade>49) and ($idade<60) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','56','$inscricao')");
           }
-          if (($id_categoria==54) and ($idade>49) ){
+          if (($id_categoria==53) and ($idade>59) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','114','$inscricao')");
+          }
+          if (($id_categoria==54) and ($idade>49) and ($idade<60) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','58','$inscricao')");
           }
-          if (($id_categoria==28) and ($idade>49) ){
+          if (($id_categoria==54) and ($idade>59) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','115','$inscricao')");
+          }
+          if (($id_categoria==28) and ($idade>49) and ($idade<60) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','32','$inscricao')");
+          }
+          if (($id_categoria==28) and ($idade>59) ){
+            mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','122','$inscricao')");
           }
           if (($id_categoria==52) and ($idade>49) and ($idade<60) ){
             mysqli_query($con,"insert into inscricao (etapa_idetapa, atleta_cpf, categoria_idcategoria, numero) values('$id_etapa','$id','60','$inscricao')");
@@ -269,7 +287,7 @@
             <label class="control-label">Etapa:</label>
               <div class="controls">
                 <select class="span4" name="etapa" >
-                    <option value="41">TRAVESSIA SSA MSP 2020</option>
+                    <option value="59">TERCEIRA ETAPA 2024</option>
                 </select> 
                </div>   
           </div>        

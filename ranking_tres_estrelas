@@ -89,9 +89,4 @@ switch ($colocacao){
       case 30:
       mysqli_query($con,"update ranking set pontos = 679 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
        break;  
-     }; 
-
-
-
-
-     
+     };      

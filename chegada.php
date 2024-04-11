@@ -1,6 +1,6 @@
 <?php
 require_once "config.php";
-require_onde "menu.php";
+require_once "menu.php";
 ?>
 
 <html>

@@ -118,22 +118,26 @@ echo " <div class=row>
                      <th>1ª</th>
                      <th>Pts1</th>
                      <th>2ª</th>
-                     <th>Pts2</th>                                           
+                     <th>Pts2</th>
+                     <th>3ª</th>
+                     <th>Pts3</th>                                           
                      <th>SOMA</th>                     
                      </tr>
                    </thead>
                    <tbody> ";
-                      $sql = mysqli_query($con,"SELECT nome, cpf, categoria_idcategoria, col_etapa1, pontos1, col_etapa2, pontos2, (pontos1+pontos2)  as soma
-                        ,  (pontos1+pontos2) as total                            
+                      $sql = mysqli_query($con,"SELECT nome, cpf, categoria_idcategoria, col_etapa1, pontos1, col_etapa2, pontos2, col_etapa3, pontos3, (pontos1+pontos2+pontos3)  as soma
+                        ,  (pontos1+pontos2+pontos3) as total                            
                              FROM (
 SELECT a.cpf, a.nome as nome, r.categoria_idcategoria 
 ,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 57 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa1 
 ,ifnull((SELECT pontos FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 57 and categoria_idcategoria = r.categoria_idcategoria), 0) as pontos1  
 ,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 58 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa2 
 ,ifnull((SELECT pontos FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 58 and categoria_idcategoria = r.categoria_idcategoria), 0) as pontos2
+,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 59 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa3 
+,ifnull((SELECT pontos FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 59 and categoria_idcategoria = r.categoria_idcategoria), 0) as pontos3
 FROM ranking r
 JOIN atleta a ON a.cpf = r.atleta_cpf
-WHERE etapa_idetapa in (57,58)
+WHERE etapa_idetapa in (57,58,59)
 ) as resul
 WHERE categoria_idcategoria = $id_categoria
 GROUP by 1
@@ -148,7 +152,9 @@ ORDER BY total desc");
                             echo '<td>'. $row['col_etapa1'] . '</td>';
                             echo '<td>'. $row['pontos1'] . '</td>';
                             echo '<td>'. $row['col_etapa2'] . '</td>';
-                            echo '<td>'. $row['pontos2'] . '</td>';                            
+                            echo '<td>'. $row['pontos2'] . '</td>';
+                            echo '<td>'. $row['col_etapa3'] . '</td>';
+                            echo '<td>'. $row['pontos3'] . '</td>';                            
                             echo '<td>'. $row['total'] . '</td>';
                             echo '</tr>';
                             $count++;

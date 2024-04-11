@@ -287,7 +287,7 @@
             <label class="control-label">Etapa:</label>
               <div class="controls">
                 <select class="span4" name="etapa" >
-                    <option value="59">TERCEIRA ETAPA 2024</option>
+                    <option value="60">QUARTA ETAPA 2024</option>
                 </select> 
                </div>   
           </div>        

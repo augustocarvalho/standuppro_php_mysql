@@ -25,7 +25,7 @@ require_once "menu.php";
 	<tr>
  	  <td style="font-weight:bold"> ETAPA: </td>
       <td> <select name="etapa" id="etapa" class="selectpicker" > 
-       <option value="61">quarta etapa abasup 2024</option>        
+       <option value="62">terceira etapa cbsup 2024</option>        
       </td>
 	</tr> 
     <tr>

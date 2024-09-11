@@ -287,7 +287,7 @@
             <label class="control-label">Etapa:</label>
               <div class="controls">
                 <select class="span4" name="etapa" >
-                    <option value="62">TERCEIRA ETAPA CBSUP 2024</option>
+                    <option value="63">QUARTA ETAPA CBSUP 2024</option>
                 </select> 
                </div>   
           </div>        

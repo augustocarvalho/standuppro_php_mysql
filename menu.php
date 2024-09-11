@@ -58,6 +58,7 @@ require_once "config.php";
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">RANKING</span></a>
           <ul class="dropdown-menu">
             <li><a href="ranking_categoria_2024.php">RANKING ABASUP 2024</a> </li>                        
+            <li><a href="ranking_cbsup_2024.php">RANKING CBSUP 2024</a> </li>
       </li> 
  
       </li>   

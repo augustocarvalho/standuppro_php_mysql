@@ -146,7 +146,7 @@ SELECT a.cpf, a.nome as nome, r.categoria_idcategoria
 , d.discarte1
 FROM ranking r
 JOIN atleta a ON a.cpf = r.atleta_cpf
-LEFT JOIN discartes d ON d.atleta_cpf = r.atleta_cpf and d.categoria_idcategoria = r.categoria_idcategoria and ano = 2024 and id_circuito = 1
+LEFT JOIN discartes d ON d.atleta_cpf = r.atleta_cpf and d.categoria_idcategoria = r.categoria_idcategoria and ano = 2023 and id_circuito = 1
 WHERE etapa_idetapa in (51,52,55,56)
 ) as resul
 WHERE categoria_idcategoria = $id_categoria
@@ -156,7 +156,7 @@ ORDER BY total desc, primeiros desc, segundos desc, terceiros desc");
                             echo '<tr>';
                             // $menor = array($row['pontos1'], $row['pontos2'], $row['pontos3'], $row['pontos4'] );
                             // sort($menor);
-                            // mysqli_query($con,"update discartes SET discarte1 = $menor[0] WHERE atleta_cpf = $row[cpf] and categoria_idcategoria = $id_categoria and ano = 2024 and id_circuito = 1");
+                            // mysqli_query($con,"update discartes SET discarte1 = $menor[0] WHERE atleta_cpf = $row[cpf] and categoria_idcategoria = $id_categoria and ano = 2023 and id_circuito = 1");
                             echo '<td>' . $count . '</td>';
                             echo '<td>' . ucwords(strtolower($row['nome'])) . '</td>';
                             echo '<td>'. $row['col_etapa1'] . '</td>';

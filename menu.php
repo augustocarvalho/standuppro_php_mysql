@@ -39,11 +39,11 @@ require_once "config.php";
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">ETAPA</span></a>
           <ul class="dropdown-menu">
-                 <li><a href="inscritos.php?id=65">INSCRITOS</a></li>
-                 <li><a href="reg_chegada.php?id=65">CHEGADA LONGA</a></li>
-                 <li><a href="reg_chegada_tecnica.php?id=65">CHEGADA TECNICA</a></li>
-                 <li><a href="reg_chegada_canoa.php?id=65">CHEGADA CANOA</a></li>
-                 <li><a href="gerar_resultado_cbsup.php?id=65">GERAR RESULTADO FINAL</a></li>
+                 <li><a href="inscritos.php?id=67">INSCRITOS</a></li>
+                 <li><a href="reg_chegada.php?id=67">CHEGADA LONGA</a></li>
+                 <li><a href="reg_chegada_tecnica.php?id=67">CHEGADA TECNICA</a></li>
+                 <li><a href="reg_chegada_canoa.php?id=67">CHEGADA CANOA</a></li>
+                 <li><a href="gerar_resultado_cbsup.php?id=67">GERAR RESULTADO FINAL</a></li>
          </ul>
       </li>
 
@@ -57,8 +57,8 @@ require_once "config.php";
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">RANKING</span></a>
           <ul class="dropdown-menu">
-            <li><a href="ranking_categoria_2024.php">RANKING ABASUP 2024</a> </li>                        
-            <li><a href="ranking_cbsup_2024.php">RANKING CBSUP 2024</a> </li>
+            <li><a href="ranking_categoria_2025.php">RANKING ABASUP 2025</a> </li>                        
+            <li><a href="ranking_cbsup_2025.php">RANKING CBSUP 2025</a> </li>
       </li> 
  
       </li>   

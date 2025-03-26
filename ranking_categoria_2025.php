@@ -157,18 +157,22 @@ echo " <div class=row>
                      <th>ATLETA</th>
                      <th>1ª</th>
                      <th>Pts1</th>
+                     <th>2ª</th>
+                     <th>Pts2</th>
                      <th>TOTAL</th>                     
                      </tr>
                    </thead>
                    <tbody> ";
-                      $sql = mysqli_query($con,"SELECT nome, cpf, categoria_idcategoria, col_etapa1, pontos1, (pontos1)  as total                                                
+                      $sql = mysqli_query($con,"SELECT nome, cpf, categoria_idcategoria, col_etapa1, pontos1, col_etapa2, pontos2, (pontos1+pontos2)  as total                                                
                              FROM (
 SELECT a.cpf, a.nome as nome, r.categoria_idcategoria 
 ,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 65 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa1 
 ,ifnull((SELECT pontos FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 65 and categoria_idcategoria = r.categoria_idcategoria), 0) as pontos1  
+,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 67 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa2 
+,ifnull((SELECT pontos FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 67 and categoria_idcategoria = r.categoria_idcategoria), 0) as pontos2  
 FROM ranking r
 JOIN atleta a ON a.cpf = r.atleta_cpf
-WHERE etapa_idetapa in (65)
+WHERE etapa_idetapa in (65, 67)
 ) as resul
 WHERE categoria_idcategoria = $id_categoria
 GROUP by 1
@@ -182,6 +186,8 @@ ORDER BY total DESC");
                             echo '<td>' . ucwords(strtolower($row['nome'])) . '</td>';
                             echo '<td>'. $row['col_etapa1'] . '</td>';
                             echo '<td>'. $row['pontos1'] . '</td>';
+                            echo '<td>'. $row['col_etapa2'] . '</td>';
+                            echo '<td>'. $row['pontos2'] . '</td>';
                             echo '<td>'. $row['total'] . '</td>';
                             echo '</tr>';
                             $count++;

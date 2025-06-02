@@ -25,7 +25,7 @@ require_once "menu.php";
 	<tr>
  	  <td style="font-weight:bold"> ETAPA: </td>
       <td> <select name="etapa" id="etapa" class="selectpicker" > 
-       <option value="68">SEGUNDA ETAPA CBSUP 2025</option>        
+       <option value="69">QUARTA ETAPA ABASUP 2025</option>        
       </td>
 	</tr> 
     <tr>
@@ -168,7 +168,7 @@ if (@$_POST['categoria'] !== null) {
                     }
                   } else {
                       echo '<br>';
-                      echo '<h3 align="center">' . "RESULTADO GERAL" . $cat . '</h3>';
+                      echo '<h3 align="center">' . "RESULTADO GERAL" . '</h3>';
                       echo '<br>';
                   } 
                 } 

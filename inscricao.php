@@ -287,7 +287,7 @@
             <label class="control-label">Etapa:</label>
               <div class="controls">
                 <select class="span4" name="etapa" >
-                    <option value="68">SEGUNDA ETAPA CBSUP 2025</option>
+                    <option value="69">QUARTA ETAPA ABASUP 2025</option>
                 </select> 
                </div>   
           </div>        

@@ -1,331 +1,155 @@
 <?php
 require_once "config.php";
+// Handle deletion
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_numero'], $_POST['delete_etapa'])) {
+    $numero = intval($_POST['delete_numero']);
+    $etapa_id = intval($_POST['delete_etapa']);
+
+    $stmt = $con->prepare("DELETE FROM inscricao WHERE numero = ? AND etapa_idetapa = ?");
+    $stmt->bind_param("ii", $numero, $etapa_id);
+    if ($stmt->execute()) {
+        echo "<script>alert('Inscrição excluída com sucesso.');</script>";
+    } else {
+        echo "<script>alert('Erro ao excluir a inscrição.');</script>";
+    }
+    $stmt->close();
+}
+
 require_once "menu.php";
 
-    $id = null;
-    if ( !empty($_GET['id'])) {
-        $id = $_REQUEST['id'];
-    }
+
+function fetchResults($con, $query) {
+    return mysqli_query($con, $query);
+}
+
+function selected($a, $b) {
+    return ($a == $b) ? 'selected' : '';
+}
+
+$id_etapa = $_POST['etapa'] ?? null;
+$id_categoria = $_POST['categoria'] ?? null;
 ?>
 
+<!DOCTYPE html>
 <html>
-<body>
-       <head>
-        <style>
+<head>
+    <meta charset="utf-8">
+    <title>Inscritos</title>
+    <style>
         body {
             background-image: url("stdp_resultados01logo.jpg"), url("stdp_resultados02.jpg");
             background-repeat: no-repeat, repeat;
-            background-size:100% auto;
+            background-size: 100% auto;
+        }
+        .nav > li > a > img {
+            height: 80px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="cadastro">
+    <form method="post">
+        <table id="form_selecao">
+            <tr>
+                <td><strong>ETAPA:</strong></td>
+                <td>
+                    <select name="etapa" id="etapa" class="selectpicker" onchange="this.form.submit()">
+                        <?php
+                        $etapas = fetchResults($con, "SELECT * FROM etapa ORDER BY idetapa DESC");
+                        while ($etapa = mysqli_fetch_assoc($etapas)) {
+                            echo "<option value='{$etapa['idetapa']}' " . selected($id_etapa, $etapa['idetapa']) . ">
+                                {$etapa['nome_etapa']} - {$etapa['local_etapa']}
+                            </option>";
+                        }
+                        ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>CATEGORIA:</strong></td>
+                <td>
+                    <select name="categoria" id="categoria" class="selectpicker" onchange="this.form.submit()">
+                        <option value="">Todas as categorias</option>
+                        <?php
+                        $categorias = fetchResults($con, "SELECT * FROM categoria ORDER BY descricao");
+                        while ($cat = mysqli_fetch_assoc($categorias)) {
+                            echo "<option value='{$cat['idcategoria']}' " . selected($id_categoria, $cat['idcategoria']) . ">
+                                {$cat['descricao']}
+                            </option>";
+                        }
+                        ?>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <?php if ($id_etapa): ?>
+        <br>
+        <?php
+        // Header info
+        $etapa_q = fetchResults($con, "SELECT * FROM etapa WHERE idetapa='$id_etapa'");
+        if ($etapa = mysqli_fetch_assoc($etapa_q)) {
+            echo "<h3 align='center'>{$etapa['nome_etapa']} - {$etapa['local_etapa']}</h3><br>";
         }
 
-       .nav > li > a > img {
-          height: 80px;
+        // Optional: Category display
+        if ($id_categoria) {
+            $cat_q = fetchResults($con, "SELECT descricao FROM categoria WHERE idcategoria='$id_categoria'");
+            if ($cat = mysqli_fetch_assoc($cat_q)) {
+                echo "<h4 align='center'>Categoria: {$cat['descricao']}</h4><br>";
+            }
         }
-        </style>
-      </head> 
-  <div class=container>  
-  <div class="row">
-  <table id="form_selecao"">
-  <form method="post"> 
-    <tr>
-    <td style="font-weight:bold" > CATEGORIA: </td>
-      <td> <select name='categoria' id="categoria" class="selectpicker" onchange="form.submit()" >
-                    <option value="">Escolha uma abaixo</option>
-                    <option value="00">GERAL</option>
-                    <option value="01">KIDS MASCULINO</option>
-                    <option value="02">KIDS FEMININO</option>
-                    <option value="03">JUNIOR MASCULINO</option>
-                    <option value="04">JUNIOR FEMININO</option>
-                    <option value="05">ALL BOARD MASCULINO</option>
-                    <option value="08">ALL BOARD FEMININO</option>
-                    <option value="06">ALL BOARD MASCULINO MASTER</option>
-                    <option value="07">ALL BOARD MASCULINO GRAN MASTER</option>
-                    <option value="119">ALL BOARD MASCULINO KAHUNA</option>
-                    <option value="09">ALL BOARD FEMININO MASTER</option>
-                    <option value="10">ALL BOARD FEMININO GRAN MASTER</option>
-                    <option value="120">ALL BOARD FEMININO KAHUNA</option>
-                    <option value="11">RACE 12'6 AMADOR MASCULINO</option>
-                    <option value="24">RACE 12'6 AMADOR MASCULINO MASTER</option>
-                    <option value="25">RACE 12'6 AMADOR MASCULINO G-MASTER</option>
-                    <option value="71">RACE 12'6 AMADOR MASCULINO LEGEND</option>
-                    <option value="12">RACE 12'6 AMADOR FEMININO</option>
-                    <option value="26">RACE 12'6 AMADOR FEMININO MASTER</option>
-                    <option value="27">RACE 12'6 AMADOR FEMININO G-MASTER</option>
-                    <option value="72">RACE 12'6 AMADOR FEMININO LEGEND</option>
-                    <option value="53">RACE 14 AMADOR MASCULINO</option>
-                    <option value="55">RACE 14 AMADOR MASCULINO MASTER</option>
-                    <option value="56">RACE 14 AMADOR MASCULINO G-MASTER</option>
-                    <option value="114">RACE 14 AMADOR KAHUNA MASC</option>
-                    <option value="54">RACE 14 AMADOR FEMININO</option>
-                    <option value="57">RACE 14 AMADOR FEMININO MASTER</option>
-                    <option value="58">RACE 14 AMADOR FEMININO G-MASTER</option>
-                    <option value="115">RACE 14 AMADOR FEMININO KAHUNA</option>
-                    <option value="113">RACE LEGEND MASC</option>
-                    <option value="116">RACE LEGEND FEM</option>                    
-                    <option value="13">RACE 12'6 PRO MASCULINO </option>
-                    <option value="14">RACE 12'6 PRO FEMININO </option>
-                    <option value="15">RACE 12'6 PRO MASTER MASC</option>
-                    <option value="22">RACE 12'6 PRO MASTER FEMININO</option>
-                    <option value="16">RACE 12'6 PRO G-MASTER MASC</option>
-                    <option value="23">RACE 12'6 PRO G-MASTER FEMININO</option>
-                    <option value="17">RACE 14 PRO MASC</option>
-                    <option value="29">RACE 14 PRO MASC MASTER</option>
-                    <option value="30">RACE 14 PRO MASC G-MASTER</option>
-                    <option value="121">RACE 14 PRO MASC KAHUNA</option>
-                    <option value="28">RACE 14 PRO FEM</option>
-                    <option value="31">RACE 14 PRO FEM MASTER</option>
-                    <option value="32">RACE 14 PRO FEM G-MASTER</option>
-                    <option value="122">RACE 14 PRO FEM KAHUNA</option>
-                    <option value="19">PADDLE BOARD MASCULINO</option>
-                    <option value="21">PADDLE BOARD FEMININO</option>
-                    <option value="117">PADDLE BOARD ELITE MASCULINO</option>
-                    <option value="118">PADDLE BOARD ELITE FEMININO</option>  
-                    <option value="49">V1R KIDS MASC</option>
-                    <option value="73">V1R KIDS FEM</option>
-                    <option value="20">V1R MASC</option>
-                    <option value="39">V1R MASC 40+</option>
-                    <option value="43">V1R MASC 50+</option>
-                    <option value="74">V1R MASC 60+</option>
-                    <option value="33">V1R FEM</option>
-                    <option value="40">V1R FEM 40+</option>
-                    <option value="44">V1R FEM 50+</option>
-                    <option value="79">V2R MASC</option>
-                    <option value="80">V2R MASC 40+</option>
-                    <option value="81">V2R MASC 50+</option>
-                    <option value="82">V2R FEM</option>
-                    <option value="83">V2R FEM 40+</option>
-                    <option value="84">V2R FEM 50+</option>
-                    <option value="85">V2R MISTA</option>
-                    <option value="86">V2R MISTA 40+</option>
-                    <option value="87">V2R MISTA 50+</option>
-                    <option value="99">V4R MASC</option>
-                    <option value="100">V4R FEM</option>
-                    <option value="101">V4R MISTA</option>
-                    <option value="102">V4R JUNIOR</option>
-                    <option value="46">V6 MASC</option>
-                    <option value="93">V6 MASC 40+</option>
-                    <option value="94">V6 MASC 50+</option>
-                    <option value="45">V6 FEM</option>
-                    <option value="95">V6 FEM 40+</option>
-                    <option value="96">V6 FEM 50+</option>
-                    <option value="92">V6 MISTA</option>
-                    <option value="97">V6 MISTA 40+</option>
-                    <option value="98">V6 MISTA 50+</option>
-                    <option value="52">SURFSKI MASCULINO</option>
-                    <option value="59">SURFSKI MASC 40+</option>
-                    <option value="60">SURFSKI MASC 50+</option>
-                    <option value="78">SURFSKI MASC 60+</option>
-                    <option value="61">SURFSKI FEMININO</option>
-                    <option value="76">SURFSKI FEM 40+</option>
-                    <option value="77">SURFSKI FEM 50+</option>
-                    <option value="88">SURFSKI DUPLO</option>
-                    <option value="89">SURFSKI DUPLO 40+</option>
-                    <option value="90">SURFSKI DUPLO 50+</option>
-                    <option value="90">SURFSKI DUPLO 60+</option>
-                    <option value="75">V1 MASC</option>
-                    <option value="103">V1 FEM</option>
-                    <option value="104">OC6 MASC</option>
-                    <option value="105">OC6 MASC 40+</option>
-                    <option value="106">OC6 MASC 50+</option>
-                    <option value="107">OC6 FEM</option>
-                    <option value="108">OC6 FEM 40+</option>
-                    <option value="109">OC6 FEM 50+</option>
-                    <option value="110">OC6 MISTA</option> 
-                    <option value="111">OC6 MISTA 40+</option>
-                    <option value="112">OC6 MISTA 50+</option>
-          </select> </td>
-     </tr>
-   
-  <!-- <td>
-       <input type="submit" name="action"  value="LISTAR INSCRITOS" style="font-weight:bold" class="btn" id="btnCad">
-    </td> -->   
-   </form>
-   </table>
-   </div>
-   <div class="row">
-      <br>
-      <br>
-      <br>
-<?php
-if (@$_POST['categoria'] !== null) {
-  $id_categoria = $_POST['categoria'];
-  $coluna = 1;
-                $etapa = mysqli_query($con,"select * from etapa where idetapa='$id'");
-                while ($result = mysqli_fetch_assoc($etapa)){
-                  echo '<h3 align="center">' . $result['nome_etapa'] . "  -  " . $result['local_etapa'] . '</h3>';
-                  echo '<br>';
-                  if ($id_categoria <> 0) {
-                    $categoria = mysqli_query($con,"select * from categoria where idcategoria='$id_categoria'");
-                    while ($result2 = mysqli_fetch_assoc($categoria)){
-                     echo '<br>';
-                     echo '<h3 align="center">' . "CATEGORIA: " . $result2['descricao'] . '</h3>';
-                    }
-                  } else {
-                      echo '<br>';
-                      echo '<h3 align="center">' . "TODOS ATLETAS INSCRITOS " . '</h3>';
-                      echo '<br>';
-                  } 
-                } 
-                  
-                
-echo"             
-                <table cellpadding=0  border=0   style=width:800px  align=center class=table table-striped table-bordered >
-                  <thead>
-                    <tr>
-					 
-                 	    <th>Número</th>
-					            <th class=col-sm-4>NOME</th>
-                      <th>Cidade</th>
-                      <th>UF</th>
-                      <th>CBSUP</th>
-                      <th>ABASUP</th>";
-                     if ($id_categoria == 0) {
-                       echo"<th>Categoria</th>";
-                      }
-					    echo"</tr>
-                  </thead>
-                  <tbody>";
-                    $count=1;
-				            if ( $id_categoria <> 0) {
-                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.estado, p.cidade, c.descricao
-                        , CASE WHEN count(*) = 2 THEN (SELECT c1.descricao FROM categoria c1 WHERE c1.idcategoria = max(i.categoria_idcategoria)) 
-                              ELSE c.descricao END as descricao 
-                        , CASE WHEN (SELECT 1 
-                                      FROM filiacao f 
-                                        WHERE f.ano = 2019 AND f.atleta_cpf = p.cpf and 
-                                         f.categoria_idcategoria = i.categoria_idcategoria) then 'ok'
-                               ELSE ' - ' END as abasup        
-                          , p.cod_cbsup  
-                          FROM inscricao i join atleta p join categoria c 
-                          WHERE i.etapa_idetapa ='$id' and i.categoria_idcategoria = '$id_categoria' and i.atleta_cpf = p.cpf and i.categoria_idcategoria = c.idcategoria GROUP by i.numero
-                            order by i.numero");
-                    }else {
-                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.cidade, p.estado, p.cod_cbsup, 
-                            CASE WHEN count(*) = 2 THEN (SELECT c1.descricao FROM categoria c1 WHERE c1.idcategoria = max(i.categoria_idcategoria)) 
-                              ELSE c.descricao END as descricao
-                              , CASE WHEN (SELECT 1 
-                                      FROM filiacao f 
-                                        WHERE f.ano = 2019 AND f.atleta_cpf = p.cpf and 
-                                         f.categoria_idcategoria = i.categoria_idcategoria) then 'ok'
-                               ELSE ' - ' END as abasup 
-                              FROM inscricao i 
-                              join atleta p ON i.atleta_cpf = p.cpf 
-                              join categoria c ON c.idcategoria = i.categoria_idcategoria
-                              WHERE i.etapa_idetapa = '$id'
-                              and i.atleta_cpf = p.cpf 
-                              and i.categoria_idcategoria = c.idcategoria 
-                              GROUP by i.numero
-                              order by i.numero");  
-                    }
-                   	while ($row = mysqli_fetch_assoc($sql)){
-                            echo '<tr>';
-                            echo '<td>' . $row['numero'] . '</td>';
-                            echo '<td>'.  ucwords(strtolower($row['nome'])) . '</td>';
-                            echo '<td>'. $row['cidade'] . '</td>';
-                            echo '<td>'. $row['estado'] . '</td>';
-                            echo '<td>'. $row['cod_cbsup'] . '</td>';
-                            echo '<td>'. $row['abasup'] . '</td>';
-                            if ($id_categoria == 0) {
-                              echo '<td>'. $row['descricao'] . '</td>';
-                            }
-                            echo '<td width=150>';
-                            echo '<a class="btn btn-success" href="update_inscritos.php?id='.$id.'&cod='.$row['numero'].'">Update</a>';
-                            echo ' ';
-                            echo '<a class="btn btn-danger" href="delete_inscricao.php?id='.$id.'&cod='.$row['numero'].'">Delete</a>';
-                            echo '</tr>';
-                            $count++;
-                    }
-  
-  echo"  
-                  </tbody>
-            </table>
-        </div>
-    </div> <!-- /container -->";
 
-}
-else {
-  $id_categoria = 00;
-  $coluna = 1;
-            
-                $etapa = mysqli_query($con,"select * from etapa where idetapa='$id'");
-                while ($result = mysqli_fetch_assoc($etapa)){
-                  echo '<h3 align="center">' . $result['nome_etapa'] . "  -  " . $result['local_etapa'] . '</h3>';
-                  echo '<br>';
-                  if ($id_categoria <> 0) {
-                    $categoria = mysqli_query($con,"select * from categoria where idcategoria='$id_categoria'");
-                    while ($result2 = mysqli_fetch_assoc($categoria)){
-                     echo '<br>';
-                     echo '<h3 align="center">' . "CATEGORIA: " . $result2['descricao'] . '</h3>';
-                     echo '<br>';
-                    }
-                  } else {
-                      echo '<br>';
-                      echo '<h3 align="center">' . "TODOS ATLETAS INSCRITOS " . '</h3>';
-                      echo '<br>';
-                  } 
-                } 
-                  
-                
-echo"             
-                <table cellpadding=0  border=0   style=width:800px  align=center class=table table-striped table-bordered >
-                  <thead>
-                    <tr>
-           
-                      <th>Número</th>
-                      <th class=col-sm-4>NOME</th>
-                      <th>CIDADE</th>
-                      <th>UF</th>
-                      <th>CATEGORIA</th>
-                      <th>CBSUP</th>
-                      <th>ABASUP</th>
-                    </tr>
-                  </thead>
-                  <tbody>";
-                    $count=1;
-                    if ( $id_categoria <> 0) {
-                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.cidade, p.estado, c.descricao, p.cod_cbsup  FROM inscricao i join atleta p join categoria c 
-                          WHERE i.etapa_idetapa ='$id' and i.categoria_idcategoria = '$id_categoria' and i.atleta_cpf = p.cpf and i.categoria_idcategoria = c.idcategoria order by i.numero");
-                    }else {
-                      $sql = mysqli_query($con,"SELECT i.numero, p.nome, p.cidade, p.estado, p.cod_cbsup, 
-                            CASE WHEN count(*) = 2 THEN (SELECT c1.descricao FROM categoria c1 WHERE c1.idcategoria = max(i.categoria_idcategoria)) 
-                              ELSE c.descricao END as descricao ,
-                             CASE WHEN (SELECT 1 
-                                      FROM filiacao f 
-                                        WHERE f.ano = 2019 AND f.atleta_cpf = p.cpf and 
-                                         f.categoria_idcategoria = i.categoria_idcategoria) then 'ok'
-                               ELSE ' - ' END as abasup 
-                              FROM inscricao i 
-                              join atleta p ON i.atleta_cpf = p.cpf 
-                              join categoria c ON c.idcategoria = i.categoria_idcategoria
-                              WHERE i.etapa_idetapa = '$id'
-                              and i.atleta_cpf = p.cpf 
-                              and i.categoria_idcategoria = c.idcategoria 
-                              GROUP by i.numero
-                              order by p.nome");  
-                    }
-                    while ($row = mysqli_fetch_assoc($sql)){
-                            echo '<tr>';
-                            echo '<td>' . $row['numero'] . '</td>';
-                            echo '<td>'. ucwords(strtolower($row['nome'])) . '</td>';
-                            echo '<td>'. $row['cidade'] . '</td>';
-                            echo '<td>'. $row['estado'] . '</td>';
-                            echo '<td>'. $row['descricao'] . '</td>';
-                            echo '<td>'. $row['cod_cbsup'] . '</td>';
-                            echo '<td>'. $row['abasup'] . '</td>';
-                            echo '</tr>';
-                            $count++;
-                    }
-  
-  echo"  
-                  </tbody>
-            </table>
-        </div>
-    </div> <!-- /container -->";
-}    
+        // Athlete list query
+        $whereCategoria = $id_categoria ? "AND i.categoria_idcategoria = '$id_categoria'" : "";
+        $sql = "
+            SELECT i.numero, i.etapa_idetapa , a.nome, a.estado, a.cidade, c.descricao AS categoria
+            FROM inscricao i
+            JOIN atleta a ON i.atleta_cpf = a.cpf
+            JOIN categoria c ON i.categoria_idcategoria = c.idcategoria
+            WHERE i.etapa_idetapa = '$id_etapa' $whereCategoria
+            ORDER BY i.numero ASC
+        ";
 
-?>    
-  </body>
-</html> 
+        $res = fetchResults($con, $sql);
 
+        echo "<table class='table table-striped table-bordered' style='width:800px; margin:auto;'>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Número</th>
+                <th>Nome</th>
+                <th>Cidade</th>
+                <th>UF</th>
+                <th>Categoria</th>
+                <th>Ações</th>
+            </tr>
+        </thead><tbody>";
 
+        $count = 1;
+        while ($row = mysqli_fetch_assoc($res)) {
+            echo "<tr>
+                <td>{$count}</td>
+                <td>{$row['numero']}</td>
+                <td>" . ucwords(strtolower($row['nome'])) . "</td>
+                <td>{$row['cidade']}</td>
+                <td>{$row['estado']}</td>
+                <td>{$row['categoria']}</td>
+                <td>
+                    <form method='post' onsubmit='return confirm(\"Tem certeza que deseja excluir esta inscrição?\");'>
+                        <input type='hidden' name='delete_numero' value='{$row['numero']}'>
+                        <input type='hidden' name='delete_etapa' value='{$row['etapa_idetapa']}'>
+                        <button type='submit' class='btn btn-danger btn-sm'>Excluir</button>
+                    </form>
+                </td>
+            </tr>";
+            $count++;
+        }
 
+        echo "</tbody></table>";
+        ?>
+    <?php endif; ?>
+</div>
+</body>
+</html>

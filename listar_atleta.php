@@ -1,85 +1,72 @@
 <?php
-     require_once "config.php";  
-     require_once "menu.php";
+include "menu.php"; // Assuming this includes Bootstrap and header HTML
+
+$message = "";
+$error = "";
+
+// Handle delete action
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_cpf'])) {
+    $cpf_to_delete = $_POST['delete_cpf'];
+
+    $stmt = $con->prepare("DELETE FROM atleta WHERE cpf = ?");
+    $stmt->bind_param("s", $cpf_to_delete);
+
+    if ($stmt->execute()) {
+        $message = "Atleta com CPF $cpf_to_delete removido com sucesso.";
+    } else {
+        $error = "Erro ao remover atleta: " . $stmt->error;
+    }
+
+    $stmt->close();
+}
+
+// Fetch athletes
+$athletes = [];
+$result = $con->query("SELECT cpf, nome FROM atleta ORDER BY nome");
+while ($row = $result->fetch_assoc()) {
+    $athletes[] = $row;
+}
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
- 
-<body>
-<head>
-<style>
-body {
-    background-image: url("stdp_atletas.jpg"), url("stdp_resultados02.jpg");
-    background-repeat: no-repeat, repeat;
-    background-size:100% auto;
-    
+<div class="container my-5">
+    <h2 class="mb-4">Lista de Atletas</h2>
 
-}
-</style>
-</head>
-   <div class="container">
-        <div class="row">
-             <br>
-             <br>
-            <h3 align="center">ATLETAS CADASTRADOS</h3>
-        </div>
-        <div class="row">
-                <table class="table table-striped table-bordered">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>CPF/RG</th>
-                          <th>Nome</th>
-                          <th>Nasc</th>
-                          <th>Sexo</th>
-                          <th>UF</th>
-                          <th>Action</th>
-                          <th>2020</th>
-                          <th>CBSUP</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      <?php
-                        $count=1;
-                        $sql = mysqli_query($con, "SELECT a.*, f.ano as ano from atleta a
-                                                      left join filiacao f on f.atleta_cpf = a.cpf and f.ano = 2020
-                                                    ORDER by nome");
-                        while ($row = mysqli_fetch_assoc($sql)){
-                                echo '<tr>';
-                                echo '<td>'. $count . '</td>';
-                                echo '<td>'. $row['cpf'] . '</td>';
-                                echo '<td>'. ucwords(strtolower($row['nome'])) . '</td>';
-                                echo '<td>'. $row['data_nascimento'] . '</td>';
+    <?php if ($message): ?>
+        <div class="alert alert-success"><?= htmlspecialchars($message) ?></div>
+    <?php endif; ?>
 
-                               # $interval = $date->diff( new DateTime( '2015-12-31' ) ); // data definida
-                               # echo '<td>'. $interval->format( '%Y Anos' ). '</td>'; 
-                                
-                                echo '<td>'. $row['sexo'] . '</td>';
-                                echo '<td>'. $row['estado'] . '</td>';
-                                echo '<td width=300>';
-                                echo '<a class="btn btn-success" href="update.php?id='.$row['cpf'].'">Update</a>';
-                                echo ' ';
-                                echo '<a class="btn btn-danger" href="delete.php?id='.$row['cpf'].'">Delete</a>';
-                                echo ' ';
-                                echo '<a class="btn btn-info" href="inscricao.php?id='.$row['cpf'].'">SUP</a>';
-                                echo ' ';
-                                echo '<a class="btn btn-info" href="filiacao.php?id='.$row['cpf'].'">FILIAR</a>';
-                                echo '</td>';
-                              if ($row['ano'] <> null ) {
-                                echo '<td>'. "ok" . '</td>';
-                              } else {
-                                echo '<td>'. "-" . '</td>';
-                              }
-                                 echo '<td>'. $row['cod_cbsup'] . '</td>';
-                                echo '</tr>';
-                                $count++;
-                        }
-             
-                      ?>
-                      </tbody>
-                </table>
-        </div>
-    </div> <!-- /container -->
-  </body>
-</html>
+    <?php if ($error): ?>
+        <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+    <?php endif; ?>
+
+    <?php if (empty($athletes)): ?>
+        <p>Nenhum atleta cadastrado.</p>
+    <?php else: ?>
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($athletes as $atleta): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($atleta['nome']) ?></td>
+                        <td><?= htmlspecialchars($atleta['cpf']) ?></td>
+                        <td class="text-center">
+                            <a href="inscricao.php?id=<?= urlencode($atleta['cpf']) ?>" class="btn btn-sm btn-primary me-2">
+                                Inscrever
+                            </a>
+                            <form method="post" class="d-inline" onsubmit="return confirm('Deseja realmente excluir o atleta <?= addslashes($atleta['nome']) ?>?');">
+                                <input type="hidden" name="delete_cpf" value="<?= htmlspecialchars($atleta['cpf']) ?>" />
+                                <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endif; ?>
+</div>

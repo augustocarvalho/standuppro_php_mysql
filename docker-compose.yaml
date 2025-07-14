@@ -20,7 +20,7 @@ services:
       MYSQL_DATABASE: circuito
       MYSQL_USER: abasup
       MYSQL_PASSWORD: abasup
-      MYSQL_ROOT_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: abasup
     volumes:
       - ./dump:/docker-entrypoint-initdb.d
       - ./mysql-data:/var/lib/mysql
@@ -34,9 +34,9 @@ services:
     ports:
       - 8000:80
     environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: test
-      MYSQL_ROOT_PASSWORD: test
+      MYSQL_USER: abasup 
+      MYSQL_PASSWORD: abasup
+      MYSQL_ROOT_PASSWORD: abasup
 
 # Define networks
 networks:

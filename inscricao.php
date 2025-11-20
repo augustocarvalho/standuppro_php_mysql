@@ -287,7 +287,7 @@
             <label class="control-label">Etapa:</label>
               <div class="controls">
                 <select class="span4" name="etapa" >
-                    <option value="72">SEXTA ETAPA ABASUP 2025</option>
+                    <option value="73">7 ETAPA ABASUP 2025</option>
                 </select> 
                </div>   
           </div>        

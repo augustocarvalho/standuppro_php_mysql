@@ -181,7 +181,7 @@ echo " <div class=row>
                       , (pontos1+pontos2+pontos3+pontos4+pontos5+pontos6+pontos7)  as soma
                       , discarte1
                       , discarte2
-                      , ((pontos1+pontos2+pontos3+pontos4+pontos5+pontos6+pontos7)) - discarte2 as total        
+                      , ((pontos1+pontos2+pontos3+pontos4+pontos5+pontos6+pontos7) - discarte1) - discarte2 as total        
                       , (Select count(*) FROM ranking rr WHERE atleta_cpf = cpf AND etapa_idetapa in (65, 67, 68, 69, 70, 72, 73) AND colocacao = 1 and rr.categoria_idcategoria = resul.categoria_idcategoria) as primeiros
                       , (Select count(*) FROM ranking rr WHERE atleta_cpf = cpf AND etapa_idetapa in (65, 67, 68, 69, 70, 72, 73) AND colocacao = 2 and rr.categoria_idcategoria = resul.categoria_idcategoria) as segundos
                       , (Select count(*) FROM ranking rr WHERE atleta_cpf = cpf AND etapa_idetapa in (65, 67, 68, 69, 70, 72, 73) AND colocacao = 3 and rr.categoria_idcategoria = resul.categoria_idcategoria) as terceiros                                                                 

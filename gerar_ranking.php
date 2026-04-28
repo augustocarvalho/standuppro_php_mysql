@@ -23,16 +23,16 @@ require_once "config.php";
 #(19,21) Paddle
 #(20,33,39,40,43,44,49,73,45,46) Canoa
 #(20,39,43,74,33,40,44,49,73,79,80,81,82,83,84,85,86,87,46,93,94,45,95,96,92,97,98,52,59,60,78,61,76,77,88,89,90,90,75)
-
-
+#(103,107)
+# INSERT INTO ranking_circuito VALUES ('01869595084', 53, 4, 71, 963);
 
 // #INSERIR OS ATLETAS FILIADOS POR ETAPA ANTES DE ATUALIZAR E LEMBRAR DE GERAR RESULTADO FINAL. (gerar_resultado_cbsup.php)
-// INSERT INTO ranking (categoria_idcategoria, atleta_cpf, pontos, etapa_idetapa, colocacao)
+// INSERT INTO ranking_circuito (categoria_idcategoria, atleta_cpf, pontos, etapa_idetapa, colocacao)
 
-// SELECT i.categoria_idcategoria, i.atleta_cpf, 0, 62 , 0
+// SELECT i.categoria_idcategoria, i.atleta_cpf, 0, 72 , 0
 // FROM atleta a
 // JOIN filiacao f ON f.atleta_cpf = a.cpf 
-// JOIN inscricao i ON i.atleta_cpf = a.cpf and i.etapa_idetapa = 62  
+// JOIN inscricao i ON i.atleta_cpf = a.cpf and i.etapa_idetapa = 72  
 
 // AND (a.categoria_idcategoria = i.categoria_idcategoria or 
 // a.categoria_idcategoria in 
@@ -47,7 +47,7 @@ require_once "config.php";
 // WHERE i.etapa_idetapa = 51  
 
 // SELECT distinct atleta_cpf, categoria_idcategoria, 0,0, 2022, 1
-// FROM ranking 
+// FROM ranking_circuito 
 // where etapa_idetapa in (49,48,47,46)
 // and categoria_idcategoria = 1
 
@@ -55,12 +55,22 @@ require_once "config.php";
 
 
 
-$etapa=70;
+$etapa=74;
+$id_circuito=2;
 
 $contador = 1;
 $categorias = mysqli_query($con,"SELECT distinct(categoria_idcategoria) 
                             FROM inscricao WHERE etapa_idetapa=$etapa
-                            and categoria_idcategoria in (99,103)
+                            and categoria_idcategoria in (1,2,3,4)
+                            -- and categoria_idcategoria in (5,6,7,8,9,10, 119, 120)
+                            -- and categoria_idcategoria in (11,12,24,25,26,27,71,72)
+                            -- and categoria_idcategoria in (53,54,55,56,57,58)
+                            -- and categoria_idcategoria in (110,111,112)
+                            -- and categoria_idcategoria in (23,16,22,15,14,13,28,32,31,17,30,29,121,122)
+                            -- and categoria_idcategoria in (19,21)
+                            -- and categoria_idcategoria in (20,33,39,40,43,44,49,73,45,46)
+                            -- and categoria_idcategoria in (20,39,43,74,33,40,44,49,73,79,80,81,82,83,84,85,86,87,46,93,94,45,95,96,92,97,98,52,59,60,78,61,76,77,88,89,90,90,75)
+                            -- and categoria_idcategoria in (103,107)
                             order by 1");
 
 while ($id_categoria = mysqli_fetch_assoc($categorias)){
@@ -72,102 +82,103 @@ order by categoria_idcategoria , geral, podio_longa ") ;
 $colocacao = 1;
 while ($pontua = mysqli_fetch_assoc($ordenar)){
 # In Case Race and Tecnica comentar a linha abaixo 
-  $colocacao = $pontua["podio_longa"];  
-  switch ($colocacao){
+  //  $colocacao = $pontua["podio_longa"];  
+    switch ($colocacao){
     case 1:
-       mysqli_query($con,"update ranking set pontos = 950 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");   
+       mysqli_query($con,"update ranking_circuito set pontos = 925 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");   
        break;
      case 2:
-      mysqli_query($con,"update ranking set pontos = 938 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 913 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;
      case 3:
-      mysqli_query($con,"update ranking set pontos = 925 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 900 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;
      case 4:
-      mysqli_query($con,"update ranking set pontos = 913 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 888 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;
      case 5:
-      mysqli_query($con,"update ranking set pontos = 900 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 875 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;
      case 6:
-      mysqli_query($con,"update ranking set pontos = 888 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 863 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;    
      case 7:
-      mysqli_query($con,"update ranking set pontos = 875 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 850 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;
      case 8:
-      mysqli_query($con,"update ranking set pontos = 863 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 838 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;
      case 9:
-      mysqli_query($con,"update ranking set pontos = 850 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 829 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;
      case 10:
-      mysqli_query($con,"update ranking set pontos = 838 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 821 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;  
      case 11:
-      mysqli_query($con,"update ranking set pontos = 829 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 813 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;         
       case 12:
-      mysqli_query($con,"update ranking set pontos = 821 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 804 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;  
       case 13:
-      mysqli_query($con,"update ranking set pontos = 813 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 796 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;
      case 14:
-      mysqli_query($con,"update ranking set pontos = 804 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 788 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;         
       case 15:
-      mysqli_query($con,"update ranking set pontos = 796 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 779 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;  
       case 16:
-      mysqli_query($con,"update ranking set pontos = 788 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 771 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;    
       case 17:
-      mysqli_query($con,"update ranking set pontos = 779 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 763 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;
      case 18:
-      mysqli_query($con,"update ranking set pontos = 771 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 754 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;         
       case 19:
-      mysqli_query($con,"update ranking set pontos = 763 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 746 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;  
       case 20:
-      mysqli_query($con,"update ranking set pontos = 754 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 738 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;  
       case 21:
-      mysqli_query($con,"update ranking set pontos = 729 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 729 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;  
      case 22:
-      mysqli_query($con,"update ranking set pontos = 746 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 721 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;         
       case 23:
-      mysqli_query($con,"update ranking set pontos = 738 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 713 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;  
       case 24:
-      mysqli_query($con,"update ranking set pontos = 729 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 704 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;
      case 25:
-      mysqli_query($con,"update ranking set pontos = 721 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 696 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;         
       case 26:
-      mysqli_query($con,"update ranking set pontos = 713 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 688 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;  
       case 27:
-      mysqli_query($con,"update ranking set pontos = 704 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 679 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;    
       case 28:
-      mysqli_query($con,"update ranking set pontos = 696 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 671 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;
      case 29:
-      mysqli_query($con,"update ranking set pontos = 688 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 663 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;         
       case 30:
-      mysqli_query($con,"update ranking set pontos = 679 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
+      mysqli_query($con,"update ranking_circuito set pontos = 654 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa and circuito_idcircuito = $id_circuito");    
        break;  
-     };               
+     }; 
+     $colocacao++;  
   };
   
 };
 echo "<script>alert('ETAPA PONTUADA!! ');</script>";
-echo "<meta http-equiv='refresh' content='0, url=./ranking_categoria_2025.php'>";
+echo "<meta http-equiv='refresh' content='0, url=./ranking_cbsup_2026.php'>";
 ?>

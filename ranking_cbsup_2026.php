@@ -141,7 +141,7 @@ echo " <div class=row>
 
                     $categoria = mysqli_query($con,"select * from categoria where idcategoria='$id_categoria'");
                     while ($result2 = mysqli_fetch_assoc($categoria)){
-                     echo '<h2 align="center">' . "RANKING ABASUP 2026 " .  '</h2>';
+                     echo '<h2 align="center">' . "RANKING CBSUP 2026 " .  '</h2>';
                      echo '<h3 align="center">' .  $result2['descricao'] . '</h3>';
                      echo '<br>';
                     };

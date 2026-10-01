@@ -39,11 +39,11 @@ require_once "config.php";
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">ETAPA</span></a>
           <ul class="dropdown-menu">
-                 <li><a href="inscritos.php?id=76">INSCRITOS</a></li>
-                 <li><a href="reg_chegada.php?id=76">CHEGADA LONGA</a></li>
-                 <li><a href="reg_chegada_tecnica.php?id=76">CHEGADA TECNICA</a></li>
-                 <li><a href="reg_chegada_canoa.php?id=76">CHEGADA CANOA</a></li>
-                 <li><a href="gerar_resultado_cbsup.php?id=76">GERAR RESULTADO FINAL</a></li>
+                 <li><a href="inscritos.php?id=77">INSCRITOS</a></li>
+                 <li><a href="reg_chegada.php?id=77">CHEGADA LONGA</a></li>
+                 <li><a href="reg_chegada_tecnica.php?id=77">CHEGADA TECNICA</a></li>
+                 <li><a href="reg_chegada_canoa.php?id=77">CHEGADA CANOA</a></li>
+                 <li><a href="gerar_resultado_cbsup.php?id=77">GERAR RESULTADO FINAL</a></li>
          </ul>
       </li>
 

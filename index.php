@@ -1,45 +1,53 @@
 <?php
 require_once "config.php";
+$titulo = "StandupPRO";
 require_once "menu.php";
 ?>
 
-<html>
-<head>
 <style>
-   	     body {
-			background: -moz-linear-gradient(45deg, rgba(42, 27, 161, 0.6), rgba(29, 210, 177, 0.6) 100%);
-    		background: -webkit-linear-gradient(45deg, rgba(42, 27, 161, 0.6), rgba(29, 210, 177, 0.6) 100%);
-    		background: -webkit-gradient(linear, 45deg, from(rgba(42, 27, 161, 0.6)), to(rgba(29, 210, 177, 0.6)));
-    		background: -o-linear-gradient(45deg, rgba(42, 27, 161, 0.6), rgba(29, 210, 177, 0.6) 100%);
-    		background: linear-gradient(to 45deg, rgba(42, 27, 161, 0.6), rgba(29, 210, 177, 0.6) 100%); 
-      }
-  
+    body {
+        background-color: #f4f7fa;
+    }
+    .home {
+        margin-top: 60px;
+    }
+    .home-hero {
+        background: #ffffff;
+        border: 1px solid #e1e6ec;
+        border-radius: 8px;
+        padding: 45px 40px;
+        text-align: center;
+    }
+    .home-hero h1 {
+        font-size: 42px;
+        line-height: 1.1;
+        margin-bottom: 15px;
+    }
+    .home-hero .lead {
+        max-width: 720px;
+        margin: 0 auto 20px;
+        font-size: 16px;
+        line-height: 24px;
+        color: #5a6470;
+    }
+    .home-footer {
+        padding: 25px 0 35px;
+        color: #8a94a0;
+        text-align: center;
+    }
 </style>
 
-</head>
-
-<body>
-
-
-<div class="container">
-
-     <div class="hero-unit">
-        <h1>Aloha</h1>
-        <p>O StandupPRO, desenvolvido em colaboração com a Associação Bahiana de Standup Paddle - ABASUP, oferece agilidade na apuração de resultados e pontuação de ranking para eventos de standup paddle. </p>
-        <div class="pull-right">
-          <a href="#"><img src="standuppro.png" style="height: 100px"></a>
-        </div>
-        <p> Acompanhe os eventos dos clubes abaixo:
-        <p>
-         <a href="./ranking_categoria_2024.php" style="padding-right:70px"><img src="logo_2018.png"></a>                          
-         <a href="./ranking_cbsup_2024.php" href="/cbsup"><img src="cbsup_logo_blue.png"></a>
+<div class="container home">
+    <div class="home-hero">
+        <h1>StandupPRO</h1>
+        <p class="lead">
+            Sistema para gerenciar eventos de standup paddle: cadastre atletas, inscreva-os nas etapas,
+            registre os tempos de chegada, apure os resultados e gere o ranking.
         </p>
-      </div>
-      <footer>
-        <p>by AugustoCarvalho</p>
-        <p>Contato: abasup.standuppro@gmail.com </p>
-      </footer>
-</div>
+        <a class="btn btn-large btn-primary" href="listar_atleta.php">Começar</a>
+    </div>
 
-</body>
-</html>
+    <div class="home-footer">
+        StandupPRO &middot; Desenvolvido por Augusto Carvalho
+    </div>
+</div>

@@ -86,51 +86,78 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 
-<div class="container my-5">
-    <h2 class="mb-4">Inscrever Atleta na Etapa</h2>
+<style>
+    body {
+        background-image: url("stdp_atletas.jpg"), url("stdp_resultados02.jpg");
+        background-repeat: no-repeat, repeat;
+        background-size: 100% auto;
+    }
+</style>
 
-
-    <p><strong>Atleta:</strong> <?= htmlspecialchars($atleta_nome) ?> (CPF: <?= htmlspecialchars($atleta_cpf) ?>)</p>
-
-    <?php if ($message): ?>
-        <div class="message"><?= htmlspecialchars($message) ?></div>
-    <?php endif; ?>
-
-    <?php if ($errors): ?>
-        <div class="error">
-            <ul>
-                <?php foreach ($errors as $err): ?>
-                    <li><?= htmlspecialchars($err) ?></li>
-                <?php endforeach; ?>
-            </ul>
+<div class="container">
+    <div class="span10 offset1">
+        <div class="row">
+            <h3 align="center">INSCREVER ATLETA NA ETAPA</h3>
+            <br>
+            <br>
         </div>
-    <?php endif; ?>
 
-    <form method="post" action="">
-        <label for="etapa">Etapa:</label>
-        <select name="etapa" id="etapa" required>
-            <option value="">-- Selecione a Etapa --</option>
-            <?php foreach ($etapas as $etapa): ?>
-                <option value="<?= $etapa['idetapa'] ?>" <?= (isset($_POST['etapa']) && $_POST['etapa'] == $etapa['idetapa']) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($etapa['nome_etapa']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+        <p><strong>Atleta:</strong> <?= htmlspecialchars($atleta_nome) ?> (CPF: <?= htmlspecialchars($atleta_cpf) ?>)</p>
 
-        <label for="categoria">Categoria:</label>
-        <select name="categoria" id="categoria" required>
-            <option value="">-- Selecione a Categoria --</option>
-            <?php foreach ($categorias as $cat): ?>
-                <option value="<?= $cat['idcategoria'] ?>" <?= (isset($_POST['categoria']) && $_POST['categoria'] == $cat['idcategoria']) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($cat['descricao']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+        <?php if ($message): ?>
+            <div class="alert alert-success"><?= htmlspecialchars($message) ?></div>
+        <?php endif; ?>
 
-        <label for="numero">Número da inscrição:</label>
-        <input type="number" name="numero" id="numero" value="<?= htmlspecialchars($_POST['numero'] ?? '') ?>" min="1" required>
+        <?php if ($errors): ?>
+            <div class="alert alert-error">
+                <ul>
+                    <?php foreach ($errors as $err): ?>
+                        <li><?= htmlspecialchars($err) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
 
-        <button type="submit">Inscrever</button>
-    </form>
+        <form class="form-horizontal" method="post" action="">
+            <div class="control-group">
+                <label class="control-label" for="etapa">Etapa</label>
+                <div class="controls">
+                    <select name="etapa" id="etapa" required>
+                        <option value="">-- Selecione a Etapa --</option>
+                        <?php foreach ($etapas as $etapa): ?>
+                            <option value="<?= $etapa['idetapa'] ?>" <?= (isset($_POST['etapa']) && $_POST['etapa'] == $etapa['idetapa']) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($etapa['nome_etapa']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
 
-</div>    
+            <div class="control-group">
+                <label class="control-label" for="categoria">Categoria</label>
+                <div class="controls">
+                    <select name="categoria" id="categoria" required>
+                        <option value="">-- Selecione a Categoria --</option>
+                        <?php foreach ($categorias as $cat): ?>
+                            <option value="<?= $cat['idcategoria'] ?>" <?= (isset($_POST['categoria']) && $_POST['categoria'] == $cat['idcategoria']) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($cat['descricao']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="numero">Número da inscrição</label>
+                <div class="controls">
+                    <input style="min-height:35px;" type="number" name="numero" id="numero" value="<?= htmlspecialchars($_POST['numero'] ?? '') ?>" min="1" required>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success">Inscrever</button>
+                <a class="btn" href="listar_atleta.php">Back</a>
+            </div>
+        </form>
+    </div>
+</div>

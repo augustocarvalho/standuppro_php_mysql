@@ -10,8 +10,23 @@ function selected($a, $b) {
     return ($a == $b) ? 'selected' : '';
 }
 
+function athleteName($row) {
+    if (!empty($row['nome'])) {
+        return ucwords(strtolower($row['nome']));
+    }
+    return '<em>Atleta não cadastrado (' . htmlspecialchars($row['atleta_cpf']) . ')</em>';
+}
+
 $id_etapa = $_POST['etapa'] ?? null;
 $id_categoria = $_POST['categoria'] ?? null;
+
+// On first load, use the same etapa shown as selected in the dropdown
+if ($id_etapa === null) {
+    $primeira_etapa = fetchResults($con, "SELECT idetapa FROM etapa ORDER BY idetapa DESC LIMIT 1");
+    if ($row = mysqli_fetch_assoc($primeira_etapa)) {
+        $id_etapa = $row['idetapa'];
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +52,7 @@ $id_categoria = $_POST['categoria'] ?? null;
             <tr>
                 <td><strong>ETAPA:</strong></td>
                 <td>
-                    <select name="etapa" id="etapa" class="selectpicker">
+                    <select name="etapa" id="etapa" class="selectpicker" onchange="this.form.categoria.value=''; this.form.submit()">
                         <?php
                         $etapas = fetchResults($con, "SELECT * FROM etapa ORDER BY idetapa DESC");
                         while ($etapa = mysqli_fetch_assoc($etapas)) {
@@ -56,7 +71,16 @@ $id_categoria = $_POST['categoria'] ?? null;
                         <option value="">Escolha uma abaixo</option>
                         <option value="00" <?= selected($id_categoria, "00") ?>>GERAL</option>
                         <?php
-                        $categorias = fetchResults($con, "SELECT * FROM categoria ORDER BY descricao");
+                        // Only categories with at least one finisher in the selected etapa
+                        $id_etapa_int = (int) $id_etapa;
+                        $categorias = fetchResults($con, "
+                            SELECT DISTINCT c.idcategoria, c.descricao
+                            FROM categoria c
+                            JOIN inscricao i ON i.categoria_idcategoria = c.idcategoria
+                            WHERE i.etapa_idetapa = '$id_etapa_int'
+                              AND i.tempo <> '00:00:00'
+                            ORDER BY c.descricao
+                        ");
                         while ($cat = mysqli_fetch_assoc($categorias)) {
                             echo "<option value='{$cat['idcategoria']}' " . selected($id_categoria, $cat['idcategoria']) . ">
                                 {$cat['descricao']}
@@ -92,9 +116,9 @@ $id_categoria = $_POST['categoria'] ?? null;
         if ($id_categoria != "00") {
             if ($id_etapa >= 20) {
                 $sql = "
-                    SELECT i.numero, p.nome, p.estado, p.cidade, i.tempo
+                    SELECT i.numero, i.atleta_cpf, p.nome, p.estado, p.cidade, i.tempo
                     FROM inscricao i
-                    JOIN atleta p ON i.atleta_cpf = p.cpf
+                    LEFT JOIN atleta p ON i.atleta_cpf = p.cpf
                     JOIN categoria c ON i.categoria_idcategoria = c.idcategoria
                     WHERE i.etapa_idetapa = '$id_etapa'
                       AND i.categoria_idcategoria = '$id_categoria'
@@ -103,10 +127,10 @@ $id_categoria = $_POST['categoria'] ?? null;
                 ";
                 $res = fetchResults($con, $sql);
 
-                echo "<table class='table table-striped table-bordered' style='width:700px; margin:auto;'>
+                echo "<table class='table' style='width:700px; margin:auto;'>
                     <thead>
                         <tr>
-                            <th>#</th><th>Número</th><th>Nome</th><th>Cidade</th><th>UF</th><th>Tempo</th>
+                            <th>#</th><th>NÚMERO</th><th>NOME</th><th>CIDADE</th><th>UF</th><th>TEMPO</th>
                         </tr>
                     </thead><tbody>";
 
@@ -114,7 +138,7 @@ $id_categoria = $_POST['categoria'] ?? null;
                     echo "<tr>
                         <td>{$count}</td>
                         <td>{$row['numero']}</td>
-                        <td>" . ucwords(strtolower($row['nome'])) . "</td>
+                        <td>" . athleteName($row) . "</td>
                         <td>{$row['cidade']}</td>
                         <td>{$row['estado']}</td>
                         <td>{$row['tempo']}</td>
@@ -126,9 +150,9 @@ $id_categoria = $_POST['categoria'] ?? null;
             } else {
                 // For etapas < 20
                 $sql = "
-                    SELECT i.numero, p.nome, p.estado, i.tempo
+                    SELECT i.numero, i.atleta_cpf, p.nome, p.estado, i.tempo
                     FROM inscricao i
-                    JOIN atleta p ON i.atleta_cpf = p.cpf
+                    LEFT JOIN atleta p ON i.atleta_cpf = p.cpf
                     JOIN categoria c ON i.categoria_idcategoria = c.idcategoria
                     WHERE i.etapa_idetapa = '$id_etapa'
                       AND i.categoria_idcategoria = '$id_categoria'
@@ -137,16 +161,16 @@ $id_categoria = $_POST['categoria'] ?? null;
                 ";
                 $res = fetchResults($con, $sql);
 
-                echo "<table class='table table-striped table-bordered' style='width:700px; margin:auto;'>
+                echo "<table class='table' style='width:700px; margin:auto;'>
                     <thead>
-                        <tr><th>#</th><th>Número</th><th>Nome</th><th>UF</th><th>Tempo</th></tr>
+                        <tr><th>#</th><th>NÚMERO</th><th>NOME</th><th>UF</th><th>TEMPO</th></tr>
                     </thead><tbody>";
 
                 while ($row = mysqli_fetch_assoc($res)) {
                     echo "<tr>
                         <td>{$count}</td>
                         <td>{$row['numero']}</td>
-                        <td>" . ucwords(strtolower($row['nome'])) . "</td>
+                        <td>" . athleteName($row) . "</td>
                         <td>{$row['estado']}</td>
                         <td>{$row['tempo']}</td>
                     </tr>";
@@ -158,9 +182,9 @@ $id_categoria = $_POST['categoria'] ?? null;
         } else {
             // GERAL (all categories)
             $sql = "
-                SELECT i.numero, p.nome, p.estado, c.descricao, i.tempo
+                SELECT i.numero, i.atleta_cpf, p.nome, p.estado, c.descricao, i.tempo
                 FROM inscricao i
-                JOIN atleta p ON i.atleta_cpf = p.cpf
+                LEFT JOIN atleta p ON i.atleta_cpf = p.cpf
                 JOIN categoria c ON i.categoria_idcategoria = c.idcategoria
                 WHERE i.etapa_idetapa = '$id_etapa'
                   AND i.tempo <> '00:00:00'
@@ -168,16 +192,16 @@ $id_categoria = $_POST['categoria'] ?? null;
             ";
             $res = fetchResults($con, $sql);
 
-            echo "<table class='table table-striped table-bordered' style='width:700px; margin:auto;'>
+            echo "<table class='table' style='width:700px; margin:auto;'>
                 <thead>
-                    <tr><th>#</th><th>Número</th><th>Nome</th><th>UF</th><th>Categoria</th><th>Tempo</th></tr>
+                    <tr><th>#</th><th>NÚMERO</th><th>NOME</th><th>UF</th><th>CATEGORIA</th><th>TEMPO</th></tr>
                 </thead><tbody>";
 
             while ($row = mysqli_fetch_assoc($res)) {
                 echo "<tr>
                     <td>{$count}</td>
                     <td>{$row['numero']}</td>
-                    <td>" . ucwords(strtolower($row['nome'])) . "</td>
+                    <td>" . athleteName($row) . "</td>
                     <td>{$row['estado']}</td>
                     <td>{$row['descricao']}</td>
                     <td>{$row['tempo']}</td>

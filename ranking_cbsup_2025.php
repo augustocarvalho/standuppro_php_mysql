@@ -124,7 +124,10 @@ echo " <div class=row>
                      </tr>
                    </thead>
                    <tbody> ";
-                      $sql = mysqli_query($con,"SELECT nome, estado, cpf, categoria_idcategoria, col_etapa1, pontos1, col_etapa2, pontos2, (pontos1+pontos2)  as total                                                
+                      $sql = mysqli_query($con,"SELECT nome, estado, cpf, categoria_idcategoria,
+                             MAX(col_etapa1) AS col_etapa1, MAX(pontos1) AS pontos1,
+                             MAX(col_etapa2) AS col_etapa2, MAX(pontos2) AS pontos2,
+                             (MAX(pontos1)+MAX(pontos2)) AS total                                                
                              FROM (
 SELECT a.cpf, a.estado, a.nome as nome, r.categoria_idcategoria 
 ,ifnull((SELECT colocacao FROM ranking WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 66 and categoria_idcategoria = r.categoria_idcategoria), '-') as col_etapa1 
@@ -136,7 +139,7 @@ JOIN atleta a ON a.cpf = r.atleta_cpf
 WHERE etapa_idetapa in (66,68)
 ) as resul
 WHERE categoria_idcategoria = $id_categoria
-GROUP by 1
+GROUP BY cpf, nome, estado, categoria_idcategoria
 ORDER BY total DESC");
                        while ($row = mysqli_fetch_assoc($sql)){
                             echo '<tr>';

@@ -28,8 +28,16 @@ while ($row = $result->fetch_assoc()) {
 }
 ?>
 
+<style>
+    body {
+        background-image: url("stdp_atletas.jpg"), url("stdp_resultados02.jpg");
+        background-repeat: no-repeat, repeat;
+        background-size: 100% auto;
+    }
+</style>
+
 <div class="container my-5">
-    <h2 class="mb-4">Lista de Atletas</h2>
+    <h2 align="center">Lista de Atletas</h2>
 
     <?php if ($message): ?>
         <div class="alert alert-success"><?= htmlspecialchars($message) ?></div>
@@ -42,12 +50,12 @@ while ($row = $result->fetch_assoc()) {
     <?php if (empty($athletes)): ?>
         <p>Nenhum atleta cadastrado.</p>
     <?php else: ?>
-        <table class="table table-bordered table-hover">
-            <thead class="table-light">
+        <table class="table" style="width:700px; margin:auto;">
+            <thead>
                 <tr>
-                    <th>Nome</th>
+                    <th>NOME</th>
                     <th>CPF</th>
-                    <th class="text-center">Ações</th>
+                    <th class="text-center" style="white-space:nowrap;">AÇÕES</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,13 +63,13 @@ while ($row = $result->fetch_assoc()) {
                     <tr>
                         <td><?= htmlspecialchars($atleta['nome']) ?></td>
                         <td><?= htmlspecialchars($atleta['cpf']) ?></td>
-                        <td class="text-center">
-                            <a href="inscricao.php?id=<?= urlencode($atleta['cpf']) ?>" class="btn btn-sm btn-primary me-2">
+                        <td class="text-center" style="white-space:nowrap;">
+                            <a href="inscricao.php?id=<?= urlencode($atleta['cpf']) ?>" class="btn btn-small btn-primary" style="margin-right:4px;">
                                 Inscrever
                             </a>
-                            <form method="post" class="d-inline" onsubmit="return confirm('Deseja realmente excluir o atleta <?= addslashes($atleta['nome']) ?>?');">
+                            <form method="post" style="display:inline; margin:0;" onsubmit="return confirm('Deseja realmente excluir o atleta <?= addslashes($atleta['nome']) ?>?');">
                                 <input type="hidden" name="delete_cpf" value="<?= htmlspecialchars($atleta['cpf']) ?>" />
-                                <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                                <button type="submit" class="btn btn-small btn-danger">Excluir</button>
                             </form>
                         </td>
                     </tr>

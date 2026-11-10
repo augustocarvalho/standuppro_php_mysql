@@ -10,6 +10,13 @@
     if ( null==$id ) {
         header("Location: index.php");
     }
+
+    $id = intval($id);
+    $etapa_titulo = '';
+    $etapa_q = mysqli_query($con, "SELECT nome_etapa, local_etapa FROM etapa WHERE idetapa='$id'");
+    if ($etapa = mysqli_fetch_assoc($etapa_q)) {
+        $etapa_titulo = $etapa['nome_etapa'] . ' - ' . $etapa['local_etapa'];
+    }
 	 
 	 
     if ( !empty($_POST)) {
@@ -55,6 +62,9 @@
                 <div class="span10 offset1">
                     <div class="row">
                         <h3 align="center">Registro de Chegada - PROVA LONGA</h3>
+                        <?php if ($etapa_titulo): ?>
+                            <h4 align="center"><?= htmlspecialchars($etapa_titulo) ?></h4>
+                        <?php endif; ?>
                         <br>
                         <br>
                     </div>

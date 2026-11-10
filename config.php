@@ -10,9 +10,11 @@
    $bd="circuito"; # nome do banco de dados
    
 # >> Conexão
-   $con = mysqli_connect("localhost", $user, $pass) or die ("Banco de Dados Morreu");
+   $con = mysqli_connect("db", $user, $pass) or die ("Banco de Dados Morreu");
    $banco = mysqli_select_db($con, $bd) or die ("Db não selecionada");
    mysqli_query($con,"SET NAMES 'utf8'");
+   // Legacy ranking queries use partial GROUP BY; keep compatibility with MySQL 8 strict mode
+   mysqli_query($con, "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
    mysqli_query($con,'SET character_set_connection=utf8');
    mysqli_query($con,'SET character_set_client=utf8');
    mysqli_query($con,'SET character_set_results=utf8');

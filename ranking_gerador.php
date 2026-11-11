@@ -8,9 +8,7 @@ function ranking_circuito_label(int $circuito): string
 {
     $labels = [
         1 => 'ABASUP',
-        2 => 'CBSUP',
-        3 => 'Brasileiro',
-        4 => 'YCB',
+        2 => 'CBSUP',        
     ];
 
     return $labels[$circuito] ?? ('Circuito ' . $circuito);

@@ -72,13 +72,14 @@ $id_etapa_atual = $etapa_atual['idetapa'] ?? '';
       <li><a href="classifica.php">RESULTADOS</a></li>
 
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">RANKING</span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">RANKING</a>
           <ul class="dropdown-menu">
-            <li><a href="ranking_categoria_2025.php">RANKING ABASUP 2025</a> </li>                        
-            <li><a href="ranking_cbsup_2025.php">RANKING CBSUP 2025</a> </li>
-      </li> 
- 
-      </li>   
+            <li><a href="ranking_categoria_2026.php">RANKING ABASUP 2026</a></li>
+            <li><a href="ranking_cbsup_2026.php">RANKING CBSUP 2026</a></li>
+            <li class="divider"></li>
+            <li><a href="gerar_ranking.php">GERAR RANKING</a></li>
+          </ul>
+      </li>
 
     </ul>
 </div>

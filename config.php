@@ -1,6 +1,6 @@
 <?php
 # >> Defina o título do site
-   $titulo="Circuito ABASUP - 2025";
+   $titulo="StandupPro - " . date("Y");
 
 
    

@@ -1,173 +1,391 @@
 <?php
 require_once "config.php";
+require_once "ranking_gerador.php";
 
-    $id = null;
-    if ( !empty($_GET['id'])) {
-        $id = $_REQUEST['id'];
+$acao = $_POST['acao'] ?? '';
+
+$etapaSelecionada = isset($_POST['etapa'])
+    ? (int) $_POST['etapa']
+    : (isset($_GET['etapa']) ? (int) $_GET['etapa'] : (isset($_GET['id']) ? (int) $_GET['id'] : 0));
+
+$circuitoSelecionado = isset($_POST['circuito'])
+    ? (int) $_POST['circuito']
+    : (isset($_GET['circuito']) ? (int) $_GET['circuito'] : 0);
+
+$estrelasSelecionadas = isset($_POST['estrelas'])
+    ? (int) $_POST['estrelas']
+    : (isset($_GET['estrelas']) ? (int) $_GET['estrelas'] : 0);
+
+$categoriasPost = $_POST['categorias'] ?? [];
+if (!is_array($categoriasPost)) {
+    $categoriasPost = [];
+}
+$categoriasSelecionadas = array_values(array_unique(array_map('intval', $categoriasPost)));
+
+try {
+    $etapas = ranking_select(
+        $con,
+        'SELECT idetapa, nome_etapa, local_etapa, associacao_idassociacao
+           FROM etapa
+          ORDER BY idetapa DESC'
+    );
+
+    if ($etapaSelecionada <= 0 && $etapas) {
+        $etapaSelecionada = (int) $etapas[0]['idetapa'];
     }
 
+    $etapaInfo = $etapaSelecionada > 0 ? ranking_etapa_info($con, $etapaSelecionada) : null;
 
+    if (!$etapaInfo && $etapas) {
+        $etapaSelecionada = (int) $etapas[0]['idetapa'];
+        $etapaInfo = ranking_etapa_info($con, $etapaSelecionada);
+    }
+
+    if ($circuitoSelecionado <= 0) {
+        $circuitoSelecionado = $etapaInfo ? ranking_circuito_sugerido($etapaInfo) : 1;
+    }
+
+    if ($estrelasSelecionadas <= 0) {
+        $estrelaDetectada = $etapaInfo ? ranking_estrela_detectada($con, $etapaSelecionada, $circuitoSelecionado) : null;
+        $estrelasSelecionadas = $estrelaDetectada ?: 1;
+    }
+
+    $categorias = $etapaSelecionada > 0 ? ranking_categorias_etapa($con, $etapaSelecionada) : [];
+
+    if ($acao !== 'simular' && $acao !== 'gerar') {
+        $categoriasSelecionadas = array_map(static function (array $categoria): int {
+            return (int) $categoria['idcategoria'];
+        }, $categorias);
+    }
+} catch (Throwable $e) {
+    $etapas = [];
+    $etapaInfo = null;
+    $categorias = [];
+    $erro = $e->getMessage();
+}
+
+$categoriasMarcadas = array_fill_keys($categoriasSelecionadas, true);
+$erro = $erro ?? '';
+$resultado = null;
+
+if ($acao === 'simular' || $acao === 'gerar') {
+    if (!$etapaInfo) {
+        $erro = 'Selecione uma etapa válida.';
+    } elseif ($circuitoSelecionado < 1 || $circuitoSelecionado > 4) {
+        $erro = 'Selecione um circuito válido.';
+    } elseif ($estrelasSelecionadas < 1 || $estrelasSelecionadas > 5) {
+        $erro = 'Selecione a quantidade de estrelas do evento.';
+    } elseif (!$categorias) {
+        $erro = 'Nenhuma inscrição encontrada para esta etapa.';
+    } else {
+        $disponiveis = [];
+        foreach ($categorias as $categoria) {
+            $disponiveis[(int) $categoria['idcategoria']] = $categoria;
+        }
+
+        $categoriasProcessar = [];
+        foreach ($categoriasSelecionadas as $idCategoria) {
+            if (isset($disponiveis[$idCategoria])) {
+                $categoriasProcessar[] = $disponiveis[$idCategoria];
+            }
+        }
+
+        if (!$categoriasProcessar) {
+            $erro = 'Selecione ao menos uma categoria para gerar o ranking.';
+        } else {
+            $erroProcessamento = null;
+            $resultado = ranking_processar_etapa(
+                $con,
+                $etapaSelecionada,
+                $circuitoSelecionado,
+                $estrelasSelecionadas,
+                $categoriasProcessar,
+                $acao === 'gerar',
+                $erroProcessamento
+            );
+
+            if ($resultado === null) {
+                $erro = $erroProcessamento ?: 'Não foi possível gerar o ranking.';
+            }
+        }
+    }
+}
+
+function h($valor): string
+{
+    return htmlspecialchars((string) $valor, ENT_QUOTES, 'UTF-8');
+}
+
+function nomeAtletaRanking($nome, string $cpf): string
+{
+    if ($nome === null || $nome === '') {
+        return 'Atleta não cadastrado (' . $cpf . ')';
+    }
+
+    return ucwords(strtolower($nome));
+}
+
+$tabelaPontos = ranking_pontos_estrela($estrelasSelecionadas);
+
+require_once "menu.php";
 ?>
 
-<?php
+<style>
+    .ranking-card {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid #e1e6ec;
+        border-radius: 8px;
+        padding: 24px;
+        margin-top: 70px;
+        margin-bottom: 30px;
+    }
+    .ranking-card h3 {
+        margin-top: 0;
+    }
+    .ranking-form td {
+        padding: 5px 10px 5px 0;
+        vertical-align: middle;
+    }
+    .ranking-categorias {
+        max-height: 260px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 10px 12px;
+        background: #fff;
+    }
+    .ranking-categorias label {
+        display: block;
+        font-weight: normal;
+        margin-bottom: 3px;
+    }
+    .ranking-pontos {
+        line-height: 28px;
+        color: #555;
+    }
+    .ranking-pontos strong {
+        color: #333;
+    }
+    .ranking-resultado details {
+        margin-bottom: 10px;
+    }
+    .ranking-resultado summary {
+        cursor: pointer;
+        font-weight: bold;
+        padding: 3px 0;
+    }
+    .ranking-resultado table {
+        margin-top: 8px;
+    }
+</style>
 
-#LEMBRAR DE EXECUTAR O JUNIOR SEPARADO POIS EXISTEM ATLETAS EM DUAS CATEGORIAS.
+<div class="container">
+    <div class="ranking-card">
+        <h3 align="center">GERAR RANKING DA ETAPA</h3>
+        <p class="muted" style="text-align:center">
+            A página insere automaticamente em <strong>ranking_circuito</strong> as inscrições
+            que ainda não existem para a etapa/circuito e depois atualiza pontos e colocação
+            categoria por categoria, usando a tabela de pontuação das estrelas do evento.
+        </p>
 
-#(1,2,3,4) kids, Jr
-#(5,6,7,8,9,10, 119, 120) Allboard
-#(11,12,24,25,26,27,71,72) Race 12'6 Amador
-#(53,54,55,56,57,58) Race 14 Amador
-#(113,114,115,116,117,118) Race Amador
-#(110,111,112) OC6 MISTA
-#(23,16,22,15,14,13,28,32,31,17,30,29,121,122) Race12 e 14 PRO
-#(19,21) Paddle
-#(20,33,39,40,43,44,49,73,45,46) Canoa
-#(20,39,43,74,33,40,44,49,73,79,80,81,82,83,84,85,86,87,46,93,94,45,95,96,92,97,98,52,59,60,78,61,76,77,88,89,90,90,75)
+        <?php if ($erro): ?>
+            <div class="alert alert-error"><?= h($erro) ?></div>
+        <?php endif; ?>
 
+        <?php if (!$etapas): ?>
+            <div class="alert alert-info">Nenhuma etapa cadastrada.</div>
+        <?php endif; ?>
 
+        <?php if ($etapaSelecionada > 0 && !$categorias && $acao !== 'simular' && $acao !== 'gerar'): ?>
+            <div class="alert alert-info">Nenhuma inscrição encontrada para esta etapa.</div>
+        <?php endif; ?>
 
-// #INSERIR OS ATLETAS FILIADOS POR ETAPA ANTES DE ATUALIZAR E LEMBRAR DE GERAR RESULTADO FINAL. (gerar_resultado_cbsup.php)
-// INSERT INTO ranking (categoria_idcategoria, atleta_cpf, pontos, etapa_idetapa, colocacao)
+        <?php if ($resultado): ?>
+            <div class="alert alert-success">
+                <strong><?= $acao === 'gerar' ? 'Ranking gerado!' : 'Simulação concluída.' ?></strong>
+                <?php if ($acao === 'gerar'): ?>
+                    <?= (int) $resultado['inseridas'] ?> inscrição(ões) adicionada(s),
+                    <?= (int) $resultado['atletas'] ?> atleta(s) pontuado(s)
+                    em <?= count($resultado['categorias']) ?> categoria(s).
+                <?php else: ?>
+                    <?= (int) $resultado['inseridas'] ?> inscrição(ões) seriam adicionada(s),
+                    <?= (int) $resultado['atletas'] ?> atleta(s) receberiam pontos
+                    em <?= count($resultado['categorias']) ?> categoria(s).
+                    Nenhuma alteração foi gravada.
+                <?php endif; ?>
+                <br>
+                Etapa <?= (int) $resultado['etapa'] ?><?= $etapaInfo ? ' - ' . h($etapaInfo['nome_etapa']) : '' ?> &middot;
+                Circuito <?= h(ranking_circuito_label((int) $resultado['circuito'])) ?> &middot;
+                <?= h(ranking_estrelas_label((int) $resultado['estrelas'])) ?>
+            </div>
 
-// SELECT i.categoria_idcategoria, i.atleta_cpf, 0, 62 , 0
-// FROM atleta a
-// JOIN filiacao f ON f.atleta_cpf = a.cpf 
-// JOIN inscricao i ON i.atleta_cpf = a.cpf and i.etapa_idetapa = 62  
+            <?php if ((int) $resultado['sem_resultado'] > 0): ?>
+                <div class="alert alert-warning">
+                    Atenção: <?= (int) $resultado['sem_resultado'] ?> atleta(s) estão sem resultado
+                    (podio_longa e podio_tecnica vazios). Gere o resultado final da etapa antes
+                    de pontuar o ranking se isso não for esperado.
+                </div>
+            <?php endif; ?>
 
-// AND (a.categoria_idcategoria = i.categoria_idcategoria or 
-// a.categoria_idcategoria in 
-// (SELECT i2.categoria_idcategoria 
-//    FROM inscricao i2
-//      WHERE i2.etapa_idetapa = 59   
-//      and i2.numero = i.numero 
-//      and i2.categoria_idcategoria <> i.categoria_idcategoria))
+            <div class="ranking-resultado">
+                <?php foreach ($resultado['categorias'] as $categoriaResultado): ?>
+                    <details>
+                        <summary>
+                            <?= h($categoriaResultado['descricao']) ?>
+                            &mdash; <?= count($categoriaResultado['linhas']) ?> atleta(s)
+                            <?php if ((int) $categoriaResultado['inseridas'] > 0): ?>
+                                &middot; <?= (int) $categoriaResultado['inseridas'] ?> nova(s) inscrição(ões)
+                            <?php endif; ?>
+                        </summary>
+                        <table class="table table-condensed table-striped" style="width:auto">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Atleta</th>
+                                    <th>Colocação</th>
+                                    <th>Pontos</th>
+                                    <th>Situação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($categoriaResultado['linhas'] as $linha): ?>
+                                    <tr>
+                                        <td><?= (int) $linha['colocacao'] ?></td>
+                                        <td><?= h(nomeAtletaRanking($linha['nome'], $linha['atleta_cpf'])) ?></td>
+                                        <td><?= (int) $linha['colocacao'] ?>º</td>
+                                        <td>
+                                            <?= (int) $linha['pontos'] ?>
+                                            <?php if ((int) $linha['pontos'] === 0): ?>
+                                                <small>(fora do top 30)</small>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($linha['inserido']): ?>
+                                                <span class="label label-info">Inserido</span>
+                                            <?php else: ?>
+                                                <span class="label">Atualizado</span>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </details>
+                <?php endforeach; ?>
+            </div>
 
-// SELECT i.categoria_idcategoria, i.atleta_cpf, 0, 51 , 0
-// FROM inscricao i 
-// WHERE i.etapa_idetapa = 51  
+            <?php if ($acao === 'gerar' && in_array($circuitoSelecionado, [1, 2], true)): ?>
+                <p style="margin-top:15px">
+                    <a class="btn btn-primary" href="<?= $circuitoSelecionado === 1 ? 'ranking_categoria_2026.php' : 'ranking_cbsup_2026.php' ?>">
+                        Ver ranking <?= h(ranking_circuito_label($circuitoSelecionado)) ?> 2026
+                    </a>
+                </p>
+            <?php endif; ?>
+        <?php endif; ?>
 
-// SELECT distinct atleta_cpf, categoria_idcategoria, 0,0, 2022, 1
-// FROM ranking 
-// where etapa_idetapa in (49,48,47,46)
-// and categoria_idcategoria = 1
+        <form method="post" id="rankingForm">
+            <input type="hidden" name="acao" id="acao" value="">
 
+            <table class="ranking-form">
+                <tr>
+                    <td><strong>ETAPA:</strong></td>
+                    <td>
+                        <select name="etapa" id="etapa" class="selectpicker" onchange="rankingSubmit('carregar')">
+                            <?php foreach ($etapas as $etapa): ?>
+                                <option value="<?= (int) $etapa['idetapa'] ?>" <?= $etapaSelecionada === (int) $etapa['idetapa'] ? 'selected' : '' ?>>
+                                    <?= h($etapa['nome_etapa']) ?> - <?= h($etapa['local_etapa']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>CIRCUITO:</strong></td>
+                    <td>
+                        <select name="circuito" id="circuito">
+                            <?php for ($circuito = 1; $circuito <= 4; $circuito++): ?>
+                                <option value="<?= $circuito ?>" <?= $circuitoSelecionado === $circuito ? 'selected' : '' ?>>
+                                    <?= h(ranking_circuito_label($circuito)) ?>
+                                </option>
+                            <?php endfor; ?>
+                        </select>
+                        <span class="help-inline">Circuito usado na tabela ranking_circuito.</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>ESTRELAS:</strong></td>
+                    <td>
+                        <select name="estrelas" id="estrelas">
+                            <?php for ($estrelas = 1; $estrelas <= 5; $estrelas++): ?>
+                                <option value="<?= $estrelas ?>" <?= $estrelasSelecionadas === $estrelas ? 'selected' : '' ?>>
+                                    <?= h(ranking_estrelas_label($estrelas)) ?>
+                                </option>
+                            <?php endfor; ?>
+                        </select>
+                        <span class="help-inline">Define a tabela de pontos usada no evento.</span>
+                    </td>
+                </tr>
+            </table>
 
+            <?php if ($estrelasSelecionadas >= 1 && $estrelasSelecionadas <= 5): ?>
+                <details style="margin: 10px 0 18px">
+                    <summary>Ver pontuação de <?= h(ranking_estrelas_label($estrelasSelecionadas)) ?> por colocação</summary>
+                    <p class="ranking-pontos">
+                        <?php foreach ($tabelaPontos as $indice => $pontos): ?>
+                            <?= $indice + 1 ?>º: <strong><?= (int) $pontos ?></strong><?= $indice < count($tabelaPontos) - 1 ? ' &middot; ' : '' ?>
+                        <?php endforeach; ?>
+                    </p>
+                </details>
+            <?php endif; ?>
 
+            <?php if ($categorias): ?>
+                <h4>Categorias da etapa</h4>
+                <p style="margin-bottom:8px">
+                    <a href="#" onclick="rankingMarcarCategorias(true); return false;">Marcar todas</a>
+                    &middot;
+                    <a href="#" onclick="rankingMarcarCategorias(false); return false;">Desmarcar todas</a>
+                </p>
+                <div class="ranking-categorias">
+                    <?php foreach ($categorias as $categoria): ?>
+                        <label>
+                            <input type="checkbox"
+                                   name="categorias[]"
+                                   value="<?= (int) $categoria['idcategoria'] ?>"
+                                   <?= isset($categoriasMarcadas[(int) $categoria['idcategoria']]) ? 'checked' : '' ?>>
+                            <?= h($categoria['descricao']) ?>
+                        </label>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
 
+            <div class="form-actions" style="margin-top:18px">
+                <button type="button" class="btn" onclick="rankingSubmit('carregar')">
+                    Carregar categorias
+                </button>
+                <button type="button" class="btn btn-info" onclick="rankingSubmit('simular')">
+                    Simular
+                </button>
+                <button type="button" class="btn btn-success"
+                        onclick="if (confirm('Gerar o ranking e gravar as alterações?')) { rankingSubmit('gerar'); }">
+                    Gerar ranking
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 
-$etapa=68;
+<script>
+    function rankingSubmit(acao) {
+        document.getElementById('acao').value = acao;
+        document.getElementById('rankingForm').submit();
+    }
 
-$contador = 1;
-$categorias = mysqli_query($con,"SELECT distinct(categoria_idcategoria) 
-                            FROM inscricao WHERE etapa_idetapa=$etapa
-                            and categoria_idcategoria in (19,21)
-                            order by 1");
-
-while ($id_categoria = mysqli_fetch_assoc($categorias)){
-$ordenar = mysqli_query($con,"SELECT (podio_longa + podio_tecnica) as geral, podio_longa, podio_tecnica, atleta_cpf, categoria_idcategoria  
-FROM inscricao 
-where etapa_idetapa = $etapa
-AND categoria_idcategoria = $id_categoria[categoria_idcategoria]
-order by categoria_idcategoria , geral, podio_longa ") ;
-$colocacao = 1;
-while ($pontua = mysqli_fetch_assoc($ordenar)){
-# In Case Race and Tecnica comentar a linha abaixo 
-  $colocacao = $pontua["podio_longa"];  
-  switch ($colocacao){
-    case 1:
-       mysqli_query($con,"update ranking set pontos = 925 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");   
-       break;
-     case 2:
-      mysqli_query($con,"update ranking set pontos = 913 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;
-     case 3:
-      mysqli_query($con,"update ranking set pontos = 900 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;
-     case 4:
-      mysqli_query($con,"update ranking set pontos = 888 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;
-     case 5:
-      mysqli_query($con,"update ranking set pontos = 875 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;
-     case 6:
-      mysqli_query($con,"update ranking set pontos = 863 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;    
-     case 7:
-      mysqli_query($con,"update ranking set pontos = 850 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;
-     case 8:
-      mysqli_query($con,"update ranking set pontos = 838 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;
-     case 9:
-      mysqli_query($con,"update ranking set pontos = 829 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;
-     case 10:
-      mysqli_query($con,"update ranking set pontos = 821 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;  
-     case 11:
-      mysqli_query($con,"update ranking set pontos = 813 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;         
-      case 12:
-      mysqli_query($con,"update ranking set pontos = 804 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;  
-      case 13:
-      mysqli_query($con,"update ranking set pontos = 796 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;
-     case 14:
-      mysqli_query($con,"update ranking set pontos = 788 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;         
-      case 15:
-      mysqli_query($con,"update ranking set pontos = 779 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;  
-      case 16:
-      mysqli_query($con,"update ranking set pontos = 771 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;    
-      case 17:
-      mysqli_query($con,"update ranking set pontos = 763 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;
-     case 18:
-      mysqli_query($con,"update ranking set pontos = 754 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;         
-      case 19:
-      mysqli_query($con,"update ranking set pontos = 746 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;  
-      case 20:
-      mysqli_query($con,"update ranking set pontos = 738 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;  
-      case 21:
-      mysqli_query($con,"update ranking set pontos = 729 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;  
-     case 22:
-      mysqli_query($con,"update ranking set pontos = 721 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;         
-      case 23:
-      mysqli_query($con,"update ranking set pontos = 713 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;  
-      case 24:
-      mysqli_query($con,"update ranking set pontos = 704 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;
-     case 25:
-      mysqli_query($con,"update ranking set pontos = 696 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;         
-      case 26:
-      mysqli_query($con,"update ranking set pontos = 688 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;  
-      case 27:
-      mysqli_query($con,"update ranking set pontos = 679 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;    
-      case 28:
-      mysqli_query($con,"update ranking set pontos = 671 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;
-     case 29:
-      mysqli_query($con,"update ranking set pontos = 663 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;         
-      case 30:
-      mysqli_query($con,"update ranking set pontos = 654 , colocacao = $colocacao WHERE atleta_cpf = $pontua[atleta_cpf] AND categoria_idcategoria = $id_categoria[categoria_idcategoria] and etapa_idetapa = $etapa");    
-       break;  
-     };               
-  };
-  
-};
-echo "<script>alert('ETAPA PONTUADA!! ');</script>";
-echo "<meta http-equiv='refresh' content='0, url=./ranking_cbsup_2025.php'>";
-?>
+    function rankingMarcarCategorias(marcar) {
+        var caixas = document.querySelectorAll('input[name="categorias[]"]');
+        for (var i = 0; i < caixas.length; i++) {
+            caixas[i].checked = marcar;
+        }
+    }
+</script>
+</body>
+</html>

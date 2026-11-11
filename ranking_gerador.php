@@ -29,7 +29,7 @@ function ranking_circuito_sugerido(array $etapa): int
 {
     $nome = strtoupper((string) ($etapa['nome_etapa'] ?? ''));
 
-    foreach ([2 => 'CBSUP', 1 => 'ABASUP', 3 => 'BRASILEIRO', 4 => 'YCB'] as $circuito => $palavra) {
+    foreach ([2 => 'CBSUP', 1 => 'ABASUP'] as $circuito => $palavra) {
         if (strpos($nome, $palavra) !== false) {
             return $circuito;
         }

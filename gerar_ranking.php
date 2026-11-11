@@ -303,7 +303,7 @@ require_once "menu.php";
                     <td><strong>CIRCUITO:</strong></td>
                     <td>
                         <select name="circuito" id="circuito">
-                            <?php for ($circuito = 1; $circuito <= 4; $circuito++): ?>
+                            <?php for ($circuito = 1; $circuito <= 2; $circuito++): ?>
                                 <option value="<?= $circuito ?>" <?= $circuitoSelecionado === $circuito ? 'selected' : '' ?>>
                                     <?= h(ranking_circuito_label($circuito)) ?>
                                 </option>

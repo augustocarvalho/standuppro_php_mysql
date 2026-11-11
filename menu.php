@@ -27,6 +27,52 @@ $id_etapa_atual = $etapa_atual['idetapa'] ?? '';
            display: inline-block;
            vertical-align: middle;
        }
+
+       /* Scale page content so it lines up with the background artwork
+          without requiring browser zoom. */
+       .container#cadastro {
+           zoom: 1.4;
+       }
+       .container.my-5 {
+           zoom: 1.4;
+       }
+
+       @media (min-width: 1900px) {
+           .container.my-5 {
+               zoom: 2;
+           }
+       }
+       @media (max-width: 1349px) {
+           .container#cadastro {
+               zoom: 1;
+           }
+           .container.my-5 {
+               zoom: 1.2;
+           }
+       }
+       @media (max-width: 1149px) {
+           .container.my-5 {
+               zoom: 1;
+           }
+       }
+
+       /* Keep the atletas title at the same distance from the top of the
+          background panel at every width/zoom level. */
+       @media (min-width: 1350px) and (max-width: 1899px) {
+           .container.my-5 h2 {
+               margin-top: calc(7.06vw - 84px);
+           }
+       }
+       @media (min-width: 1150px) and (max-width: 1349px) {
+           .container.my-5 h2 {
+               margin-top: calc(8.23vw - 81px);
+           }
+       }
+       @media (max-width: 1149px) {
+           .container.my-5 h2 {
+               margin-top: max(10px, calc(9.88vw - 78px));
+           }
+       }
    </style>
      <script src="js/jquery.js"></script>
      <script src="js/jquery_mask.js"></script>

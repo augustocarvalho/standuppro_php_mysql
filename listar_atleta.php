@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_cpf'])) {
 
 // Fetch athletes
 $athletes = [];
-$result = $con->query("SELECT cpf, nome FROM atleta ORDER BY nome");
+$result = $con->query("SELECT cpf, nome, cidade, estado FROM atleta ORDER BY nome");
 while ($row = $result->fetch_assoc()) {
     $athletes[] = $row;
 }
@@ -55,6 +55,8 @@ while ($row = $result->fetch_assoc()) {
                 <tr>
                     <th>NOME</th>
                     <th>CPF</th>
+                    <th>CIDADE</th>
+                    <th>UF</th>
                     <th class="text-center" style="white-space:nowrap;">AÇÕES</th>
                 </tr>
             </thead>
@@ -63,6 +65,8 @@ while ($row = $result->fetch_assoc()) {
                     <tr>
                         <td><?= htmlspecialchars($atleta['nome']) ?></td>
                         <td><?= htmlspecialchars($atleta['cpf']) ?></td>
+                        <td><?= htmlspecialchars($atleta['cidade'] ?? '') ?></td>
+                        <td><?= htmlspecialchars($atleta['estado'] ?? '') ?></td>
                         <td class="text-center" style="white-space:nowrap;">
                             <a href="inscricao.php?id=<?= urlencode($atleta['cpf']) ?>" class="btn btn-small btn-primary" style="margin-right:4px;">
                                 Inscrever

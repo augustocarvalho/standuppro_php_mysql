@@ -124,6 +124,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if (empty($numero)) {
         $errors[] = "Por favor, informe o número da inscrição.";
+    } elseif (!ctype_digit($numero) || (int) $numero <= 0) {
+        $errors[] = "Por favor, informe um número de inscrição válido.";
+    }
+
+    if (!$errors) {
+        // A bib number belongs to a single athlete within the same etapa.
+        // The same athlete may still have the number in multiple categories
+        // (base category plus age subcategory).
+        $stmt = $con->prepare("SELECT 1 FROM inscricao WHERE etapa_idetapa = ? AND numero = ? AND atleta_cpf <> ? LIMIT 1");
+        $stmt->bind_param("iis", $etapa_id, $numero, $atleta_cpf);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows > 0) {
+            $errors[] = "O número {$numero} já está em uso por outro atleta nesta etapa.";
+        }
+        $stmt->close();
     }
 
     if (!$errors) {
@@ -258,6 +275,7 @@ include "menu.php";
                 <label class="control-label" for="numero">Número da inscrição</label>
                 <div class="controls">
                     <input style="min-height:35px;" type="number" name="numero" id="numero" value="<?= htmlspecialchars($_POST['numero'] ?? '') ?>" min="1" required>
+                    <p class="help-block">O número não pode ser usado por outro atleta na mesma etapa.</p>
                 </div>
             </div>
 

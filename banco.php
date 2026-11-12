@@ -41,6 +41,140 @@ function banco_identificador(string $nome): string
 }
 
 /**
+ * Divide um arquivo SQL em comandos individuais, respeitando strings,
+ * identificadores e comentários. Assim cada comando é enviado separadamente,
+ * como o phpMyAdmin faz, evitando o limite de max_allowed_packet.
+ *
+ * @return Generator<int, string>
+ */
+function banco_comandos_sql(string $sql): Generator
+{
+    $tamanho = strlen($sql);
+    $inicio = 0;
+    $estado = 'normal';
+
+    for ($i = 0; $i < $tamanho; $i++) {
+        $caractere = $sql[$i];
+        $proximo = $i + 1 < $tamanho ? $sql[$i + 1] : '';
+
+        switch ($estado) {
+            case 'normal':
+                if ($caractere === "'") {
+                    $estado = 'aspas_simples';
+                } elseif ($caractere === '"') {
+                    $estado = 'aspas_duplas';
+                } elseif ($caractere === '`') {
+                    $estado = 'identificador';
+                } elseif ($caractere === '#') {
+                    $estado = 'comentario_linha';
+                } elseif ($caractere === '-' && $proximo === '-' &&
+                    ($i + 2 >= $tamanho || ctype_space($sql[$i + 2]))) {
+                    $estado = 'comentario_linha';
+                    $i++;
+                } elseif ($caractere === '/' && $proximo === '*') {
+                    $estado = 'comentario_bloco';
+                    $i++;
+                } elseif ($caractere === ';') {
+                    $comando = trim(substr($sql, $inicio, $i - $inicio));
+                    if ($comando !== '') {
+                        yield $comando;
+                    }
+                    $inicio = $i + 1;
+                }
+                break;
+
+            case 'aspas_simples':
+            case 'aspas_duplas':
+                $delimitador = $estado === 'aspas_simples' ? "'" : '"';
+                if ($caractere === '\\') {
+                    $i++;
+                } elseif ($caractere === $delimitador) {
+                    if ($proximo === $delimitador) {
+                        $i++;
+                    } else {
+                        $estado = 'normal';
+                    }
+                }
+                break;
+
+            case 'identificador':
+                if ($caractere === '`') {
+                    if ($proximo === '`') {
+                        $i++;
+                    } else {
+                        $estado = 'normal';
+                    }
+                }
+                break;
+
+            case 'comentario_linha':
+                if ($caractere === "\n") {
+                    $estado = 'normal';
+                }
+                break;
+
+            case 'comentario_bloco':
+                if ($caractere === '*' && $proximo === '/') {
+                    $estado = 'normal';
+                    $i++;
+                }
+                break;
+        }
+    }
+
+    $comando = trim(substr($sql, $inicio));
+    if ($comando !== '') {
+        yield $comando;
+    }
+}
+
+/**
+ * Executa um dump SQL comando a comando.
+ *
+ * @throws RuntimeException
+ */
+function banco_importar_sql(mysqli $con, string $conteudo): void
+{
+    $indice = 0;
+
+    foreach (banco_comandos_sql($conteudo) as $comando) {
+        $indice++;
+        $erro = null;
+        $codigo = null;
+
+        try {
+            $resultado = $con->query($comando);
+        } catch (Throwable $e) {
+            $resultado = false;
+            $erro = $e->getMessage();
+            $codigo = (int) $e->getCode();
+        }
+
+        if ($resultado === false) {
+            $erro = $erro ?? $con->error;
+            $codigo = $codigo ?? $con->errno;
+
+            $resumo = preg_replace('/\s+/', ' ', trim($comando)) ?? $comando;
+            $resumo = function_exists('mb_substr')
+                ? mb_substr($resumo, 0, 160, 'UTF-8')
+                : substr($resumo, 0, 160);
+
+            $dica = in_array($codigo, [1153, 2006], true)
+                ? ' O comando excede o max_allowed_packet ou a conexão foi encerrada.'
+                : '';
+
+            throw new RuntimeException(
+                "Erro no comando {$indice}: {$erro}.{$dica} Comando: {$resumo}"
+            );
+        }
+
+        if ($resultado instanceof mysqli_result) {
+            $resultado->free();
+        }
+    }
+}
+
+/**
  * Gera um dump SQL completo (estrutura + dados) do banco.
  *
  * @throws RuntimeException
@@ -259,26 +393,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['acao'] ?? '') === 'importa
 
         $importacaoIniciada = true;
 
-        if (!$con->multi_query($conteudo)) {
-            throw new RuntimeException($con->error);
+        try {
+            banco_importar_sql($con, $conteudo);
+        } finally {
+            try {
+                $con->query('SET FOREIGN_KEY_CHECKS=1');
+            } catch (Throwable $e) {
+                // A conexão pode ter sido encerrada durante a importação.
+            }
         }
-
-        do {
-            $resultado = $con->store_result();
-            if ($resultado) {
-                $resultado->free();
-            }
-
-            if (!$con->more_results()) {
-                break;
-            }
-
-            if (!$con->next_result()) {
-                throw new RuntimeException($con->error);
-            }
-        } while (true);
-
-        $con->query('SET FOREIGN_KEY_CHECKS=1');
 
         header('Location: banco.php?importado=1');
         exit;

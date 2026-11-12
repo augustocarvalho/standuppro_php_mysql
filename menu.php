@@ -2,7 +2,16 @@
 require_once "config.php";
 
 // Latest etapa, used by the etapa menu links
-$etapa_atual = mysqli_fetch_assoc(mysqli_query($con, "SELECT idetapa FROM etapa ORDER BY idetapa DESC LIMIT 1"));
+$etapa_atual = null;
+try {
+    $resultado_etapa = mysqli_query($con, "SELECT idetapa FROM etapa ORDER BY idetapa DESC LIMIT 1");
+    if ($resultado_etapa instanceof mysqli_result) {
+        $etapa_atual = mysqli_fetch_assoc($resultado_etapa);
+        mysqli_free_result($resultado_etapa);
+    }
+} catch (Throwable $e) {
+    // A tabela etapa ainda não existe (por exemplo, importação incompleta).
+}
 $id_etapa_atual = $etapa_atual['idetapa'] ?? '';
 ?>
 

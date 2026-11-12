@@ -4,6 +4,46 @@ include "menu.php"; // Assuming this includes Bootstrap and header HTML
 $message = "";
 $error = "";
 
+/**
+ * Busca atletas pelo nome. Sem termo, retorna todos.
+ *
+ * @return array<int, array{cpf: string, nome: string, cidade: ?string, estado: ?string}>
+ */
+function buscar_atletas(mysqli $con, string $busca = ''): array
+{
+    $busca = trim($busca);
+    $atletas = [];
+
+    if ($busca === '') {
+        $resultado = $con->query("SELECT cpf, nome, cidade, estado FROM atleta ORDER BY nome");
+    } else {
+        $stmt = $con->prepare(
+            "SELECT cpf, nome, cidade, estado
+               FROM atleta
+              WHERE nome LIKE ?
+              ORDER BY nome"
+        );
+
+        // Trata os curingas do LIKE como texto digitado pelo usuário.
+        $termo = '%' . str_replace(['\\', '%', '_'], ['\\\\', '\\%', '\\_'], $busca) . '%';
+        $stmt->bind_param("s", $termo);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+    }
+
+    while ($linha = $resultado->fetch_assoc()) {
+        $atletas[] = $linha;
+    }
+
+    if (isset($stmt)) {
+        $stmt->close();
+    } else {
+        $resultado->free();
+    }
+
+    return $atletas;
+}
+
 // Handle delete action
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_cpf'])) {
     $cpf_to_delete = $_POST['delete_cpf'];
@@ -20,12 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_cpf'])) {
     $stmt->close();
 }
 
-// Fetch athletes
-$athletes = [];
-$result = $con->query("SELECT cpf, nome, cidade, estado FROM atleta ORDER BY nome");
-while ($row = $result->fetch_assoc()) {
-    $athletes[] = $row;
-}
+$busca = trim((string) ($_GET['busca'] ?? ''));
+$athletes = buscar_atletas($con, $busca);
 ?>
 
 <style>
@@ -47,9 +83,28 @@ while ($row = $result->fetch_assoc()) {
         <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
 
+    <form method="get" action="listar_atleta.php" class="form-inline" style="width:700px; margin:18px auto 14px; text-align:center;">
+        <input type="text"
+               name="busca"
+               class="input-xlarge search-query"
+               placeholder="Buscar atleta pelo nome"
+               value="<?= htmlspecialchars($busca) ?>">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+        <?php if ($busca !== ''): ?>
+            <a class="btn" href="listar_atleta.php">Limpar</a>
+        <?php endif; ?>
+    </form>
+
     <?php if (empty($athletes)): ?>
-        <p>Nenhum atleta cadastrado.</p>
+        <?php if ($busca !== ''): ?>
+            <p style="text-align:center;">Nenhum atleta encontrado para “<?= htmlspecialchars($busca) ?>”.</p>
+        <?php else: ?>
+            <p style="text-align:center;">Nenhum atleta cadastrado.</p>
+        <?php endif; ?>
     <?php else: ?>
+        <p style="text-align:center; color:#666;">
+            <?= count($athletes) ?> atleta(s) encontrado(s)
+        </p>
         <table class="table" style="width:700px; margin:auto;">
             <thead>
                 <tr>

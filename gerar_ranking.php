@@ -25,7 +25,7 @@ $categoriasSelecionadas = array_values(array_unique(array_map('intval', $categor
 try {
     $etapas = ranking_select(
         $con,
-        'SELECT idetapa, nome_etapa, local_etapa, associacao_idassociacao
+        'SELECT idetapa, nome_etapa, local_etapa
            FROM etapa
           ORDER BY idetapa DESC'
     );

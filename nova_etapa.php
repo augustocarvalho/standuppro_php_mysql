@@ -6,12 +6,11 @@ $message = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome_etapa = trim($_POST['nome_etapa']);
     $local_etapa = trim($_POST['local_etapa']);
-    $associacao_id = intval($_POST['associacao_idassociacao']);
 
-    if ($nome_etapa && $local_etapa && $associacao_id) {
+    if ($nome_etapa && $local_etapa) {
         // Prepare insert (idetapa is generated automatically by AUTO_INCREMENT)
-        $stmt = $con->prepare("INSERT INTO etapa (nome_etapa, local_etapa, associacao_idassociacao) VALUES (?, ?, ?)");
-        $stmt->bind_param("ssi", $nome_etapa, $local_etapa, $associacao_id);
+        $stmt = $con->prepare("INSERT INTO etapa (nome_etapa, local_etapa) VALUES (?, ?)");
+        $stmt->bind_param("ss", $nome_etapa, $local_etapa);
 
         if ($stmt->execute()) {
             $message = "Etapa criada com sucesso!";
@@ -53,13 +52,6 @@ require_once "menu.php";
                 <label class="control-label" for="local_etapa">Local da Etapa</label>
                 <div class="controls">
                     <input style="min-height:35px;" type="text" id="local_etapa" name="local_etapa" required>
-                </div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label" for="associacao_idassociacao">ID da Associação</label>
-                <div class="controls">
-                    <input style="min-height:35px;" type="number" id="associacao_idassociacao" name="associacao_idassociacao" required>
                 </div>
             </div>
 

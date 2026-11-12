@@ -120,10 +120,16 @@ $id_etapa_atual = $etapa_atual['idetapa'] ?? '';
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">RANKING</a>
           <ul class="dropdown-menu">
-            <li><a href="ranking_categoria_2026.php">RANKING ABASUP 2026</a></li>
-            <li><a href="ranking_cbsup_2026.php">RANKING CBSUP 2026</a></li>
+            <li><a href="ranking.php">RANKINGS</a></li>
             <li class="divider"></li>
             <li><a href="gerar_ranking.php">GERAR RANKING</a></li>
+          </ul>
+      </li>
+
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">SISTEMA</a>
+          <ul class="dropdown-menu">
+            <li><a href="banco.php">IMPORTAR / EXPORTAR BANCO</a></li>
           </ul>
       </li>
 

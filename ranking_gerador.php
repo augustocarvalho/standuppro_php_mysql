@@ -23,7 +23,7 @@ function ranking_estrelas_label(int $estrelas): string
 }
 
 /**
- * Tenta sugerir o circuito de uma etapa pelo nome ou pela associação.
+ * Tenta sugerir o circuito de uma etapa pelo nome.
  */
 function ranking_circuito_sugerido(array $etapa): int
 {
@@ -33,11 +33,6 @@ function ranking_circuito_sugerido(array $etapa): int
         if (strpos($nome, $palavra) !== false) {
             return $circuito;
         }
-    }
-
-    $associacao = (int) ($etapa['associacao_idassociacao'] ?? 0);
-    if ($associacao >= 1 && $associacao <= 4) {
-        return $associacao;
     }
 
     return 1;
@@ -117,7 +112,7 @@ function ranking_etapa_info(mysqli $con, int $etapa): ?array
 {
     $linhas = ranking_select(
         $con,
-        'SELECT idetapa, nome_etapa, local_etapa, associacao_idassociacao
+        'SELECT idetapa, nome_etapa, local_etapa
            FROM etapa
           WHERE idetapa = ?
           LIMIT 1',

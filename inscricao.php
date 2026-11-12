@@ -225,7 +225,8 @@ include "menu.php";
             <br>
         </div>
 
-        <p><strong>Atleta:</strong> <?= htmlspecialchars($atleta_nome) ?> (CPF: <?= htmlspecialchars($atleta_cpf) ?><?php if ($idade_atleta !== null): ?> - <?= $idade_atleta ?> anos<?php endif; ?>)</p>
+        <p><strong>Atleta:</strong> <?= htmlspecialchars($atleta_nome) ?> (CPF: <?= htmlspecialchars($atleta_cpf) ?>)</p>
+        <p><strong>Idade:</strong> <?= $idade_atleta !== null ? $idade_atleta . ' anos' : 'não informada' ?></p>
 
         <?php if ($message): ?>
             <div class="alert alert-success"><?= htmlspecialchars($message) ?></div>

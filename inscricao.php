@@ -1,6 +1,5 @@
 <?php
 require_once "config.php";
-include "menu.php";
 
 $message = "";
 $errors = [];
@@ -23,14 +22,18 @@ if (!$stmt->fetch()) {
 }
 $stmt->close();
 
-// Fetch etapas (events)
+// Fetch the last two etapas (events)
 $etapas = [];
-$etapa_result = $con->query("SELECT idetapa, nome_etapa FROM etapa ORDER BY idetapa DESC");
+$etapa_result = $con->query("SELECT idetapa, nome_etapa FROM etapa ORDER BY idetapa DESC LIMIT 2");
 if ($etapa_result) {
     while ($row = $etapa_result->fetch_assoc()) {
         $etapas[] = $row;
     }
 }
+
+// Default to the last etapa (highest idetapa)
+$etapa_padrao = $etapas[0]['idetapa'] ?? '';
+$etapa_selecionada = isset($_POST['etapa']) ? $_POST['etapa'] : $etapa_padrao;
 
 // Fetch categorias
 $categorias = [];
@@ -76,13 +79,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("isii", $numero, $atleta_cpf, $etapa_id, $categoria_id);
 
         if ($stmt->execute()) {
-            $message = "Inscrição realizada com sucesso!";
+            // Redirect back to the athlete list after a successful subscription
+            header("Location: listar_atleta.php?inscrito=1");
+            exit;
         } else {
             $errors[] = "Erro ao realizar inscrição: " . $stmt->error;
         }
         $stmt->close();
     }
 }
+
+include "menu.php";
 ?>
 
 
@@ -125,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <select name="etapa" id="etapa" required>
                         <option value="">-- Selecione a Etapa --</option>
                         <?php foreach ($etapas as $etapa): ?>
-                            <option value="<?= $etapa['idetapa'] ?>" <?= (isset($_POST['etapa']) && $_POST['etapa'] == $etapa['idetapa']) ? 'selected' : '' ?>>
+                            <option value="<?= $etapa['idetapa'] ?>" <?= $etapa_selecionada == $etapa['idetapa'] ? 'selected' : '' ?>>
                                 <?= htmlspecialchars($etapa['nome_etapa']) ?>
                             </option>
                         <?php endforeach; ?>

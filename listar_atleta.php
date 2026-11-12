@@ -4,6 +4,10 @@ include "menu.php"; // Assuming this includes Bootstrap and header HTML
 $message = "";
 $error = "";
 
+if (isset($_GET['inscrito'])) {
+    $message = "Inscrição realizada com sucesso!";
+}
+
 /**
  * Busca atletas pelo nome. Sem termo, retorna todos.
  *

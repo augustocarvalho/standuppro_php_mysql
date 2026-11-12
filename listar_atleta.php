@@ -8,6 +8,10 @@ if (isset($_GET['inscrito'])) {
     $message = "Inscrição realizada com sucesso!";
 }
 
+if (isset($_GET['editado'])) {
+    $message = "Atleta alterado com sucesso!";
+}
+
 /**
  * Busca atletas pelo nome. Sem termo, retorna todos.
  *
@@ -127,6 +131,9 @@ $athletes = buscar_atletas($con, $busca);
                         <td><?= htmlspecialchars($atleta['cidade'] ?? '') ?></td>
                         <td><?= htmlspecialchars($atleta['estado'] ?? '') ?></td>
                         <td class="text-center" style="white-space:nowrap;">
+                            <a href="update.php?id=<?= urlencode($atleta['cpf']) ?>" class="btn btn-small btn-warning" style="margin-right:4px;">
+                                Editar
+                            </a>
                             <a href="inscricao.php?id=<?= urlencode($atleta['cpf']) ?>" class="btn btn-small btn-primary" style="margin-right:4px;">
                                 Inscrever
                             </a>

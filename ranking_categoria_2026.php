@@ -85,15 +85,16 @@ echo " <div class=row>
                      <th>Pts3</th>
                      <th>4ª</th>
                      <th>Pts4</th>
-                     <th>SOMA</th>                    
+                     <th>SOMA</th>
+                     <th>Dct 1</th>
+                     <th>Pts FINAL</th>
                      </tr>
                    </thead>
                    <tbody> ";
                       $sql = mysqli_query($con,"SELECT nome, cpf, categoria_idcategoria, col_etapa1, pontos1, col_etapa2, pontos2, col_etapa3, pontos3, col_etapa4, pontos4
                       , (pontos1 + pontos2 + pontos3 + pontos4 )  as soma
-                      -- , discarte1
-                      -- , discarte2
-                      -- , ((pontos1+pontos2+pontos3+pontos4+pontos5+pontos6+pontos7) - discarte1) - discarte2 as total        
+                      , discarte1
+                      , ((pontos1+pontos2+pontos3+pontos4) - discarte1) as total        
                       -- , (Select count(*) FROM ranking_circuito rr WHERE atleta_cpf = cpf AND etapa_idetapa in (74) AND colocacao = 1 and rr.categoria_idcategoria = resul.categoria_idcategoria) as primeiros
                       -- , (Select count(*) FROM ranking_circuito rr WHERE atleta_cpf = cpf AND etapa_idetapa in (74) AND colocacao = 2 and rr.categoria_idcategoria = resul.categoria_idcategoria) as segundos
                       -- , (Select count(*) FROM ranking_circuito rr WHERE atleta_cpf = cpf AND etapa_idetapa in (74) AND colocacao = 3 and rr.categoria_idcategoria = resul.categoria_idcategoria) as terceiros                                                                 
@@ -107,17 +108,16 @@ SELECT a.cpf, a.nome as nome, r.categoria_idcategoria
 ,ifnull((SELECT pontos FROM ranking_circuito WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 77 and categoria_idcategoria = r.categoria_idcategoria and circuito_idcircuito = 1), 0) as pontos3  
  ,ifnull((SELECT colocacao FROM ranking_circuito WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 79 and categoria_idcategoria = r.categoria_idcategoria and circuito_idcircuito = 1), '-') as col_etapa4
  ,ifnull((SELECT pontos FROM ranking_circuito WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 79 and categoria_idcategoria = r.categoria_idcategoria and circuito_idcircuito = 1), 0) as pontos4  
--- , d.discarte1
--- , d.discarte2
+, IFNULL(d.discarte1, 0) as discarte1
 FROM ranking_circuito r
 JOIN atleta a ON a.cpf = r.atleta_cpf
--- LEFT JOIN discartes d ON d.atleta_cpf = r.atleta_cpf and d.categoria_idcategoria = r.categoria_idcategoria and ano = 2026 and id_circuito = 1
+LEFT JOIN discartes d ON d.atleta_cpf = r.atleta_cpf and d.categoria_idcategoria = r.categoria_idcategoria and ano = 2026 and id_circuito = 1
 WHERE etapa_idetapa in (74, 75,77,79)
 and r.circuito_idcircuito = 1 -- abasup
 ) as resul
 WHERE categoria_idcategoria = $id_categoria
 GROUP by 1
-ORDER BY soma desc");
+ORDER BY total desc");
                        while ($row = mysqli_fetch_assoc($sql)){
                             echo '<tr>';
                             // $menor = array($row['pontos1'], $row['pontos2'], $row['pontos3'], $row['pontos4'], $row['pontos5'], $row['pontos6'], $row['pontos7']  );
@@ -133,7 +133,9 @@ ORDER BY soma desc");
                             echo '<td>'. $row['pontos3'] . '</td>';
                             echo '<td>'. $row['col_etapa4'] . '</td>';
                             echo '<td>'. $row['pontos4'] . '</td>';
-                            echo '<td>'. $row['soma'] . '</td>';                            
+                            echo '<td>'. $row['soma'] . '</td>';
+                            echo '<td>'. $row['discarte1'] . '</td>';
+                            echo '<td>'. $row['total'] . '</td>';
                             echo '</tr>';
                             $count++;
                         } 

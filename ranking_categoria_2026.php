@@ -95,9 +95,9 @@ echo " <div class=row>
                       , (pontos1 + pontos2 + pontos3 + pontos4 )  as soma
                       , discarte1
                       , ((pontos1+pontos2+pontos3+pontos4) - discarte1) as total        
-                      -- , (Select count(*) FROM ranking_circuito rr WHERE atleta_cpf = cpf AND etapa_idetapa in (74) AND colocacao = 1 and rr.categoria_idcategoria = resul.categoria_idcategoria) as primeiros
-                      -- , (Select count(*) FROM ranking_circuito rr WHERE atleta_cpf = cpf AND etapa_idetapa in (74) AND colocacao = 2 and rr.categoria_idcategoria = resul.categoria_idcategoria) as segundos
-                      -- , (Select count(*) FROM ranking_circuito rr WHERE atleta_cpf = cpf AND etapa_idetapa in (74) AND colocacao = 3 and rr.categoria_idcategoria = resul.categoria_idcategoria) as terceiros                                                                 
+                      , (Select count(*) FROM ranking_circuito rr WHERE rr.atleta_cpf = cpf AND rr.etapa_idetapa in (74,75,77,79) AND rr.colocacao = 1 and rr.categoria_idcategoria = resul.categoria_idcategoria and rr.circuito_idcircuito = 1) as primeiros
+                      , (Select count(*) FROM ranking_circuito rr WHERE rr.atleta_cpf = cpf AND rr.etapa_idetapa in (74,75,77,79) AND rr.colocacao = 2 and rr.categoria_idcategoria = resul.categoria_idcategoria and rr.circuito_idcircuito = 1) as segundos
+                      , (Select count(*) FROM ranking_circuito rr WHERE rr.atleta_cpf = cpf AND rr.etapa_idetapa in (74,75,77,79) AND rr.colocacao = 3 and rr.categoria_idcategoria = resul.categoria_idcategoria and rr.circuito_idcircuito = 1) as terceiros
                              FROM (
 SELECT a.cpf, a.nome as nome, r.categoria_idcategoria 
 ,ifnull((SELECT colocacao FROM ranking_circuito WHERE atleta_cpf = r.atleta_cpf and etapa_idetapa = 74 and categoria_idcategoria = r.categoria_idcategoria and circuito_idcircuito = 1), '-') as col_etapa1 
@@ -117,7 +117,7 @@ and r.circuito_idcircuito = 1 -- abasup
 ) as resul
 WHERE categoria_idcategoria = $id_categoria
 GROUP by 1
-ORDER BY total desc");
+ORDER BY total desc, primeiros desc, segundos desc, terceiros desc, pontos4 desc");
                        while ($row = mysqli_fetch_assoc($sql)){
                             echo '<tr>';
                             // $menor = array($row['pontos1'], $row['pontos2'], $row['pontos3'], $row['pontos4'], $row['pontos5'], $row['pontos6'], $row['pontos7']  );
